@@ -6,7 +6,7 @@
 - 타입 시스템
 - 반복문 및 배열 활용
 - 구조체 및 포인터 활용
-- 연결리스트와 동적할당
+- 연결 리스트와 동적 할당
 
 ### 참고 자료
 - https://www.inflearn.com/course/c_game-making/ 처음부터 `더블 링크드리스트 정렬 2`까지.
@@ -89,3 +89,13 @@ enum DIRECTION {
 ## 야구 게임
 
 `baseball.cpp`
+
+## 숫자 퍼즐 게임
+
+`number_puzzle.cpp`
+
+- TODO: 리눅스에서 `getch()` 사용하기
+
+## 숫자 빙고 게임
+
+`number_bingo.cpp`
