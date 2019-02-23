@@ -4,7 +4,7 @@
 using namespace std;
 
 const int LOTTO_MAX = 45;
-const int SHUFFLE_COUNT = 1000;
+const int SHUFFLE_CNT = 1000;
 
 int main() {
   srand((unsigned int)time(0));
@@ -18,7 +18,7 @@ int main() {
   
   // shuffle
   int idx1, idx2;
-  for (int i = 0; i < SHUFFLE_COUNT; ++i) {
+  for (int i = 0; i < SHUFFLE_CNT; ++i) {
     idx1 = rand() % LOTTO_MAX;
     idx2 = rand() % LOTTO_MAX;
     
