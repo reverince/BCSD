@@ -99,3 +99,42 @@ enum DIRECTION {
 ## 숫자 빙고 게임
 
 `number_bingo.cpp`
+
+## 구조체
+
+- 관련 있는 변수들을 모아 만들어진 하나의 새로운 타입.
+- 배열처럼 연속된 공간에 데이터가 저장된다.
+
+```cpp
+struct Student {
+  char name[255];
+  int age;
+};
+```
+
+## 문자열 함수
+
+```cpp
+// 문자열 길이
+strlen(name);
+
+// 오른쪽 문자열을 왼쪽으로 복사
+strcpy_s(name, "YJ");
+
+// 문자열 뒤에 새로운 문자열 추가
+strcat_s(name, "Cho");
+
+// 두 문자열이 같을 경우 0,
+// 왼쪽 문자열이 클 경우 양수,
+// 오른쪽 문자열이 클 경우 음수 반환
+strcmp_s(name, name2);
+```
+
+## 구조체를 이용한 학생 관리 프로그램
+
+`student_manager.cpp`
+
+
+## TextRPG
+
+`textRPG.cpp`
