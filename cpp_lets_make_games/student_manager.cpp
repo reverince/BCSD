@@ -6,17 +6,15 @@ using namespace std;
 const int NAME_SIZE = 32;
 const int STUDENT_MAX = 10;
 
+enum MENU { NONE, INSERT, DELETE, SEARCH, PRINT, EXIT };
+
 struct Student {
   int id;
   char name[NAME_SIZE];
-  int kor;
-  int eng;
-  int math;
+  int kor, eng, math;
   int sum;
   float avg;
 };
-
-enum MENU { NONE, INSERT, DELETE, SEARCH, PRINT, EXIT };
 
 Student students[STUDENT_MAX] = { };
 
@@ -100,7 +98,7 @@ int main() {
         break;
         
       case PRINT:
-        cout << "=====< 학생 출력 >=====\n";
+        cout << "=====< 학생 목록 >=====\n";
         for (int i = 0; i < cntStudent; ++i) {
           printStudent(i);
         }

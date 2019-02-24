@@ -102,15 +102,15 @@ enum DIRECTION {
 
 ## 구조체
 
-- 관련 있는 변수들을 모아 만들어진 하나의 새로운 타입.
-- 배열처럼 연속된 공간에 데이터가 저장된다.
-
 ```cpp
 struct Student {
-  char name[255];
-  int age;
+  int id;
+  char name[32];
 };
 ```
+
+- 관련 있는 변수들을 모아 만들어진 하나의 새로운 타입.
+- 배열처럼 연속된 공간에 데이터가 저장된다.
 
 ## 문자열 함수
 
@@ -130,7 +130,7 @@ strcat_s(name, "Cho");
 strcmp_s(name, name2);
 ```
 
-## 구조체를 이용한 학생 관리 프로그램
+## 학생 관리 프로그램 (구조체)
 
 `student_manager.cpp`
 
@@ -138,3 +138,72 @@ strcmp_s(name, name2);
 ## TextRPG
 
 `textRPG.cpp`
+
+## 포인터
+
+```cpp
+// x86에서는 4, x64에서는 8 출력
+cout << sizeof(int*) << '\n';
+cout << sizeof(char*) << '\n';
+cout << sizeof(double*) << '\n';
+
+int num = 100;
+int* pNum = &num;
+cout << *pNum << '\n';  //=> 100 (역참조)
+cout << &num << '\n';     //=> 0012FF56
+cout << pNum << '\n';   //=> 0012FF56
+cout << &pNum << '\n';  //=> 0034DD78
+
+// 이중 포인터
+int** ppNum = &pNum;
+cout << **ppNum << '\n';  //=> 100
+cout << *pNum << '\n';    //=> 0034DD78
+
+// 포인터 연산
+int arr[5] = { 2, 3, 5, 7, 11 };
+int* pArr;
+cout << *pArr << '\n';        //=> 2
+cout << *(pArr + 2) << '\n';  //=> 5
+
+// 구조체 포인터
+Student student = { };
+student.kor = 100;
+Student* pStudent = &student;
+(*pStudent).kor = 50;  // 연산자 우선순위: . > *
+pStudent->kor = 80;  // 대상의 멤버에 접근
+
+// void 포인터
+// 어떤 타입의 메모리 주소든 저장할 수 있다
+// 역참조 불가능
+void* pVoid = &num;
+```
+
+- 일반 변수는 값을 저장하지만 포인터 변수는 메모리 주소를 저장한다.
+- 모든 변수 타입은 포인터로 선언할 수 있다.
+- 32비트 환경에서는 4바이트, 64비트 환경에서는 8바이트를 차지한다.
+- 다른 변수의 메모리 주소를 바탕으로 값을 제어한다.
+
+## 미로 게임
+
+`maze.cpp`
+
+## 동적 할당
+
+```cpp
+int* pNum = new int;
+*pNum = 100;
+delete pNum;
+
+// 동적 배열 할당
+int* pNums = new int[10];
+pNums[0] = 100;
+delete[] pNums;
+```
+
+- 원하는 시점에 메모리를 할당할 수 있는 기능.
+- 메모리 힙 영역에 할당되며 힙 특성상 해제하기 전까지는 메모리를 계속 차지한다.
+- 사용하지 않는 메모리를 해제하지 않으면 메모리 누수가 발생할 수 있다.
+
+## 학생 관리 프로그램 (단일 연결 리스트)
+
+`student_manager_with_single_linked_list.cpp`
