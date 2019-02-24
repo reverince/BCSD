@@ -82,6 +82,16 @@ enum DIRECTION {
 
 ## `for`문 별 찍기
 
+`stargazer.cpp`
+
+```
+    *
+   **
+  ***
+ ****
+*****
+```
+
 ## 로또
 
 `lotto.cpp`
