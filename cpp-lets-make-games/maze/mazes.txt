@@ -1,0 +1,3 @@
+2
+maze1.txt
+maze2.txt

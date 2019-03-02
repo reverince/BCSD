@@ -219,3 +219,53 @@ delete[] pNums;
 `student_manager_with_single_linked_list.cpp`
 
 `student_manager_with_double_linked_list.cpp`
+
+## 파일 입출력
+
+`file-io.cpp`
+
+`file-io-binary.cpp`
+
+## 함수 포인터
+
+```cpp
+#include <iostream>
+#inlcude <functional>
+using namespace std;
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int main() {
+	int(*pFunc)(int, int) = add;
+	cout << pFunc(10, 20) << '\n';
+
+	function<int(int, int)> func;
+	func = bind(add, placeholders::_1, placeholders::_2);
+	cout << func(10, 20);
+	
+	return 0;
+}
+```
+
+- 함수의 메모리 주소를 저장하기 위한 포인터.
+- 전역 함수는 함수명이 메모리 주소를 가리킨다.
+
+## 연산자 오버로딩
+
+```cpp
+struct Point {
+	int x, y;
+	
+	// + 연산 오버로딩
+	Point operator+(const Point &pt) {
+		Point res;
+		res.x = x + pt.x;
+		res.y = y + pt.y;
+		return res;
+	}
+};
+```
+
+- 클래스나 구조체 간 할당, 산술, 비교 연산을 수행할 수 있다.

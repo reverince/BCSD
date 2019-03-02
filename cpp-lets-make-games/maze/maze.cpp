@@ -6,6 +6,8 @@
 #include <time.h>
 using namespace std;
 
+const char* FILE_NAME = "mazes.txt";
+const int MAZE_NAME_MAX = 256;
 const int ROW = 6;
 const int COLUMN = 11;
 const int BOMB_MAX = 3;  // 동시에 설치할 수 있는 최대 폭탄 수
@@ -26,19 +28,71 @@ struct Player {
 
 void initMaze(char maze[ROW][COLUMN],
 	Player* pPlayer, Point* pStartPos, Point* pEndPos) {
-	pStartPos->y = 0;
-	pStartPos->x = 0;
-	pEndPos->y = ROW - 2;
-	pEndPos->x = COLUMN - 2;
-	pPlayer->pos = *pStartPos;
+	FILE* pFile = nullptr;
+	fopen_s(&pFile, "mazes.txt", "rt");
+	if (pFile) {
+		char ch;
+		fread(&ch, 1, 1, pFile);
+		int mazeCount = atoi(&ch);
+		char** pMazeList = new char*[mazeCount];
+		fread(&ch, 1, 1, pFile);
+
+		for (int i = 0; i < mazeCount; ++i) {
+			int nameCount = 0;
+
+			// 파일 이름 저장 배열
+			pMazeList[i] = new char[MAZE_NAME_MAX];
+
+			while (true) {
+				fread(&ch, 1, 1, pFile);
+
+				if (ch != '\n') {
+					pMazeList[i][nameCount] = ch;
+					++nameCount;
+				}
+				else break;
+			}
+
+			// 0으로 문자열의 끝 확인
+			pMazeList[i][nameCount] = 0;
+		}
+
+		fclose(pFile);
+
+		// 미로 선택
+		for (int i = 0; i < mazeCount; ++i) {
+			cout << i + 1 << ". " << pMazeList[i] << "\n";
+		}
+		cout << "미로를 선택하세요: ";
+		int ipt;
+		cin >> ipt;
+
+		fopen_s(&pFile, pMazeList[ipt - 1], "rt");
+		if (pFile) {
+			for (int i = 0; i < ROW; ++i) {
+				fread(maze[i], 1, COLUMN - 1, pFile);
+
+				// 입구 출구 확인
+				for (int j = 0; j < COLUMN - 1; ++j) {
+					if (maze[i][j] == '2') {
+						pStartPos->y = i;
+						pStartPos->x = j;
+						pPlayer->pos = *pStartPos;
+					}
+					else if (maze[i][j] == '3') {
+						pEndPos->y = i;
+						pEndPos->x = j;
+					}
+				}
+
+				// 개행문자
+				fread(&ch, 1, 1, pFile);
+			}
+		}
+	}
 
 	// 0: 길 / 1: 벽 / 2: 입구 / 3: 출구 / 4: 폭탄
 	// [아이템] 5: 파워 / 6: 벽 밀기 / 7: 유령
-	strcpy_s(maze[0], "2100510006");
-	strcpy_s(maze[1], "0101111110");
-	strcpy_s(maze[2], "0000100000");
-	strcpy_s(maze[3], "0110101011");
-	strcpy_s(maze[4], "0710001003");
 }
 
 void printMaze(char maze[ROW][COLUMN], Player* pPlayer) {
