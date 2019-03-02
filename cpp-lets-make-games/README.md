@@ -78,11 +78,11 @@ enum DIRECTION {
 
 ## 가위바위보 게임
 
-`rock_scissors_paper.cpp`
+`rock-scissors-paper\`
 
 ## `for`문 별 찍기
 
-`stargazer.cpp`
+`stargazer\`
 
 ```
     *
@@ -94,21 +94,21 @@ enum DIRECTION {
 
 ## 로또
 
-`lotto.cpp`
+`lotto\`
 
 ## 야구 게임
 
-`baseball.cpp`
+`baseball\`
 
 ## 숫자 퍼즐 게임
 
-`number_puzzle.cpp`
+`number-puzzle\`
 
 - TODO: 리눅스에서 `getch()` 사용하기
 
 ## 숫자 빙고 게임
 
-`number_bingo.cpp`
+`number-bingo\`
 
 ## 구조체
 
@@ -142,12 +142,12 @@ strcmp_s(name, name2);
 
 ## 학생 관리 프로그램 (구조체)
 
-`student_manager.cpp`
+`student-manager\`
 
 
 ## TextRPG
 
-`textRPG.cpp`
+`textRPG\`
 
 ## 포인터
 
@@ -195,7 +195,7 @@ void* pVoid = &num;
 
 ## 미로 게임
 
-`maze.cpp`
+`maze\`
 
 ## 동적 할당
 
@@ -216,15 +216,15 @@ delete[] pNums;
 
 ## 학생 관리 프로그램 (연결 리스트)
 
-`student_manager_with_single_linked_list.cpp`
+`student-manager-with-single-linked-list\`
 
-`student_manager_with_double_linked_list.cpp`
+`student-manager-with-double-linked-list\`
 
 ## 파일 입출력
 
-`file-io.cpp`
+`file-io\`
 
-`file-io-binary.cpp`
+`file-io-binary\`
 
 ## 함수 포인터
 
@@ -254,18 +254,28 @@ int main() {
 
 ## 연산자 오버로딩
 
+`operator-overloading\`
+
+- 클래스나 구조체 간 할당, 산술, 비교 연산을 수행할 수 있다.
+
+## 클래스 상속 · 다형성
+
+`class-basics\`
+
+## 템플릿
+
 ```cpp
-struct Point {
-	int x, y;
-	
-	// + 연산 오버로딩
-	Point operator+(const Point &pt) {
-		Point res;
-		res.x = x + pt.x;
-		res.y = y + pt.y;
-		return res;
-	}
+template <typename T>
+struct Node {
+    T datum;
+    Node* next;
 };
 ```
 
-- 클래스나 구조체 간 할당, 산술, 비교 연산을 수행할 수 있다.
+- 컴파일 단계에서 타입을 결정하는 기능.
+- `typeid(T).name()`으로 타입 이름 확인.
+- [템플릿을 이용한 연결 리스트](https://github.com/reverince/BCSD/blob/master/data-structure/linked-list.cpp)
+
+## vector · stack · queue
+
+`vector\`
