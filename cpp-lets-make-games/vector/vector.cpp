@@ -4,6 +4,7 @@ using namespace std;
 
 template <typename T>
 class VectorNode {
+
 	T datum;
 	int index;
 
@@ -16,11 +17,13 @@ class VectorNode {
 
 template <typename T>
 class Vector {
+
 	unsigned int size;
 	unsigned int capacity;
 	VectorNode<T> *pNode;
 
 public:
+
 	// 머리 꼬리 노드를 위해 2를 더함
 	Vector() : size(0), capacity(2), pNode(new VectorNode<T>[capacity + 2]) { }
 	~Vector() { delete[] pNode; }

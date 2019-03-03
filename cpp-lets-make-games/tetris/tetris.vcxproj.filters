@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="1. Core">
+      <UniqueIdentifier>{2e8355dc-9d55-4772-8b6f-21bfe7a9cb41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Stage">
+      <UniqueIdentifier>{e641d0ad-d97c-43be-9060-623d3a7b3500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Shape">
+      <UniqueIdentifier>{2c81cfff-5cd4-47b3-b1dc-8a7912485365}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="value.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="macro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>1. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>2. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>2. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="flag.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeManager.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeI.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeL.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeLReversed.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeS.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeT.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeZ.h">
+      <Filter>3. Shape</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="tetris.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>1. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>2. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>2. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeManager.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeI.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeL.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeLReversed.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeS.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeT.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeZ.cpp">
+      <Filter>3. Shape</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
