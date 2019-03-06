@@ -9,8 +9,6 @@ protected:
 	int widthCount;
 	int dir;
 	Position pos;
-	Position pivot;
-	
 
 public:
 
@@ -21,13 +19,12 @@ public:
 	void setPos(int y, int x) { pos.y = y; pos.x = x; }
 	void setPos(const Position & _pos) { pos = _pos; }
 	Position getPos() const { return pos; }
-	Position getPivot() const { return pivot; }
 
 	virtual bool init();
+	virtual void rotate();
 
 	void render();
 	void renderNext();
-	void rotate();
 	bool moveDown();
 	void moveLeft();
 	void moveRight();

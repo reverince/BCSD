@@ -68,7 +68,7 @@ void ShapeManager::update()
 		pCurShape->moveDown();
 	}
 	if (GetAsyncKeyState('W') & 0x8000) {
-		
+		pCurShape->rotate();
 	}
 }
 

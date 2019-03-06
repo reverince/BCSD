@@ -21,11 +21,7 @@ bool Rectangle::init()
 	shape[2][1] = '1';
 	shape[3][0] = '1';
 	shape[3][1] = '1';
-
 	widthCount = 2;
-
-	pivot.y = 0;
-	pivot.x = 0;
 
 	return true;
 }

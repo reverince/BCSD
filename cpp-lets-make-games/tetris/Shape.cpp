@@ -41,7 +41,6 @@ void Shape::render()
 			if (shape[i][j] == '1')
 				cout << "¡á";
 		}
-		cout << '\n';
 	}
 }
 
@@ -56,14 +55,12 @@ void Shape::renderNext()
 			if (shape[i][j] == '1')
 				cout << "¡á";
 		}
-		cout << '\n';
 	}
 }
 
 void Shape::rotate()
 {
 }
-
 
 // ¹Ù´Ú¿¡ ´êÀº °æ¿ì true ¹İÈ¯
 bool Shape::moveDown()

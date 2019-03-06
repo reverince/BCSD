@@ -21,11 +21,7 @@ bool ShapeL::init()
 	shape[3][0] = '1';
 	shape[3][1] = '1';
 	shape[3][2] = '1';
-
 	widthCount = 3;
-
-	pivot.y = 0;
-	pivot.x = 0;
 
 	return true;
 }
@@ -43,10 +39,15 @@ void ShapeL::rotate()
 
 	switch (dir) {
 	case RD_UP:
+		// ¡à¡à¡à¡à
+		// ¡à¡à¡à¡à
+		// ¡à¡à¡á¡à
+		// ¡á¡á¡á¡à
 		shape[2][2] = '1';
 		shape[3][0] = '1';
 		shape[3][1] = '1';
 		shape[3][2] = '1';
+		widthCount = 3;
 		break;
 	case RD_RIGHT:
 		// ¡à¡à¡à¡à
@@ -57,6 +58,7 @@ void ShapeL::rotate()
 		shape[2][0] = '1';
 		shape[3][0] = '1';
 		shape[3][1] = '1';
+		widthCount = 2;
 		break;
 	case RD_DOWN:
 		// ¡à¡à¡à¡à
@@ -67,6 +69,7 @@ void ShapeL::rotate()
 		shape[2][1] = '1';
 		shape[2][2] = '1';
 		shape[3][0] = '1';
+		widthCount = 3;
 		break;
 	case RD_LEFT:
 		// ¡à¡à¡à¡à
@@ -77,6 +80,7 @@ void ShapeL::rotate()
 		shape[1][1] = '1';
 		shape[2][1] = '1';
 		shape[3][1] = '1';
+		widthCount = 2;
 		break;
 	}
 }

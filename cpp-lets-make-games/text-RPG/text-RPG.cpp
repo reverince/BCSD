@@ -254,8 +254,8 @@ int main() {
 
 						if (player.hp <= 0) {
 							cout << player.name << "(이)가 죽었습니다.\n";
-							int exp = player.exp * 0.1f;
-							int gold = player.inventory.gold * 0.1f;
+							int exp = (int)(player.exp * 0.1f);
+							int gold = (int)(player.inventory.gold * 0.1f);
 							player.exp -= exp;
 							player.inventory.gold -= gold;
 							cout << exp << " 경험치를 잃었습니다.\n";

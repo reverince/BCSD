@@ -36,8 +36,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "file-io-binary", "file-io-b
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "operator-overloading", "operator-overloading\operator-overloading.vcxproj", "{53915F7B-4F22-4EA7-835B-6D14C0EF6F08}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "class-basics", "class-inheritance\class-inheritance.vcxproj", "{60139A91-C342-4F7E-9059-7565DD050919}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector", "vector\vector.vcxproj", "{99D2F75C-FF6B-406F-9963-C8097EE5DB63}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stack", "stack\stack.vcxproj", "{B7772962-4EC6-4F38-8CBA-BFD8BD96C3E4}"
@@ -166,14 +164,6 @@ Global
 		{53915F7B-4F22-4EA7-835B-6D14C0EF6F08}.Release|x64.Build.0 = Release|x64
 		{53915F7B-4F22-4EA7-835B-6D14C0EF6F08}.Release|x86.ActiveCfg = Release|Win32
 		{53915F7B-4F22-4EA7-835B-6D14C0EF6F08}.Release|x86.Build.0 = Release|Win32
-		{60139A91-C342-4F7E-9059-7565DD050919}.Debug|x64.ActiveCfg = Debug|x64
-		{60139A91-C342-4F7E-9059-7565DD050919}.Debug|x64.Build.0 = Debug|x64
-		{60139A91-C342-4F7E-9059-7565DD050919}.Debug|x86.ActiveCfg = Debug|Win32
-		{60139A91-C342-4F7E-9059-7565DD050919}.Debug|x86.Build.0 = Debug|Win32
-		{60139A91-C342-4F7E-9059-7565DD050919}.Release|x64.ActiveCfg = Release|x64
-		{60139A91-C342-4F7E-9059-7565DD050919}.Release|x64.Build.0 = Release|x64
-		{60139A91-C342-4F7E-9059-7565DD050919}.Release|x86.ActiveCfg = Release|Win32
-		{60139A91-C342-4F7E-9059-7565DD050919}.Release|x86.Build.0 = Release|Win32
 		{99D2F75C-FF6B-406F-9963-C8097EE5DB63}.Debug|x64.ActiveCfg = Debug|x64
 		{99D2F75C-FF6B-406F-9963-C8097EE5DB63}.Debug|x64.Build.0 = Debug|x64
 		{99D2F75C-FF6B-406F-9963-C8097EE5DB63}.Debug|x86.ActiveCfg = Debug|Win32

@@ -6,7 +6,7 @@
 #include <time.h>
 using namespace std;
 
-const char* FILE_NAME = "mazes.txt";
+const char * FILE_NAME = "mazes.txt";
 const int MAZE_NAME_MAX = 256;
 const int ROW = 6;
 const int COLUMN = 11;
@@ -27,14 +27,14 @@ struct Player {
 };
 
 void initMaze(char maze[ROW][COLUMN],
-	Player* pPlayer, Point* pStartPos, Point* pEndPos) {
-	FILE* pFile = nullptr;
+	Player * pPlayer, Point * pStartPos, Point * pEndPos) {
+	FILE * pFile = nullptr;
 	fopen_s(&pFile, "mazes.txt", "rt");
 	if (pFile) {
 		char ch;
 		fread(&ch, 1, 1, pFile);
 		int mazeCount = atoi(&ch);
-		char** pMazeList = new char*[mazeCount];
+		char ** pMazeList = new char*[mazeCount];
 		fread(&ch, 1, 1, pFile);
 
 		for (int i = 0; i < mazeCount; ++i) {
@@ -95,7 +95,7 @@ void initMaze(char maze[ROW][COLUMN],
 	// [아이템] 5: 파워 / 6: 벽 밀기 / 7: 유령
 }
 
-void printMaze(char maze[ROW][COLUMN], Player* pPlayer) {
+void printMaze(char maze[ROW][COLUMN], Player * pPlayer) {
 	system("cls");
 	for (int r = 0; r < ROW - 1; ++r) {
 		for (int c = 0; c < COLUMN - 1; ++c) {
@@ -116,7 +116,7 @@ void printMaze(char maze[ROW][COLUMN], Player* pPlayer) {
 	}
 }
 
-bool addItem(char itemType, Player* pPlayer) {
+bool addItem(char itemType, Player * pPlayer) {
 	if (itemType == '5') {
 		if (pPlayer->bombPower < BOMB_POWER_MAX)
 			++pPlayer->bombPower;
@@ -136,7 +136,7 @@ bool addItem(char itemType, Player* pPlayer) {
 	return false;
 }
 
-void movePlayer(char maze[ROW][COLUMN], Player* pPlayer, char ipt) {
+void movePlayer(char maze[ROW][COLUMN], Player * pPlayer, char ipt) {
 	Point targetPos = pPlayer->pos;
 	ipt = tolower(ipt);
 	DIRECTION dir;
@@ -170,7 +170,7 @@ void movePlayer(char maze[ROW][COLUMN], Player* pPlayer, char ipt) {
 	if (!pPlayer->canPush && !pPlayer->isGhost && (*tile == '1' || *tile == '4'))
 		return;
 
-	if (pPlayer->canPush & *tile == '1') {
+	if (pPlayer->canPush && *tile == '1') {
 		char *tileBehind = nullptr;  // 벽 너머 타일
 		switch (dir) {
 		case NORTH:
@@ -205,7 +205,7 @@ void movePlayer(char maze[ROW][COLUMN], Player* pPlayer, char ipt) {
 		*tile = '0';
 }
 
-void placeBomb(char maze[ROW][COLUMN], const Player* pPlayer, int& cntBomb, Point* pBombs) {
+void placeBomb(char maze[ROW][COLUMN], const Player * pPlayer, int& cntBomb, Point * pBombs) {
 	if (cntBomb >= BOMB_MAX) return;
 	char *tile = &maze[pPlayer->pos.y][pPlayer->pos.x];
 	if (*tile == '1' || *tile == '4') return;
@@ -215,7 +215,7 @@ void placeBomb(char maze[ROW][COLUMN], const Player* pPlayer, int& cntBomb, Poin
 	*tile = '4';
 }
 
-void detonateBomb(char maze[ROW][COLUMN], Player* pPlayer, const Point* pStartPos, int& cntBomb, Point* pBombs) {
+void detonateBomb(char maze[ROW][COLUMN], Player * pPlayer, const Point * pStartPos, int & cntBomb, Point * pBombs) {
 	for (int b = 0; b < cntBomb; ++b) {
 		Point targets[1 + BOMB_POWER_MAX * 4] = { };
 		for (int t = 0; t < 1 + BOMB_POWER_MAX * 4; ++t) {
@@ -267,7 +267,6 @@ void detonateBomb(char maze[ROW][COLUMN], Player* pPlayer, const Point* pStartPo
 			// 아이템 파괴
 			else if (*tile == '5' || *tile == '6' || *tile == '7')
 				*tile = '0';
-			
 		}
 
 		// 폭탄 제거
