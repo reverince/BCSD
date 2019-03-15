@@ -5,6 +5,10 @@
 - `WCHAR` : `typedef wchar_t WCHAR;  // 16-bit UNICODE char`
 - `TCHAR` : `typedef WCHAR TCHAR;`
 
+
+- `GetClientRect(HWND hWnd, LPRECT lpRect)` : `lpRect`에 클라이언트 크기 저장
+- `InvalidateRect(HWND hWnd, const RECT *lpRect, BOOL bErase)` : 화면 갱신
+
 ### `wWinMain` 
 
 ```cpp
@@ -25,11 +29,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
   - [C++ 함수 호출 규약](http://confluence.goldpitcher.co.kr/pages/viewpage.action?pageId=26378616)
 - `HINSTANCE` : 인스턴스 핸들 (`int` 또는 `void*`)
 
+
+- `GetMessage`
+- `PeekMessage`
+
 ### `WndProc`
 
 주 창의 메시지 처리
-
-- `InvalidateRect(HWND hWnd, const RECT *lpRect, BOOL bErase)` : 화면 갱신
 
 #### `WM_PAINT`
 
@@ -45,3 +51,8 @@ TCHAR strMouse[64] = { };
 wsprintf(strMouse, TEXT("x: %d y: %d"), area.start.x, area.start.y);
 TextOut(hdc, 600, 30, strMouse, lstrlen(strMouse));
 ```
+
+### 델타타임 관리
+
+- `QueryPerformanceFrequency(LARGE_INTEGER lpFrequency)`
+- `QueryPerformanceCounter(LARGE_INTEGER lpPerformanceCount)`
