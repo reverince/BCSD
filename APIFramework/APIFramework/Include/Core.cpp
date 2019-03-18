@@ -33,17 +33,17 @@ ATOM Core::MyRegisterClass()
 
 BOOL Core::Create()
 {
-	HWND hWnd = CreateWindowW(CLASS_NAME, CLASS_NAME, WS_OVERLAPPEDWINDOW,
+	m_hWnd = CreateWindowW(CLASS_NAME, CLASS_NAME, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, m_hInst, nullptr);
 
-	if (!hWnd)
+	if (!m_hWnd)
 		return FALSE;
 
 	// 윈도우 크기 확인
 	RECT rc = { 0, 0, WND_WIDTH, WND_HEIGHT };
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 	// 윈도우 크기 설정
-	SetWindowPos(hWnd, HWND_TOPMOST, 100, 100, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER);
+	SetWindowPos(m_hWnd, HWND_TOPMOST, 100, 100, rc.right - rc.left, rc.bottom - rc.top, SWP_NOMOVE | SWP_NOZORDER);
 
 	ShowWindow(m_hWnd, SW_SHOW);
 	UpdateWindow(m_hWnd);
@@ -82,7 +82,7 @@ int Core::Run()
 		}
 	}
 
-	return (int) msg.wParam;
+	return (int)msg.wParam;
 }
 
 LRESULT Core::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
