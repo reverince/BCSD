@@ -16,6 +16,18 @@
     <Filter Include="01. Core">
       <UniqueIdentifier>{116b7cdb-6cf2-4256-9daf-a6aee928aa81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. Scene">
+      <UniqueIdentifier>{02a7de04-59d7-4870-b42b-7f6f7b2e0c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\01.Timer">
+      <UniqueIdentifier>{db5f012f-adea-415e-87c9-26f13a3caf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\01.Layer">
+      <UniqueIdentifier>{26e70a91-b987-4452-b219-c95a6ee57e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object">
+      <UniqueIdentifier>{413d8ba6-c9e8-4d78-a5bd-5af62c5cf406}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,6 +35,24 @@
     </ClCompile>
     <ClCompile Include="Core.cpp">
       <Filter>01. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\InGameScene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Timer.cpp">
+      <Filter>01. Core\01.Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Layer.cpp">
+      <Filter>02. Scene\01.Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Object.cpp">
+      <Filter>03. Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +70,27 @@
     </ClInclude>
     <ClInclude Include="Core.h">
       <Filter>01. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\InGameScene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Flag.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Timer.h">
+      <Filter>01. Core\01.Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Layer.h">
+      <Filter>02. Scene\01.Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Object.h">
+      <Filter>03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

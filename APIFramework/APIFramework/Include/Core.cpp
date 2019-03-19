@@ -1,4 +1,6 @@
 #include "Core.h"
+#include "Core\Timer.h"
+#include "Scene\SceneManager.h"
 
 Core * Core::m_pInst = nullptr;
 bool Core::m_isLooping = true;
@@ -9,6 +11,8 @@ Core::Core()
 
 Core::~Core()
 {
+	DESTROY_SINGLE(SceneManager);
+	DESTROY_SINGLE(Timer);
 }
 
 ATOM Core::MyRegisterClass()
@@ -51,6 +55,13 @@ BOOL Core::Create()
 	return TRUE;
 }
 
+void Core::Logic()
+{
+	GET_SINGLE(Timer)->Update();
+
+	float deltaTime = GET_SINGLE(Timer)->GetDeltaTime();
+}
+
 bool Core::Init(HINSTANCE hInst)
 {
 	m_hInst = hInst;
@@ -61,6 +72,14 @@ bool Core::Init(HINSTANCE hInst)
 	m_rs.h = WND_HEIGHT;
 
 	Create();
+
+	// Timer 초기화
+	if (!GET_SINGLE(Timer)->Init())
+		return false;
+
+	// SceneManager 초기화
+	if (!GET_SINGLE(SceneManager)->Init())
+		return false;
 
 	return true;
 }
@@ -79,6 +98,7 @@ int Core::Run()
 		}
 		else
 		{
+			Logic();
 		}
 	}
 

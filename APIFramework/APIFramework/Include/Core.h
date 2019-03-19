@@ -16,6 +16,8 @@ class Core
 	ATOM MyRegisterClass();
 	BOOL Create();
 
+	void Logic();
+
 public:
 
 	static Core * GetInst()
