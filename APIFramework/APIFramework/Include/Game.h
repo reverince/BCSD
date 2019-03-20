@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "resource.h"
 #include <Windows.h>
+#include <crtdbg.h>  // 메모리 누수 체크
 #include <list>
 #include <vector>
 using namespace std;

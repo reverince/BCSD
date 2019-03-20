@@ -17,12 +17,30 @@ bool Player::Init()
 {
 	SetPos(100.f, 100.f);
 	SetSize(100.f, 100.f);
+	SetSpeed(500.f);
 	return true;
 }
 
 void Player::Input(float deltaTime)
 {
 	DynamicObject::Input(deltaTime);
+
+	if (GetAsyncKeyState('W') & 0x8000)
+	{
+		MoveY(deltaTime, MD_BACK);
+	}
+	if (GetAsyncKeyState('S') & 0x8000)
+	{
+		MoveY(deltaTime, MD_FRONT);
+	}
+	if (GetAsyncKeyState('A') & 0x8000)
+	{
+		MoveX(deltaTime, MD_BACK);
+	}
+	if (GetAsyncKeyState('D') & 0x8000)
+	{
+		MoveX(deltaTime, MD_FRONT);
+	}
 }
 
 int Player::Update(float deltaTime)

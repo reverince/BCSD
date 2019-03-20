@@ -38,100 +38,67 @@ typedef struct Position
 		x = (float)pt.x;
 		y = (float)pt.y;
 	}
-	void operator = (float f[2])
-	{
-		x = f[0];
-		y = f[1];
-	}
-	void operator = (float f)
-	{
-		x = f;
-		y = f;
-	}
 
 	// + 오버라이딩
-	Position operator + (const Position & pos)
+	Position operator + (const Position & pos) const
 	{
 		Position ret;
 		ret.x = x + pos.x;
 		ret.y = y + pos.y;
 		return ret;
 	}
-	Position operator + (const POINT & pt)
+	Position operator + (const POINT & pt) const
 	{
 		Position ret;
 		ret.x = x + (float)pt.x;
 		ret.y = y + (float)pt.y;
 		return ret;
 	}
-	Position operator + (float f[2])
+
+	// += 오버라이딩
+	void operator += (const Position & pos)
 	{
-		Position ret;
-		ret.x = x + f[0];
-		ret.y = y + f[1];
-		return ret;
+		x = x + pos.x;
+		y = y + pos.y;
 	}
-	Position operator + (float f)
+	void operator += (const POINT & pt)
 	{
-		Position ret;
-		ret.x = x + f;
-		ret.y = y + f;
-		return ret;
+		x = x + (float)pt.x;
+		y = y + (float)pt.y;
 	}
 
 	// - 오버라이딩
-	Position operator - (const Position & pos)
+	Position operator - (const Position & pos) const
 	{
 		Position ret;
 		ret.x = x - pos.x;
 		ret.y = y - pos.y;
 		return ret;
 	}
-	Position operator - (const POINT & pt)
+	Position operator - (const POINT & pt) const
 	{
 		Position ret;
 		ret.x = x - (float)pt.x;
 		ret.y = y - (float)pt.y;
 		return ret;
 	}
-	Position operator - (float f[2])
-	{
-		Position ret;
-		ret.x = x - f[0];
-		ret.y = y - f[1];
-		return ret;
-	}
-	Position operator - (float f)
-	{
-		Position ret;
-		ret.x = x - f;
-		ret.y = y - f;
-		return ret;
-	}
 
 	// * 오버라이딩
-	Position operator * (const Position & pos)
+	Position operator * (const Position & pos) const
 	{
 		Position ret;
 		ret.x = x * pos.x;
 		ret.y = y * pos.y;
 		return ret;
 	}
-	Position operator * (const POINT & pt)
+	Position operator * (const POINT & pt) const
 	{
 		Position ret;
 		ret.x = x * (float)pt.x;
 		ret.y = y * (float)pt.y;
 		return ret;
 	}
-	Position operator * (float f[2])
-	{
-		Position ret;
-		ret.x = x * f[0];
-		ret.y = y * f[1];
-		return ret;
-	}
-	Position operator * (float f)
+	Position operator * (float f) const
 	{
 		Position ret;
 		ret.x = x * f;
@@ -140,32 +107,18 @@ typedef struct Position
 	}
 
 	// 나눗셈 오버라이딩
-	Position operator / (const Position & pos)
+	Position operator / (const Position & pos) const
 	{
 		Position ret;
 		ret.x = x / pos.x;
 		ret.y = y / pos.y;
 		return ret;
 	}
-	Position operator / (const POINT & pt)
+	Position operator / (const POINT & pt) const
 	{
 		Position ret;
 		ret.x = x / (float)pt.x;
 		ret.y = y / (float)pt.y;
-		return ret;
-	}
-	Position operator / (float f[2])
-	{
-		Position ret;
-		ret.x = x / f[0];
-		ret.y = y / f[1];
-		return ret;
-	}
-	Position operator / (float f)
-	{
-		Position ret;
-		ret.x = x / f;
-		ret.y = y / f;
 		return ret;
 	}
 } POSITION, _SIZE;

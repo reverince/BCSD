@@ -7,6 +7,9 @@ bool Core::m_isLooping = true;
 
 Core::Core()
 {
+	// 메모리 누수 체크
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc();
 }
 
 Core::~Core()
