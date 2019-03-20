@@ -8,6 +8,7 @@ class Core
 
 	HINSTANCE m_hInst;
 	HWND m_hWnd;
+	HDC m_hDC;
 	Resolution m_rs;
 
 	Core();
@@ -17,6 +18,11 @@ class Core
 	BOOL Create();
 
 	void Logic();
+	void Input(float deltaTime);
+	int Update(float deltaTime);
+	int LateUpdate(float deltaTime);
+	void Collision(float deltaTime);
+	void Render(float deltaTime);
 
 public:
 

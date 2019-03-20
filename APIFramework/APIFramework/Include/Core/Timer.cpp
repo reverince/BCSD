@@ -2,7 +2,8 @@
 
 DEFINE_SINGLE(Timer);
 
-Timer::Timer()
+Timer::Timer() :
+	m_timeScale(1)
 {
 }
 

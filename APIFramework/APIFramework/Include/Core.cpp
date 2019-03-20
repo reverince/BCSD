@@ -62,6 +62,33 @@ void Core::Logic()
 	float deltaTime = GET_SINGLE(Timer)->GetDeltaTime();
 }
 
+void Core::Input(float deltaTime)
+{
+	GET_SINGLE(SceneManager)->Input(deltaTime);
+}
+
+int Core::Update(float deltaTime)
+{
+	GET_SINGLE(SceneManager)->Update(deltaTime);
+	return 0;
+}
+
+int Core::LateUpdate(float deltaTime)
+{
+	GET_SINGLE(SceneManager)->LateUpdate(deltaTime);
+	return 0;
+}
+
+void Core::Collision(float deltaTime)
+{
+	GET_SINGLE(SceneManager)->Collision(deltaTime);
+}
+
+void Core::Render(float deltaTime)
+{
+	GET_SINGLE(SceneManager)->Render(m_hDC, deltaTime);
+}
+
 bool Core::Init(HINSTANCE hInst)
 {
 	m_hInst = hInst;
@@ -71,7 +98,11 @@ bool Core::Init(HINSTANCE hInst)
 	m_rs.w = WND_WIDTH;
 	m_rs.h = WND_HEIGHT;
 
+	// HWND
 	Create();
+
+	// HDC
+	m_hDC = GetDC(m_hWnd);
 
 	// Timer ÃÊ±âÈ­
 	if (!GET_SINGLE(Timer)->Init())

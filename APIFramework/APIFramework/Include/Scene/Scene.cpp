@@ -23,6 +23,65 @@ bool Scene::Init()
 	return true;
 }
 
+void Scene::Input(float deltaTime)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		(*iter)->Input(deltaTime);
+	}
+}
+
+int Scene::Update(float deltaTime)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		(*iter)->Update(deltaTime);
+	}
+
+	return 0;
+}
+
+int Scene::LateUpdate(float deltaTime)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		(*iter)->LateUpdate(deltaTime);
+	}
+
+	return 0;
+}
+
+void Scene::Collision(float deltaTime)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		(*iter)->Collision(deltaTime);
+	}
+}
+
+void Scene::Render(HDC hDC, float deltaTime)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		(*iter)->Render(hDC, deltaTime);
+	}
+}
+
 Layer * Scene::CreateLayer(const string & tag, int zOrder)
 {
 	Layer * pLayer = new Layer;
@@ -37,4 +96,18 @@ Layer * Scene::CreateLayer(const string & tag, int zOrder)
 		m_LayerList.sort(Scene::LayerSort);
 
 	return pLayer;
+}
+
+Layer * Scene::FindLayer(const string & tag)
+{
+	list<Layer *>::iterator iter;
+	list<Layer *>::iterator iterEnd = m_LayerList.end();
+
+	for (iter = m_LayerList.begin(); iter != iterEnd; ++iter)
+	{
+		if ((*iter)->GetTag() == tag)
+			return *iter;
+	}
+
+	return nullptr;
 }
