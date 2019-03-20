@@ -3,7 +3,7 @@
 
 class Player : public DynamicObject
 {
-private:
+	friend class Object;
 
 	Player();
 	Player(const Player & player);
@@ -11,10 +11,10 @@ private:
 
 public:
 
-	bool Init() = 0;
-	void Input(float deltaTime);
-	int Update(float deltaTime);
-	int LateUpdate(float deltaTime);
-	void Collision(float deltaTime);
-	void Render(HDC hDC, float deltaTime);
+	virtual bool Init();
+	virtual void Input(float deltaTime);
+	virtual int Update(float deltaTime);
+	virtual int LateUpdate(float deltaTime);
+	virtual void Collision(float deltaTime);
+	virtual void Render(HDC hDC, float deltaTime);
 };

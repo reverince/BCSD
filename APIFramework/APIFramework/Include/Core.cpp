@@ -60,6 +60,12 @@ void Core::Logic()
 	GET_SINGLE(Timer)->Update();
 
 	float deltaTime = GET_SINGLE(Timer)->GetDeltaTime();
+
+	Input(deltaTime);
+	Update(deltaTime);
+	LateUpdate(deltaTime);
+	Collision(deltaTime);
+	Render(deltaTime);
 }
 
 void Core::Input(float deltaTime)

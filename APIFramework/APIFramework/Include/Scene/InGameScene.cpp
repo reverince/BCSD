@@ -12,9 +12,13 @@ InGameScene::~InGameScene()
 
 bool InGameScene::Init()
 {
-	// 부모 클래스 Scene의 Init() 호출
 	if (!Scene::Init())
 		return false;
 
-	return false;
+	Layer * pLayer = FindLayer("Default");
+	Player * pPlayer = Object::CreateObject<Player>("Player", pLayer);
+
+	SAFE_RELEASE(pPlayer);
+
+	return true;
 }

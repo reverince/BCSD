@@ -15,7 +15,8 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Init()
 {
-	CreateScene<InGameScene>(SC_CURRENT);
+	if (!CreateScene<InGameScene>(SC_CURRENT))
+		return false;
 
 	return true;
 }

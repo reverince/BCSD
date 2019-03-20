@@ -13,10 +13,10 @@ Layer::~Layer()
 
 void Layer::AddObject(Object * pObj)
 {
-	m_ObjectList.push_back(pObj);
 	pObj->SetScene(m_pScene);
 	pObj->SetLayer(this);
 	pObj->AddRef();
+	m_ObjectList.push_back(pObj);
 }
 
 void Layer::Input(float deltaTime)
