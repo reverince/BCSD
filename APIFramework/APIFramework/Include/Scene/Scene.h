@@ -5,7 +5,8 @@ class Scene
 {
 protected:
 
-	list<class Layer *> m_LayerList;
+	list<class Layer *> m_listLayer;
+	static unordered_map<string, class Object *> m_mapPrototype;
 
 	friend class SceneManager;
 
@@ -15,6 +16,29 @@ protected:
 public:
 
 	static bool LayerSort(class Layer * pL1, class Layer * pL2);
+
+	template <typename T>
+	static T * CreatePrototype(const string & tag)
+	{
+		T * pObj = new T;
+
+		pObj->SetTag(tag);
+
+		if (!pObj->Init())
+		{
+			SAFE_RELEASE(pObj);
+			return nullptr;
+		}
+
+		pObj->AddRef();
+		m_mapPrototype.insert(make_pair(tag, pObj));
+
+		return pObj;
+	}
+
+	static Object * FindPrototype(const string & key);
+	static void ErasePrototype(const string & tag);
+	static void ClearPrototypes();
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

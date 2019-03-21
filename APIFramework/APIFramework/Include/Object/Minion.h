@@ -1,25 +1,24 @@
 #pragma once
 #include "DynamicObject.h"
 
-class Player : public DynamicObject
+class Minion : public DynamicObject
 {
-	friend class Scene;
 	friend class Object;
 
+	MOVE_DIR m_dir;
 	float m_fireTime;
 	float m_firePeriod;
 
-	Player();
-	Player(const Player & player);
-	~Player();
+	Minion();
+	Minion(const Minion & minion);
+	~Minion();
 
 	void Fire();
 
 public:
 
-	virtual Player * Clone();
+	virtual Minion * Clone();
 	virtual bool Init();
-	virtual void Input(float deltaTime);
 	virtual int Update(float deltaTime);
 	virtual int LateUpdate(float deltaTime);
 	virtual void Collision(float deltaTime);

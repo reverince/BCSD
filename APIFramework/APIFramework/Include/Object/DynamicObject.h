@@ -3,10 +3,10 @@
 
 class DynamicObject : public Object
 {
+protected:
+
 	float m_angle;
 	float m_speed;
-
-protected:
 
 	DynamicObject();
 	DynamicObject(const DynamicObject  & obj);
@@ -18,9 +18,10 @@ protected:
 	void Move(const POSITION & move, float deltaTime);
 	void MoveX(float deltaTime, MOVE_DIR dir);
 	void MoveY(float deltaTime, MOVE_DIR dir);
-	void MoveAngle(float speed);
-	void MoveAngle(float speed, float deltaTime);
+	void MoveAngle();
+	void MoveAngle(float deltaTime);
 
+	virtual Object * Clone() = 0;
 	virtual bool Init() = 0;
 	virtual void Input(float deltaTime);
 	virtual int Update(float deltaTime);

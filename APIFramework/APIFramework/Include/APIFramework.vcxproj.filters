@@ -37,6 +37,12 @@
     <Filter Include="03. Object\01. DynamicObject\01. Player">
       <UniqueIdentifier>{a1a3d428-836d-4577-8a32-9d99f789d0ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\01. DynamicObject\02. Enemy">
+      <UniqueIdentifier>{c3bf1b25-9569-4165-b6db-7ca58d1d7173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Object\01. DynamicObject\03. Bullet">
+      <UniqueIdentifier>{52359e10-eaf6-46ff-9424-d03e79880f54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +80,12 @@
     </ClCompile>
     <ClCompile Include="Object\StaticObject.cpp">
       <Filter>03. Object\02. StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Minion.cpp">
+      <Filter>03. Object\01. DynamicObject\02. Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Bullet.cpp">
+      <Filter>03. Object\01. DynamicObject\03. Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="Object\StaticObject.h">
       <Filter>03. Object\02. StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Minion.h">
+      <Filter>03. Object\01. DynamicObject\02. Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Bullet.h">
+      <Filter>03. Object\01. DynamicObject\03. Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

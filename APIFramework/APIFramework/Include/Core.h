@@ -38,8 +38,10 @@ public:
 		SAFE_DELETE(m_pInst);
 	}
 
+	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	Resolution GetResolution() const { return m_rs; }
+
 	bool Init(HINSTANCE hInst);
 	int Run();
-
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

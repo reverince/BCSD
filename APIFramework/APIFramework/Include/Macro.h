@@ -1,8 +1,9 @@
 #pragma once
 
+#define PI 3.141592f
 #define CLASS_NAME L"WinAPI02"
-#define WND_WIDTH 1280
-#define WND_HEIGHT 720
+#define WND_WIDTH 1600
+#define WND_HEIGHT 900
 
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 #define SAFE_DELETE_ARRAY(p) if p { delete[] p; p = nullptr; }
@@ -28,6 +29,8 @@ public:\
 	}\
 private:
 
-#define DEFINE_SINGLE(Type) Type * Type::m_pInst = nullptr;
+#define DEFINE_SINGLE(Type) Type * Type::m_pInst = nullptr
 #define GET_SINGLE(Type) Type::GetInst()
 #define DESTROY_SINGLE(Type) Type::DestroyInst()
+
+#define GET_RESOLUTION Core::GetInst()->GetResolution()

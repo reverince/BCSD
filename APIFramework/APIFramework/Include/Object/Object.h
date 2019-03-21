@@ -4,7 +4,11 @@
 
 class Object : public Reference
 {
+	static list<Object *> m_listObject;
+
 protected:
+	
+	friend class Scene;
 
 	class Scene * m_pScene;
 	class Layer * m_pLayer;
@@ -17,13 +21,15 @@ protected:
 	Object();
 	Object(const Object & obj);
 	virtual ~Object();
-
+	
 public:
 
 	template <typename T>
 	static T * CreateObject(const string & tag, class Layer * pLayer = nullptr)
 	{
 		T * pObj = new T;
+
+		pObj->SetTag(tag);
 
 		if (!pObj->Init())
 		{
@@ -34,8 +40,18 @@ public:
 		if (pLayer)
 			pLayer->AddObject(pObj);
 
+		pObj->AddRef();
+		m_listObject.push_back(pObj);
+
 		return pObj;
 	}
+
+	static Object * CloneObject(const string & key, const string & tag, class Layer * pLayer = nullptr);
+	
+	static Object * FindObject(const string & tag);
+	static void EraseObject(Object * pObj);
+	static void EraseObject(const string & tag);
+	static void ClearObjects();
 
 	void SetScene(class Scene * pScene) { m_pScene = pScene; }
 	void SetLayer(class Layer * pLayer) { m_pLayer = pLayer; }
@@ -59,4 +75,5 @@ public:
 	virtual int LateUpdate(float deltaTime);
 	virtual void Collision(float deltaTime);
 	virtual void Render(HDC hDC, float deltaTime);
+	virtual Object * Clone() = 0;
 };

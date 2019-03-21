@@ -8,6 +8,8 @@ DynamicObject::DynamicObject() :
 DynamicObject::DynamicObject(const DynamicObject & obj) :
 	Object(obj)
 {
+	m_angle = obj.m_angle;
+	m_speed = obj.m_speed;
 }
 
 DynamicObject::~DynamicObject()
@@ -36,26 +38,6 @@ void DynamicObject::Move(const POSITION & move, float deltaTime)
 	m_pos += move * deltaTime;
 }
 
-void DynamicObject::MoveX(float x)
-{
-	m_pos.x += x;
-}
-
-void DynamicObject::MoveX(float x, float deltaTime)
-{
-	m_pos.x += x * deltaTime;
-}
-
-void DynamicObject::MoveY(float y)
-{
-	m_pos.y += y;
-}
-
-void DynamicObject::MoveY(float y, float deltaTime)
-{
-	m_pos.y += y * deltaTime;
-}
-
 void DynamicObject::MoveX(float deltaTime, MOVE_DIR dir)
 {
 	m_pos.x += m_speed * deltaTime * dir;
@@ -66,16 +48,16 @@ void DynamicObject::MoveY(float deltaTime, MOVE_DIR dir)
 	m_pos.y += m_speed * deltaTime * dir;
 }
 
-void DynamicObject::MoveAngle(float speed)
+void DynamicObject::MoveAngle()
 {
-	m_pos.x += cosf(m_angle) * speed;
-	m_pos.y += sinf(m_angle) * speed;
+	m_pos.x += cosf(m_angle) * m_speed;
+	m_pos.y += sinf(m_angle) * m_speed;
 }
 
-void DynamicObject::MoveAngle(float speed, float deltaTime)
+void DynamicObject::MoveAngle(float deltaTime)
 {
-	m_pos.x += cosf(m_angle) * speed * deltaTime;
-	m_pos.y += sinf(m_angle) * speed * deltaTime;
+	m_pos.x += cosf(m_angle) * m_speed * deltaTime;
+	m_pos.y += sinf(m_angle) * m_speed * deltaTime;
 }
 
 void DynamicObject::Input(float deltaTime)

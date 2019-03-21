@@ -1,25 +1,24 @@
 #pragma once
 #include "DynamicObject.h"
 
-class Player : public DynamicObject
+class Bullet : public DynamicObject
 {
 	friend class Scene;
 	friend class Object;
 
-	float m_fireTime;
-	float m_firePeriod;
+	float m_dist;
+	float m_distMax;
 
-	Player();
-	Player(const Player & player);
-	~Player();
-
-	void Fire();
+	Bullet();
+	Bullet(const Bullet & bullet);
+	~Bullet();
 
 public:
 
-	virtual Player * Clone();
+	void SetDistMax(float distMax) { m_distMax = distMax; }
+
+	virtual Bullet * Clone();
 	virtual bool Init();
-	virtual void Input(float deltaTime);
 	virtual int Update(float deltaTime);
 	virtual int LateUpdate(float deltaTime);
 	virtual void Collision(float deltaTime);

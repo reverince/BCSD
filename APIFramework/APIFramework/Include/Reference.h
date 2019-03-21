@@ -6,6 +6,8 @@ class Reference
 protected:
 
 	int m_refCnt;
+	bool m_isAlive;
+	bool m_isEnabled;
 
 	Reference();
 	virtual ~Reference() = 0;
@@ -19,4 +21,9 @@ public:
 		if (m_refCnt == 0)
 			delete this;
 	}
+
+	void SetEnable(bool enable) { m_isEnabled = enable; }
+	bool GetEnable() const { return m_isEnabled; }
+	void Die() { m_isAlive = false; }
+	bool IsAlive() const { return m_isAlive; }
 };

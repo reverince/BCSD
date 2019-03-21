@@ -6,7 +6,9 @@ class Layer
 	class Scene * m_pScene;
 	string m_tag;
 	int m_zOrder;
-	list<class Object *> m_ObjectList;
+	bool m_isEnabled;
+	bool m_isAlive;
+	list<class Object *> m_listObject;
 
 	friend class Scene;
 
@@ -22,6 +24,11 @@ public:
 	Scene * GetScene() const { return m_pScene; }
 	string GetTag() const { return m_tag; }
 	int GetZOrder() const { return m_zOrder; }
+
+	void SetEnable(bool enable) { m_isEnabled = enable; }
+	bool GetEnable() const { return m_isEnabled; }
+	void Die() { m_isAlive = false; }
+	bool IsAlive() const { return m_isAlive; }
 
 	void AddObject(Object * pObj);
 
