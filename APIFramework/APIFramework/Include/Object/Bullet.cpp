@@ -23,8 +23,8 @@ Bullet * Bullet::Clone()
 
 bool Bullet::Init()
 {
-	SetSize(20.f, 20.f);
-	SetSpeed(1000.f);
+	SetSize(BULLET_WIDTH, BULLET_HEIGHT);
+	SetSpeed(BULLET_SPEED);
 
 	return true;
 }

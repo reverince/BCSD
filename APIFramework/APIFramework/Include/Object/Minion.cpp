@@ -38,8 +38,8 @@ Minion * Minion::Clone()
 bool Minion::Init()
 {
 	SetPos(1400.f, 100.f);
-	SetSize(50.f, 50.f);
-	SetSpeed(200.f);
+	SetSize(MINION_WIDTH, MINION_HEIGHT);
+	SetSpeed(MINION_SPEED);
 
 	return true;
 }
@@ -48,7 +48,7 @@ int Minion::Update(float deltaTime)
 {
 	DynamicObject::Update(deltaTime);
 
-	// 이동
+	// 이동 관련
 	MoveY(deltaTime, m_dir);
 
 	if (m_pos.y + m_size.y >= GET_RESOLUTION.h)
@@ -62,7 +62,7 @@ int Minion::Update(float deltaTime)
 		m_dir = MD_FRONT;
 	}
 
-	// 장전 발사
+	// 발사 관련
 	m_fireTime += deltaTime;
 
 	if (m_fireTime > m_firePeriod)

@@ -39,8 +39,8 @@ Player * Player::Clone()
 bool Player::Init()
 {
 	SetPos(100.f, 100.f);
-	SetSize(100.f, 100.f);
-	SetSpeed(500.f);
+	SetSize(PLAYER_WIDTH, PLAYER_HEIGHT);
+	SetSpeed(PLAYER_SPEED);
 	return true;
 }
 
