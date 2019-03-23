@@ -1,21 +1,28 @@
 #pragma once
 
 #define CLASS_NAME L"WinAPI02"
-#define WND_WIDTH 1600
-#define WND_HEIGHT 900
+
 #define PATH_ROOT "RootPath"
 #define PATH_TEXTURE "TexturePath"
+
+#define WND_WIDTH 1600
+#define WND_HEIGHT 900
+#define WORLD_WIDTH 2560
+#define WORLD_HEIGHT 1440
 
 #define PLAYER_WIDTH 100.f
 #define PLAYER_HEIGHT PLAYER_WIDTH
 #define PLAYER_SPEED 500.f
-#define PLAYER_TEXTURE_NORMAL L"trump_normal.bmp"
-#define MINION_WIDTH 50.f
+#define PLAYER_SPEED_SLOW PLAYER_SPEED * 0.5f
+#define MINION_WIDTH 100.f
 #define MINION_HEIGHT MINION_WIDTH
 #define MINION_SPEED 300.f
 #define BULLET_WIDTH 20.f
 #define BULLET_HEIGHT BULLET_WIDTH
 #define BULLET_SPEED 1000.f
+
+#define PLAYER_TEXTURE_NORMAL L"player_normal.bmp"
+#define MINION_TEXTURE L"minion.bmp"
 
 #define PI 3.141592f
 

@@ -21,11 +21,26 @@ Minion::~Minion()
 void Minion::Fire()
 {
 	Object * pBullet = Object::CloneObject("Bullet", "MinionBullet", m_pLayer);
+	Object * pPlayer = Object::FindObject("Player");
 
-	// 왼쪽으로 발사
-	((DynamicObject *)pBullet)->SetAngle(PI);
+	float dy = m_pos.y - pPlayer->GetPos().y;
+	float dx = m_pos.x - pPlayer->GetPos().x;
+	float theta;
 
-	pBullet->SetPos(m_pos.x - pBullet->GetSize().x, m_pos.y + (m_size.y - pBullet->GetSize().y) / 2.f);
+	/*if (dx == 0.f)
+		theta = (dy > 0.f) ? 1.5f * PI : 0.5f * PI;
+	else
+	{
+		theta = atanf(dy / dx);
+		theta += (dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f;
+	}*/
+
+	// 각도 계산은 너굴맨이 처리했으니 안심하라구
+	theta = (dx == 0.f) ? (dy > 0.f) ? 1.5f * PI : 0.5f * PI : (atanf(dy / dx) + ( (dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f ));
+
+	((DynamicObject *)pBullet)->SetAngle(theta);
+	pBullet->SetPos(m_pos);
+	((DynamicObject *)pBullet)->SetSpeed(BULLET_SPEED * 0.5f);
 
 	SAFE_RELEASE(pBullet);
 }
@@ -40,6 +55,7 @@ bool Minion::Init()
 	SetPos(1400.f, 100.f);
 	SetSize(MINION_WIDTH, MINION_HEIGHT);
 	SetSpeed(MINION_SPEED);
+	SetTexture("Minion", MINION_TEXTURE);
 
 	return true;
 }
@@ -53,7 +69,7 @@ int Minion::Update(float deltaTime)
 
 	if (m_pos.y >= GET_RESOLUTION.h)
 	{
-		m_pos.y = GET_RESOLUTION.h;
+		m_pos.y = (float)GET_RESOLUTION.h;
 		m_dir = MD_BACK;
 	}
 	else if (m_pos.y <= 0)
@@ -89,7 +105,4 @@ void Minion::Collision(float deltaTime)
 void Minion::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
-
-	POSITION pos = m_pos - m_size * m_pivot;
-	Rectangle(hDC, (int)pos.x, (int)pos.y, (int)(pos.x + m_size.x), (int)(pos.y + m_size.y));
 }

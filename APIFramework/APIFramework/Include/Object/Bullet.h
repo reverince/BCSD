@@ -4,7 +4,6 @@
 class Bullet : public DynamicObject
 {
 	friend class Scene;
-	friend class Object;
 
 	float m_dist;
 	float m_distMax;

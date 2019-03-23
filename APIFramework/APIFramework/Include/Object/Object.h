@@ -5,14 +5,14 @@
 class Object : public Reference
 {
 	static list<Object *> m_listObject;
-	class Texture * m_pTexture;
-
+	
 protected:
 	
 	friend class Scene;
 
 	class Scene * m_pScene;
 	class Layer * m_pLayer;
+	class Texture * m_pTexture;
 
 	string m_tag;
 	POSITION m_pos;

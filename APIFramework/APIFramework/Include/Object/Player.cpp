@@ -45,7 +45,6 @@ bool Player::Init()
 	SetPos(100.f, 100.f);
 	SetSize(PLAYER_WIDTH, PLAYER_HEIGHT);
 	SetSpeed(PLAYER_SPEED);
-
 	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
 
 	return true;
@@ -75,6 +74,11 @@ void Player::Input(float deltaTime)
 	{
 		Fire();
 	}
+	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
+		SetSpeed(PLAYER_SPEED_SLOW);
+	else
+		SetSpeed(PLAYER_SPEED);
+
 }
 
 int Player::Update(float deltaTime)
@@ -84,7 +88,7 @@ int Player::Update(float deltaTime)
 	// 이동 관련
 	if (m_pos.x >= GET_RESOLUTION.w)
 	{
-		m_pos.x = GET_RESOLUTION.w;
+		m_pos.x = (float)GET_RESOLUTION.w;
 	}
 	else if (m_pos.x <= 0)
 	{
@@ -93,7 +97,7 @@ int Player::Update(float deltaTime)
 
 	if (m_pos.y >= GET_RESOLUTION.h)
 	{
-		m_pos.y = GET_RESOLUTION.h;
+		m_pos.y = (float)GET_RESOLUTION.h;
 	}
 	else if (m_pos.y <= 0)
 	{
@@ -121,6 +125,4 @@ void Player::Collision(float deltaTime)
 void Player::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
-
-	//Rectangle(hDC, (int)m_pos.x, (int)m_pos.y, (int)(m_pos.x + m_size.x), (int)(m_pos.y + m_size.y));
 }
