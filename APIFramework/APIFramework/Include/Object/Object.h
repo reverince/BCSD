@@ -5,6 +5,7 @@
 class Object : public Reference
 {
 	static list<Object *> m_listObject;
+	class Texture * m_pTexture;
 
 protected:
 	
@@ -68,6 +69,9 @@ public:
 	string GetTag() const { return m_tag; }
 	POSITION GetPos() const { return m_pos; }
 	_SIZE GetSize() const { return m_size; }
+
+	void SetTexture(class Texture * pTexture);
+	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

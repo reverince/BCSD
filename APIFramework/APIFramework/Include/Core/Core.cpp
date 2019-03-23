@@ -1,6 +1,8 @@
 #include "Core.h"
-#include "Core\Timer.h"
-#include "Scene\SceneManager.h"
+#include "Timer.h"
+#include "PathManager.h"
+#include "..\Resource\ResourceManager.h"
+#include "..\Scene\SceneManager.h"
 
 Core * Core::m_pInst = nullptr;
 bool Core::m_isLooping = true;
@@ -14,8 +16,12 @@ Core::Core()
 
 Core::~Core()
 {
-	DESTROY_SINGLE(SceneManager);
 	DESTROY_SINGLE(Timer);
+	DESTROY_SINGLE(PathManager);
+	DESTROY_SINGLE(ResourceManager);
+	DESTROY_SINGLE(SceneManager);
+
+	ReleaseDC(m_hWnd, m_hDC);
 }
 
 ATOM Core::MyRegisterClass()
@@ -113,11 +119,13 @@ bool Core::Init(HINSTANCE hInst)
 	// HDC
 	m_hDC = GetDC(m_hWnd);
 
-	// Timer 초기화
+	// 싱글톤 초기화
 	if (!GET_SINGLE(Timer)->Init())
 		return false;
-
-	// SceneManager 초기화
+	if (!GET_SINGLE(PathManager)->Init())
+		return false;
+	if (!GET_SINGLE(ResourceManager)->Init(hInst, m_hDC))
+		return false;
 	if (!GET_SINGLE(SceneManager)->Init())
 		return false;
 

@@ -21,12 +21,14 @@ void StaticObject::Input(float deltaTime)
 int StaticObject::Update(float deltaTime)
 {
 	Object::Update(deltaTime);
+
 	return 0;
 }
 
 int StaticObject::LateUpdate(float deltaTime)
 {
 	Object::LateUpdate(deltaTime);
+
 	return 0;
 }
 

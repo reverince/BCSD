@@ -1,21 +1,28 @@
 #include "Object.h"
+#include "..\Resource\ResourceManager.h"
+#include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
 #include "..\Scene\Scene.h"
 #include "..\Scene\Layer.h"
 
 list<Object *> Object::m_listObject;
 
-Object::Object()
+Object::Object() :
+	m_pTexture(nullptr)
 {
 }
 
 Object::Object(const Object & obj)
 {
 	*this = obj;
+
+	if (m_pTexture)
+		m_pTexture->AddRef();
 }
 
 Object::~Object()
 {
+	SAFE_RELEASE(m_pTexture);
 }
 
 Object * Object::CloneObject(const string & key, const string & tag, class Layer * pLayer)
@@ -92,6 +99,21 @@ void Object::ClearObjects()
 	SafeReleaseVectorList(m_listObject);
 }
 
+void Object::SetTexture(Texture * pTexture)
+{
+	SAFE_RELEASE(m_pTexture);
+	m_pTexture = pTexture;
+
+	if (pTexture)
+		pTexture->AddRef();
+}
+
+void Object::SetTexture(const string & key, const wchar_t * pFileName, const string & pathKey)
+{
+	SAFE_RELEASE(m_pTexture);
+	m_pTexture = GET_SINGLE(ResourceManager)->LoadTexture(key, pFileName, pathKey);
+}
+
 bool Object::Init()
 {
 	return true;
@@ -117,4 +139,8 @@ void Object::Collision(float deltaTime)
 
 void Object::Render(HDC hDC, float deltaTime)
 {
+	if (m_pTexture)
+	{
+		BitBlt(hDC, (int)m_pos.x, (int)m_pos.y, (int)m_size.x, (int)m_size.y, m_pTexture->GetDC(), 0, 0, SRCCOPY);
+	}
 }

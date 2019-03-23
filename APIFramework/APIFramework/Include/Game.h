@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "msimg32")
 #include "Flag.h"
 #include "Macro.h"
 #include "Types.h"

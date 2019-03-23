@@ -1,5 +1,5 @@
 #include "Minion.h"
-#include "..\Core.h"
+#include "..\Core\Core.h"
 
 Minion::Minion() :
 	m_dir(MD_FRONT), m_fireTime(0.f), m_firePeriod(2.f)

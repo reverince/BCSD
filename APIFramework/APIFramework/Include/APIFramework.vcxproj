@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Core\Core.cpp" />
+    <ClCompile Include="Core\PathManager.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\Bullet.cpp" />
@@ -29,13 +30,16 @@
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\StaticObject.cpp" />
     <ClCompile Include="Reference.cpp" />
+    <ClCompile Include="Resource\ResourceManager.cpp" />
+    <ClCompile Include="Resource\Texture.cpp" />
     <ClCompile Include="Scene\InGameScene.cpp" />
     <ClCompile Include="Scene\Layer.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core.h" />
+    <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\PathManager.h" />
     <ClInclude Include="Core\Timer.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
@@ -48,6 +52,8 @@
     <ClInclude Include="Object\StaticObject.h" />
     <ClInclude Include="Reference.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Resource\ResourceManager.h" />
+    <ClInclude Include="Resource\Texture.h" />
     <ClInclude Include="Scene\InGameScene.h" />
     <ClInclude Include="Scene\Layer.h" />
     <ClInclude Include="Scene\Scene.h" />

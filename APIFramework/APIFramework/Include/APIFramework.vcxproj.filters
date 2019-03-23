@@ -19,12 +19,6 @@
     <Filter Include="02. Scene">
       <UniqueIdentifier>{02a7de04-59d7-4870-b42b-7f6f7b2e0c81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Core\01.Timer">
-      <UniqueIdentifier>{db5f012f-adea-415e-87c9-26f13a3caf48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. Scene\01.Layer">
-      <UniqueIdentifier>{26e70a91-b987-4452-b219-c95a6ee57e85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Object">
       <UniqueIdentifier>{413d8ba6-c9e8-4d78-a5bd-5af62c5cf406}</UniqueIdentifier>
     </Filter>
@@ -43,13 +37,22 @@
     <Filter Include="03. Object\01. DynamicObject\03. Bullet">
       <UniqueIdentifier>{52359e10-eaf6-46ff-9424-d03e79880f54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Core\02. Path">
+      <UniqueIdentifier>{d55bda86-cb27-4d8d-a3ff-2b7c486b5ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\01. Timer">
+      <UniqueIdentifier>{db5f012f-adea-415e-87c9-26f13a3caf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Scene\01. Layer">
+      <UniqueIdentifier>{26e70a91-b987-4452-b219-c95a6ee57e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Resource">
+      <UniqueIdentifier>{91242bdd-54ae-4ba3-b456-8397a75e68d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Core.cpp">
-      <Filter>01. Core</Filter>
     </ClCompile>
     <ClCompile Include="Scene\SceneManager.cpp">
       <Filter>02. Scene</Filter>
@@ -61,10 +64,10 @@
       <Filter>02. Scene</Filter>
     </ClCompile>
     <ClCompile Include="Core\Timer.cpp">
-      <Filter>01. Core\01.Timer</Filter>
+      <Filter>01. Core\01. Timer</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Layer.cpp">
-      <Filter>02. Scene\01.Layer</Filter>
+      <Filter>02. Scene\01. Layer</Filter>
     </ClCompile>
     <ClCompile Include="Object\Object.cpp">
       <Filter>03. Object</Filter>
@@ -87,6 +90,18 @@
     <ClCompile Include="Object\Bullet.cpp">
       <Filter>03. Object\01. DynamicObject\03. Bullet</Filter>
     </ClCompile>
+    <ClCompile Include="Core\PathManager.cpp">
+      <Filter>01. Core\02. Path</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Core.cpp">
+      <Filter>01. Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>04. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Texture.cpp">
+      <Filter>04. Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -101,9 +116,6 @@
     <ClInclude Include="Types.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Core.h">
-      <Filter>01. Core</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\SceneManager.h">
       <Filter>02. Scene</Filter>
     </ClInclude>
@@ -117,10 +129,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Core\Timer.h">
-      <Filter>01. Core\01.Timer</Filter>
+      <Filter>01. Core\01. Timer</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Layer.h">
-      <Filter>02. Scene\01.Layer</Filter>
+      <Filter>02. Scene\01. Layer</Filter>
     </ClInclude>
     <ClInclude Include="Object\Object.h">
       <Filter>03. Object</Filter>
@@ -142,6 +154,18 @@
     </ClInclude>
     <ClInclude Include="Object\Bullet.h">
       <Filter>03. Object\01. DynamicObject\03. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\PathManager.h">
+      <Filter>01. Core\02. Path</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Core.h">
+      <Filter>01. Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>04. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Texture.h">
+      <Filter>04. Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

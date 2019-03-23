@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "..\Core.h"
+#include "..\Core\Core.h"
 
 Player::Player() :
 	m_fireTime(0.f), m_firePeriod(0.1f)
@@ -41,6 +41,9 @@ bool Player::Init()
 	SetPos(100.f, 100.f);
 	SetSize(PLAYER_WIDTH, PLAYER_HEIGHT);
 	SetSpeed(PLAYER_SPEED);
+
+	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
+
 	return true;
 }
 
@@ -115,5 +118,5 @@ void Player::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
 
-	Rectangle(hDC, (int)m_pos.x, (int)m_pos.y, (int)(m_pos.x + m_size.x), (int)(m_pos.y + m_size.y));
+	//Rectangle(hDC, (int)m_pos.x, (int)m_pos.y, (int)(m_pos.x + m_size.x), (int)(m_pos.y + m_size.y));
 }

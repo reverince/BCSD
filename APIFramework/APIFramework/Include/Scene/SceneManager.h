@@ -3,10 +3,10 @@
 
 class SceneManager
 {
+	DECLARE_SINGLE(SceneManager);
+
 	class Scene * m_pScene;
 	class Scene * m_pSceneNext;
-
-	DECLARE_SINGLE(SceneManager);
 
 public:
 

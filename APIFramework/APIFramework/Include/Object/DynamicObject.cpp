@@ -68,12 +68,14 @@ void DynamicObject::Input(float deltaTime)
 int DynamicObject::Update(float deltaTime)
 {
 	Object::Update(deltaTime);
+
 	return 0;
 }
 
 int DynamicObject::LateUpdate(float deltaTime)
 {
 	Object::LateUpdate(deltaTime);
+
 	return 0;
 }
 
