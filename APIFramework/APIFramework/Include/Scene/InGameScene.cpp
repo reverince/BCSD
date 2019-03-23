@@ -1,5 +1,7 @@
 #include "InGameScene.h"
+#include "..\Core\Camera.h"
 #include "Layer.h"
+#include "..\Object\Stage.h"
 #include "..\Object\Player.h"
 #include "..\Object\Minion.h"
 #include "..\Object\Bullet.h"
@@ -17,11 +19,16 @@ bool InGameScene::Init()
 	if (!Scene::Init())
 		return false;
 
-	Layer * pLayer = FindLayer("Default");
-	Player * pPlayer = Object::CreateObject<Player>("Player", pLayer);
-	Minion * pMinion = Object::CreateObject<Minion>("Minion", pLayer);
+	Layer * pLayerStage = FindLayer("Stage");
+	Stage * pStage = Object::CreateObject<Stage>("Stage", pLayerStage);
+	Layer * pLayerDefault = FindLayer("Default");
+	Player * pPlayer = Object::CreateObject<Player>("Player", pLayerDefault);
+	Minion * pMinion = Object::CreateObject<Minion>("Minion", pLayerDefault);
 	Bullet * pBullet = Scene::CreatePrototype<Bullet>("Bullet");
 
+	GET_SINGLE(Camera)->SetTarget(pPlayer);
+
+	SAFE_RELEASE(pStage);
 	SAFE_RELEASE(pPlayer);
 	SAFE_RELEASE(pMinion);
 	SAFE_RELEASE(pBullet);

@@ -6,7 +6,9 @@ unordered_map<string, class Object *> Scene::m_mapPrototype;
 
 Scene::Scene()
 {
-	Layer * pLayer = CreateLayer("Default");
+	Layer * pLayer;
+	pLayer = CreateLayer("Stage", 0);
+	pLayer = CreateLayer("Default", 1);
 	pLayer = CreateLayer("UI", INT_MAX);
 }
 

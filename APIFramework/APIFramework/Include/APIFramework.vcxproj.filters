@@ -49,6 +49,12 @@
     <Filter Include="04. Resource">
       <UniqueIdentifier>{91242bdd-54ae-4ba3-b456-8397a75e68d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\02. StaticObject\01. Stage">
+      <UniqueIdentifier>{b1272d02-3f52-4449-bf1f-eb7c9783e7bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Core\03. Camera">
+      <UniqueIdentifier>{5dbb4492-6c54-4dd7-979e-fdcc56993970}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="Resource\Texture.cpp">
       <Filter>04. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Stage.cpp">
+      <Filter>03. Object\02. StaticObject\01. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Camera.cpp">
+      <Filter>01. Core\03. Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="Resource\Texture.h">
       <Filter>04. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Stage.h">
+      <Filter>03. Object\02. StaticObject\01. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Camera.h">
+      <Filter>01. Core\03. Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

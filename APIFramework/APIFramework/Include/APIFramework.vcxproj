@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Core\PathManager.cpp" />
     <ClCompile Include="Core\Timer.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="Object\Minion.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Object\Player.cpp" />
+    <ClCompile Include="Object\Stage.cpp" />
     <ClCompile Include="Object\StaticObject.cpp" />
     <ClCompile Include="Reference.cpp" />
     <ClCompile Include="Resource\ResourceManager.cpp" />
@@ -38,6 +40,7 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\PathManager.h" />
     <ClInclude Include="Core\Timer.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="Object\Minion.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Object\Player.h" />
+    <ClInclude Include="Object\Stage.h" />
     <ClInclude Include="Object\StaticObject.h" />
     <ClInclude Include="Reference.h" />
     <ClInclude Include="resource.h" />

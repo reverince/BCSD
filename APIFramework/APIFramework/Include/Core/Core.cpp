@@ -1,6 +1,7 @@
 #include "Core.h"
 #include "Timer.h"
 #include "PathManager.h"
+#include "Camera.h"
 #include "..\Resource\ResourceManager.h"
 #include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
@@ -12,13 +13,14 @@ Core::Core()
 {
 	// 메모리 누수 체크
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(230);
+	//_CrtSetBreakAlloc(290);
 }
 
 Core::~Core()
 {
 	DESTROY_SINGLE(Timer);
 	DESTROY_SINGLE(PathManager);
+	DESTROY_SINGLE(Camera);
 	DESTROY_SINGLE(ResourceManager);
 	DESTROY_SINGLE(SceneManager);
 
@@ -80,18 +82,22 @@ void Core::Logic()
 
 void Core::Input(float deltaTime)
 {
+	GET_SINGLE(Camera)->Input(deltaTime);
 	GET_SINGLE(SceneManager)->Input(deltaTime);
 }
 
 int Core::Update(float deltaTime)
 {
+	GET_SINGLE(Camera)->Update(deltaTime);
 	GET_SINGLE(SceneManager)->Update(deltaTime);
+
 	return 0;
 }
 
 int Core::LateUpdate(float deltaTime)
 {
 	GET_SINGLE(SceneManager)->LateUpdate(deltaTime);
+
 	return 0;
 }
 
@@ -130,6 +136,8 @@ bool Core::Init(HINSTANCE hInst)
 	if (!GET_SINGLE(Timer)->Init())
 		return false;
 	if (!GET_SINGLE(PathManager)->Init())
+		return false;
+	if (!GET_SINGLE(Camera)->Init(POSITION(), m_rs, RESOLUTION(WORLD_WIDTH, WORLD_HEIGHT)))
 		return false;
 	if (!GET_SINGLE(ResourceManager)->Init(hInst, m_hDC))
 		return false;

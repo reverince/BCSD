@@ -1,10 +1,17 @@
 #pragma once
 #include <Windows.h>
 
-struct Resolution
+typedef struct Resolution
 {
 	unsigned int w, h;
-};
+
+	Resolution() :
+		w(0), h(0)
+	{ }
+	Resolution(UINT _w, UINT _h) :
+		w(_w), h(_h)
+	{ }
+} RESOLUTION;
 
 typedef struct Position
 {
@@ -65,6 +72,18 @@ typedef struct Position
 	{
 		x = x + (float)pt.x;
 		y = y + (float)pt.y;
+	}
+
+	// -= 오버라이딩
+	void operator -= (const Position & pos)
+	{
+		x = x - pos.x;
+		y = y - pos.y;
+	}
+	void operator -= (const POINT & pt)
+	{
+		x = x - (float)pt.x;
+		y = y - (float)pt.y;
 	}
 
 	// - 오버라이딩

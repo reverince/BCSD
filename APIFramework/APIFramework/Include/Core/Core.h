@@ -9,7 +9,7 @@ class Core
 	HINSTANCE m_hInst;
 	HWND m_hWnd;
 	HDC m_hDC;
-	Resolution m_rs;
+	RESOLUTION m_rs;
 
 	Core();
 	~Core();
@@ -40,7 +40,7 @@ public:
 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-	Resolution GetResolution() const { return m_rs; }
+	RESOLUTION GetResolution() const { return m_rs; }
 
 	bool Init(HINSTANCE hInst);
 	int Run();
