@@ -8,7 +8,7 @@
 list<Object *> Object::m_listObject;
 
 Object::Object() :
-	m_pTexture(nullptr)
+	m_pTexture(nullptr), m_pivot(0.5f, 0.5f)
 {
 }
 
@@ -141,6 +141,7 @@ void Object::Render(HDC hDC, float deltaTime)
 {
 	if (m_pTexture)
 	{
-		BitBlt(hDC, (int)m_pos.x, (int)m_pos.y, (int)m_size.x, (int)m_size.y, m_pTexture->GetDC(), 0, 0, SRCCOPY);
+		POSITION pos = m_pos - m_size * m_pivot;
+		BitBlt(hDC, (int)pos.x, (int)pos.y, (int)m_size.x, (int)m_size.y, m_pTexture->GetDC(), 0, 0, SRCCOPY);
 	}
 }

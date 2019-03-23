@@ -59,5 +59,6 @@ void Bullet::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
 
-	Ellipse(hDC, (int)m_pos.x, (int)m_pos.y, (int)(m_pos.x + m_size.x), (int)(m_pos.y + m_size.y));
+	POSITION pos = m_pos - m_size * m_pivot;
+	Ellipse(hDC, (int)pos.x, (int)pos.y, (int)(pos.x + m_size.x), (int)(pos.y + m_size.y));
 }

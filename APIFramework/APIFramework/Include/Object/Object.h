@@ -48,7 +48,6 @@ public:
 	}
 
 	static Object * CloneObject(const string & key, const string & tag, class Layer * pLayer = nullptr);
-	
 	static Object * FindObject(const string & tag);
 	static void EraseObject(Object * pObj);
 	static void EraseObject(const string & tag);
@@ -63,12 +62,15 @@ public:
 	void SetPos(const POSITION & pos) { m_pos = pos; }
 	void SetPos(const POINT & pt) { m_pos = pt; }
 	void SetPos(float x, float y) { m_pos.x = x; m_pos.y = y; }
+	void SetPivot(const POSITION & size) { m_pivot = size; }
+	void SetPivot(float x, float y) { m_pivot.x = x; m_pivot.y = y; }
 	void SetSize(const POSITION & size) { m_size = size; }
 	void SetSize(const POINT & pt) { m_size = pt; }
 	void SetSize(float x, float y) { m_size.x = x; m_size.y = y; }
 	string GetTag() const { return m_tag; }
 	POSITION GetPos() const { return m_pos; }
 	_SIZE GetSize() const { return m_size; }
+	POSITION GetPivot() const { return m_pivot; }
 
 	void SetTexture(class Texture * pTexture);
 	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);

@@ -51,9 +51,9 @@ int Minion::Update(float deltaTime)
 	// 이동 관련
 	MoveY(deltaTime, m_dir);
 
-	if (m_pos.y + m_size.y >= GET_RESOLUTION.h)
+	if (m_pos.y >= GET_RESOLUTION.h)
 	{
-		m_pos.y = GET_RESOLUTION.h - m_size.y;
+		m_pos.y = GET_RESOLUTION.h;
 		m_dir = MD_BACK;
 	}
 	else if (m_pos.y <= 0)
@@ -90,5 +90,6 @@ void Minion::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
 
-	Rectangle(hDC, (int)m_pos.x, (int)m_pos.y, (int)(m_pos.x + m_size.x), (int)(m_pos.y + m_size.y));
+	POSITION pos = m_pos - m_size * m_pivot;
+	Rectangle(hDC, (int)pos.x, (int)pos.y, (int)(pos.x + m_size.x), (int)(pos.y + m_size.y));
 }
