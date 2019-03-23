@@ -10,12 +10,16 @@ ResourceManager::ResourceManager()
 ResourceManager::~ResourceManager()
 {
 	SafeReleaseMap(m_mapTexture);
+	SAFE_RELEASE(m_pBackBuffer);
 }
 
 bool ResourceManager::Init(HINSTANCE hInst, HDC hDC)
 {
 	m_hInst = hInst;
 	m_hDC = hDC;
+
+	// ¹é ¹öÆÛ
+	m_pBackBuffer = LoadTexture("BackBuffer", L"back_buffer.bmp");
 
 	return true;
 }

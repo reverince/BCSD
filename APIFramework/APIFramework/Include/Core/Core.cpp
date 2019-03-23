@@ -2,6 +2,7 @@
 #include "Timer.h"
 #include "PathManager.h"
 #include "..\Resource\ResourceManager.h"
+#include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
 
 Core * Core::m_pInst = nullptr;
@@ -101,7 +102,13 @@ void Core::Collision(float deltaTime)
 
 void Core::Render(float deltaTime)
 {
-	GET_SINGLE(SceneManager)->Render(m_hDC, deltaTime);
+	Texture * pBackBuffer = GET_SINGLE(ResourceManager)->GetBackBuffer();
+
+	Rectangle(pBackBuffer->GetDC(), 0, 0, (int)m_rs.w, (int)m_rs.h);
+	GET_SINGLE(SceneManager)->Render(pBackBuffer->GetDC(), deltaTime);
+	BitBlt(m_hDC, 0, 0, (int)m_rs.w, (int)m_rs.h, pBackBuffer->GetDC(), 0, 0, SRCCOPY);
+
+	SAFE_RELEASE(pBackBuffer);
 }
 
 bool Core::Init(HINSTANCE hInst)
