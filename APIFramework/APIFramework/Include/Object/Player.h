@@ -16,6 +16,8 @@ class Player : public DynamicObject
 
 public:
 
+	void CollisionBullet(float deltaTime, class Collider * pSrc, class Collider * pDest);
+
 	virtual Player * Clone();
 	virtual bool Init();
 	virtual void Input(float deltaTime);

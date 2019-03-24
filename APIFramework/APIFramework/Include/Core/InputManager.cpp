@@ -81,19 +81,20 @@ void InputManager::Update(float deltaTime)
 		}
 
 		// 입력 상태 변경 (down press up)
-		if (pushCount == iter->second->keys.size())
+		if (pushCount == iter->second->keys.size())  // Press
 		{
 			if (!iter->second->isDown && !iter->second->isPressed)
-				iter->second->isDown = true;
-			else if (iter->second->isDown && !iter->second->isPressed)
 			{
+				iter->second->isDown = true;
 				iter->second->isPressed = true;
-				iter->second->isDown = false;
+				iter->second->isUp = false;
 			}
+			else if (iter->second->isDown)
+				iter->second->isDown = false;
 		}
-		else
+		else  // Up
 		{
-			if (iter->second->isDown || iter->second->isPressed)
+			if (iter->second->isPressed)
 			{
 				iter->second->isDown = false;
 				iter->second->isPressed = false;

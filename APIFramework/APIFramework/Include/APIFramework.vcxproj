@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Collider\Collider.cpp" />
+    <ClCompile Include="Collider\ColliderRect.cpp" />
+    <ClCompile Include="Collider\CollisionManager.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Core\InputManager.cpp" />
@@ -41,6 +44,9 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collider\Collider.h" />
+    <ClInclude Include="Collider\ColliderRect.h" />
+    <ClInclude Include="Collider\CollisionManager.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\InputManager.h" />

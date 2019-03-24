@@ -1,0 +1,69 @@
+#include "ColliderRect.h"
+#include "..\Object\Object.h"
+
+ColliderRect::ColliderRect()
+{
+	m_type = CT_RECT;
+}
+
+ColliderRect::ColliderRect(const ColliderRect & collider) :
+	Collider(collider)
+{
+	m_rect = collider.m_rect;
+}
+
+ColliderRect::~ColliderRect()
+{
+}
+
+bool ColliderRect::Init()
+{
+	return true;
+}
+
+void ColliderRect::Input(float deltaTime)
+{
+	Collider::Input(deltaTime);
+}
+
+int ColliderRect::Update(float deltaTime)
+{
+	Collider::Update(deltaTime);
+
+	return 0;
+}
+
+int ColliderRect::LateUpdate(float deltaTime)
+{
+	Collider::LateUpdate(deltaTime);
+
+	POSITION pos = m_pObj->GetPos();
+	m_rectWorld.l = pos.x + m_rect.l;
+	m_rectWorld.t = pos.y + m_rect.t;
+	m_rectWorld.r = pos.x + m_rect.r;
+	m_rectWorld.b = pos.y + m_rect.b;
+	
+	return 0;
+}
+
+bool ColliderRect::Collision(Collider * pDest)
+{
+	switch (pDest->GetType())
+	{
+	case CT_RECT:
+		return CollisionRectVsRect(m_rectWorld, ((ColliderRect*)pDest)->GetRectWorld());
+		break;
+	}
+
+	return false;
+}
+
+void ColliderRect::Render(HDC hDC, float deltaTime)
+{
+	Collider::Render(hDC, deltaTime);
+}
+
+ColliderRect * ColliderRect::Clone()
+{
+	return new ColliderRect(*this);
+}

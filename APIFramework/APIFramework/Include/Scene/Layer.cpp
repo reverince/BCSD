@@ -1,5 +1,6 @@
 #include "Layer.h"
 #include "..\Object\Object.h"
+#include "..\Collider\CollisionManager.h"
 
 Layer::Layer() :
 	m_pScene(nullptr), m_tag(""), m_zOrder(0), m_isEnabled(true), m_isAlive(true)
@@ -33,15 +34,16 @@ void Layer::Input(float deltaTime)
 		if (!(*iter)->GetEnabled())
 			continue;
 
-		(*iter)->Input(deltaTime);
-
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
 			--iter;
+			continue;
 		}
+
+		(*iter)->Input(deltaTime);
 	}
 }
 
@@ -52,15 +54,16 @@ int Layer::Update(float deltaTime)
 		if (!(*iter)->GetEnabled())
 			continue;
 
-		(*iter)->Update(deltaTime);
-
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
 			--iter;
+			continue;
 		}
+
+		(*iter)->Update(deltaTime);
 	}
 
 	return 0;
@@ -73,15 +76,16 @@ int Layer::LateUpdate(float deltaTime)
 		if (!(*iter)->GetEnabled())
 			continue;
 
-		(*iter)->LateUpdate(deltaTime);
-
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
 			--iter;
+			continue;
 		}
+
+		(*iter)->LateUpdate(deltaTime);
 	}
 
 	return 0;
@@ -94,15 +98,18 @@ void Layer::Collision(float deltaTime)
 		if (!(*iter)->GetEnabled())
 			continue;
 
-		(*iter)->Collision(deltaTime);
-
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
 			--iter;
+			continue;
 		}
+
+		GET_SINGLE(CollisionManager)->AddObject(*iter);
+
+		(*iter)->Collision(deltaTime);
 	}
 }
 
@@ -113,14 +120,15 @@ void Layer::Render(HDC hDC, float deltaTime)
 		if (!(*iter)->GetEnabled())
 			continue;
 
-		(*iter)->Render(hDC, deltaTime);
-
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
 			--iter;
+			continue;
 		}
+
+		(*iter)->Render(hDC, deltaTime);
 	}
 }

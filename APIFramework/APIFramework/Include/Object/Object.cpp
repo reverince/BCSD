@@ -4,6 +4,7 @@
 #include "..\Scene\SceneManager.h"
 #include "..\Scene\Scene.h"
 #include "..\Scene\Layer.h"
+#include "..\Collider\Collider.h"
 
 list<Object *> Object::m_listObject;
 
@@ -18,11 +19,22 @@ Object::Object(const Object & obj)
 
 	if (m_pTexture)
 		m_pTexture->AddRef();
+
+	m_listCollider.clear();
+
+	for (list<Collider *>::const_iterator iter = obj.m_listCollider.begin(); iter != obj.m_listCollider.end(); ++iter)
+	{
+		Collider * pCollider = (*iter)->Clone();
+		pCollider->SetObj(this);
+
+		m_listCollider.push_back(pCollider);
+	}
 }
 
 Object::~Object()
 {
 	SAFE_RELEASE(m_pTexture);
+	SafeReleaseVectorList(m_listCollider);
 }
 
 Object * Object::CloneObject(const string & key, const string & tag, class Layer * pLayer)
@@ -116,11 +128,43 @@ void Object::Input(float deltaTime)
 
 int Object::Update(float deltaTime)
 {
+	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	{
+		if (!(*iter)->GetEnabled())
+			continue;
+
+		if (!(*iter)->IsAlive())
+		{
+			SAFE_RELEASE(*iter);
+			iter = m_listCollider.erase(iter);
+			--iter;
+			continue;
+		}
+
+		(*iter)->Update(deltaTime);
+	}
+
 	return 0;
 }
 
 int Object::LateUpdate(float deltaTime)
 {
+	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	{
+		if (!(*iter)->GetEnabled())
+			continue;
+
+		if (!(*iter)->IsAlive())
+		{
+			SAFE_RELEASE(*iter);
+			iter = m_listCollider.erase(iter);
+			--iter;
+			continue;
+		}
+
+		(*iter)->LateUpdate(deltaTime);
+	}
+
 	return 0;
 }
 
@@ -141,7 +185,22 @@ void Object::Render(HDC hDC, float deltaTime)
 		}
 		else
 		{
-		BitBlt(hDC, pX, pY, sX,sY, m_pTexture->GetDC(), 0, 0, SRCCOPY);
+			BitBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), 0, 0, SRCCOPY);
 		}
+	}
+
+	// Ãæµ¹Ã¼ ·»´õ
+	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	{
+		if (!(*iter)->GetEnabled())
+			continue;
+
+		if (!(*iter)->IsAlive())
+		{
+			SAFE_RELEASE(*iter);
+			iter = m_listCollider.erase(iter);
+		}
+
+		(*iter)->Render(hDC, deltaTime);
 	}
 }

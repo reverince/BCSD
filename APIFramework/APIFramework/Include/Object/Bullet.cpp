@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "..\Resource\Texture.h"
+#include "..\Collider\ColliderRect.h"
 
 Bullet::Bullet() :
 	m_dist(0.f), m_distMax(1000.f)
@@ -27,6 +28,11 @@ bool Bullet::Init()
 	SetSize(BULLET_WIDTH, BULLET_HEIGHT);
 	SetSpeed(BULLET_SPEED);
 	SetTexture("Bullet", BULLET_TEXTURE);
+
+	ColliderRect * pCollRect = AddCollider<ColliderRect>("Minion");
+	pCollRect->SetRect(-BULLET_WIDTH * 0.5f, -BULLET_HEIGHT * 0.5f, BULLET_WIDTH * 0.5f, BULLET_HEIGHT * 0.5f);
+
+	SAFE_RELEASE(pCollRect);
 
 	return true;
 }

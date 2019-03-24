@@ -1,5 +1,6 @@
 #include "Minion.h"
 #include "..\Core\Core.h"
+#include "..\Collider\ColliderRect.h"
 
 Minion::Minion() :
 	m_dir(MD_FRONT), m_fireTime(0.f), m_firePeriod(2.f)
@@ -36,7 +37,7 @@ void Minion::Fire()
 	}*/
 
 	// 각도 계산은 너굴맨이 처리했으니 안심하라구
-	theta = (dx == 0.f) ? (dy > 0.f) ? 1.5f * PI : 0.5f * PI : (atanf(dy / dx) + ( (dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f ));
+	theta = (dx == 0.f) ? (dy > 0.f) ? 1.5f * PI : 0.5f * PI : (atanf(dy / dx) + ((dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f));
 
 	((DynamicObject *)pBullet)->SetAngle(theta);
 	pBullet->SetPos(m_pos);
@@ -56,6 +57,11 @@ bool Minion::Init()
 	SetSize(MINION_WIDTH, MINION_HEIGHT);
 	SetSpeed(MINION_SPEED);
 	SetTexture("Minion", MINION_TEXTURE);
+
+	ColliderRect * pCollRect = AddCollider<ColliderRect>("Minion");
+	pCollRect->SetRect(-MINION_WIDTH * 0.5f, -MINION_HEIGHT * 0.5f, MINION_WIDTH * 0.5f, MINION_HEIGHT * 0.5f);
+
+	SAFE_RELEASE(pCollRect);
 
 	return true;
 }

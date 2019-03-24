@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "..\Core\Core.h"
 #include "..\Core\InputManager.h"
+#include "..\Collider\ColliderRect.h"
 
 Player::Player() :
 	m_fireTime(0.f), m_firePeriod(0.1f)
@@ -26,7 +27,7 @@ void Player::Fire()
 	m_fireTime = 0.f;
 
 	Object * pBullet = Object::CloneObject("Bullet", "PlayerBullet", m_pLayer);
-	
+
 	POSITION pos;
 	pos.x = m_pos.x + m_size.x * (1.f - m_pivot.x);
 	pos.y = m_pos.y + m_size.y * (0.5f - m_pivot.y);
@@ -34,6 +35,12 @@ void Player::Fire()
 	pBullet->SetPos(pos.x, pos.y);
 
 	SAFE_RELEASE(pBullet);
+}
+
+void Player::CollisionBullet(float deltaTime, Collider * pSrc, Collider * pDest)
+{
+	if (pDest->GetObj()->GetTag() == "MinionBullet")
+		MessageBox(NULL, L"충돌했습니다", L"충돌", MB_OK);
 }
 
 Player * Player::Clone()
@@ -47,6 +54,10 @@ bool Player::Init()
 	SetSize(PLAYER_WIDTH, PLAYER_HEIGHT);
 	SetSpeed(PLAYER_SPEED);
 	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
+
+	ColliderRect * pCollRect = AddCollider<ColliderRect>("Player");
+	pCollRect->SetRect(-MINION_WIDTH * 0.5f, -MINION_HEIGHT * 0.5f, MINION_WIDTH * 0.5f, MINION_HEIGHT * 0.5f);
+	pCollRect->AddCollisionFunc(CS_ENTER, this, &Player::CollisionBullet);
 
 	return true;
 }

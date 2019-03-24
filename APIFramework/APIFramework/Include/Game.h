@@ -6,6 +6,7 @@
 #include "resource.h"
 #include <Windows.h>
 #include <crtdbg.h>  // 메모리 누수 체크
+#include <functional>
 #include <list>
 #include <string>
 #include <typeinfo>

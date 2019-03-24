@@ -5,14 +5,15 @@
 class Object : public Reference
 {
 	static list<Object *> m_listObject;
-	
+
 protected:
-	
+
 	friend class Scene;
 
 	class Scene * m_pScene;
 	class Layer * m_pLayer;
 	class Texture * m_pTexture;
+	list<class  Collider *> m_listCollider;
 
 	string m_tag;
 	POSITION m_pos;
@@ -22,7 +23,7 @@ protected:
 	Object();
 	Object(const Object & obj);
 	virtual ~Object();
-	
+
 public:
 
 	template <typename T>
@@ -74,6 +75,31 @@ public:
 
 	void SetTexture(class Texture * pTexture);
 	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);
+
+	template <typename T>
+	T * AddCollider(const string & tag)
+	{
+		T * pCollider = new T;
+
+		pCollider->SetObj(this);
+
+		if (!pCollider->Init())
+		{
+			SAFE_RELEASE(pCollider);
+			return nullptr;
+		}
+
+		pCollider->AddRef();
+		m_listCollider.push_back(pCollider);
+
+		return pCollider;
+	}
+
+	bool HasCollider()
+	{
+		return !m_listCollider.empty();
+	}
+	const list<class Collider *> * GetColliders() const { return &m_listCollider; }
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

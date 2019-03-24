@@ -6,6 +6,7 @@
 #include "..\Resource\ResourceManager.h"
 #include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
+#include "..\Collider\CollisionManager.h"
 
 DEFINE_SINGLE(Core);
 
@@ -26,6 +27,7 @@ Core::~Core()
 	DESTROY_SINGLE(InputManager);
 	DESTROY_SINGLE(ResourceManager);
 	DESTROY_SINGLE(SceneManager);
+	DESTROY_SINGLE(CollisionManager);
 
 	ReleaseDC(m_hWnd, m_hDC);
 }
@@ -108,6 +110,7 @@ int Core::LateUpdate(float deltaTime)
 void Core::Collision(float deltaTime)
 {
 	GET_SINGLE(SceneManager)->Collision(deltaTime);
+	GET_SINGLE(CollisionManager)->Collision(deltaTime);
 }
 
 void Core::Render(float deltaTime)
