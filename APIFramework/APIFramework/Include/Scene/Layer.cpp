@@ -8,10 +8,7 @@ Layer::Layer() :
 
 Layer::~Layer()
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		// 오브젝트 제거
 		Object::EraseObject(*iter);
@@ -31,12 +28,9 @@ void Layer::AddObject(Object * pObj)
 
 void Layer::Input(float deltaTime)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
 
 		(*iter)->Input(deltaTime);
@@ -46,7 +40,6 @@ void Layer::Input(float deltaTime)
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			iterEnd = m_listObject.end();
 			--iter;
 		}
 	}
@@ -54,12 +47,9 @@ void Layer::Input(float deltaTime)
 
 int Layer::Update(float deltaTime)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
 
 		(*iter)->Update(deltaTime);
@@ -69,7 +59,6 @@ int Layer::Update(float deltaTime)
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			iterEnd = m_listObject.end();
 			--iter;
 		}
 	}
@@ -79,12 +68,9 @@ int Layer::Update(float deltaTime)
 
 int Layer::LateUpdate(float deltaTime)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
 
 		(*iter)->LateUpdate(deltaTime);
@@ -94,7 +80,6 @@ int Layer::LateUpdate(float deltaTime)
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			iterEnd = m_listObject.end();
 			--iter;
 		}
 	}
@@ -104,12 +89,9 @@ int Layer::LateUpdate(float deltaTime)
 
 void Layer::Collision(float deltaTime)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
 
 		(*iter)->Collision(deltaTime);
@@ -119,7 +101,6 @@ void Layer::Collision(float deltaTime)
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			iterEnd = m_listObject.end();
 			--iter;
 		}
 	}
@@ -127,12 +108,9 @@ void Layer::Collision(float deltaTime)
 
 void Layer::Render(HDC hDC, float deltaTime)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
 
 		(*iter)->Render(hDC, deltaTime);
@@ -142,7 +120,6 @@ void Layer::Render(HDC hDC, float deltaTime)
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			iterEnd = m_listObject.end();
 			--iter;
 		}
 	}

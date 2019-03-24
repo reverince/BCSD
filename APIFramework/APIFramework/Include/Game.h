@@ -7,6 +7,8 @@
 #include <Windows.h>
 #include <crtdbg.h>  // 메모리 누수 체크
 #include <list>
+#include <string>
+#include <typeinfo>
 #include <unordered_map>
 #include <vector>
 using namespace std;

@@ -2,18 +2,20 @@
 #include "Timer.h"
 #include "PathManager.h"
 #include "Camera.h"
+#include "InputManager.h"
 #include "..\Resource\ResourceManager.h"
 #include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
 
-Core * Core::m_pInst = nullptr;
+DEFINE_SINGLE(Core);
+
 bool Core::m_isLooping = true;
 
 Core::Core()
 {
 	// 메모리 누수 체크
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(290);
+	//_CrtSetBreakAlloc(289);
 }
 
 Core::~Core()
@@ -21,6 +23,7 @@ Core::~Core()
 	DESTROY_SINGLE(Timer);
 	DESTROY_SINGLE(PathManager);
 	DESTROY_SINGLE(Camera);
+	DESTROY_SINGLE(InputManager);
 	DESTROY_SINGLE(ResourceManager);
 	DESTROY_SINGLE(SceneManager);
 
@@ -82,6 +85,7 @@ void Core::Logic()
 
 void Core::Input(float deltaTime)
 {
+	GET_SINGLE(InputManager)->Update(deltaTime);
 	GET_SINGLE(Camera)->Input(deltaTime);
 	GET_SINGLE(SceneManager)->Input(deltaTime);
 }
@@ -139,7 +143,9 @@ bool Core::Init(HINSTANCE hInst)
 		return false;
 	if (!GET_SINGLE(Camera)->Init(POSITION(), m_rs, RESOLUTION(WORLD_WIDTH, WORLD_HEIGHT)))
 		return false;
-	if (!GET_SINGLE(ResourceManager)->Init(hInst, m_hDC))
+	if (!GET_SINGLE(InputManager)->Init(m_hWnd))
+		return false;
+	if (!GET_SINGLE(ResourceManager)->Init(m_hInst, m_hDC))
 		return false;
 	if (!GET_SINGLE(SceneManager)->Init())
 		return false;

@@ -47,10 +47,7 @@ Object * Object::CloneObject(const string & key, const string & tag, class Layer
 
 Object * Object::FindObject(const string & tag)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if ((*iter)->GetTag() == tag)
 		{
@@ -64,10 +61,7 @@ Object * Object::FindObject(const string & tag)
 
 void Object::EraseObject(Object * pObj)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if (*iter == pObj)
 		{
@@ -80,10 +74,7 @@ void Object::EraseObject(Object * pObj)
 
 void Object::EraseObject(const string & tag)
 {
-	list<Object *>::iterator iter;
-	list<Object *>::iterator iterEnd = m_listObject.end();
-
-	for (iter = m_listObject.begin(); iter != iterEnd; ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if ((*iter)->GetTag() == tag)
 		{
@@ -142,6 +133,15 @@ void Object::Render(HDC hDC, float deltaTime)
 	if (m_pTexture)
 	{
 		POSITION pos = m_pos - m_size * m_pivot;
-		BitBlt(hDC, (int)pos.x, (int)pos.y, (int)m_size.x, (int)m_size.y, m_pTexture->GetDC(), 0, 0, SRCCOPY);
+		int pX = (int)pos.x, pY = (int)pos.y, sX = (int)m_size.x, sY = (int)m_size.y;
+
+		if (m_pTexture->HasColorKey())
+		{
+			TransparentBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), 0, 0, sX, sY, m_pTexture->GetColorKey());
+		}
+		else
+		{
+		BitBlt(hDC, pX, pY, sX,sY, m_pTexture->GetDC(), 0, 0, SRCCOPY);
+		}
 	}
 }

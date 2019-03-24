@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "..\Core\Core.h"
+#include "..\Core\InputManager.h"
 
 Player::Player() :
 	m_fireTime(0.f), m_firePeriod(0.1f)
@@ -54,31 +55,30 @@ void Player::Input(float deltaTime)
 {
 	DynamicObject::Input(deltaTime);
 
-	if (GetAsyncKeyState('W') & 0x8000)
+	if (KEYPRESS("MoveUp"))
 	{
 		MoveY(deltaTime, MD_BACK);
 	}
-	if (GetAsyncKeyState('S') & 0x8000)
+	if (KEYPRESS("MoveDown"))
 	{
 		MoveY(deltaTime, MD_FRONT);
 	}
-	if (GetAsyncKeyState('A') & 0x8000)
+	if (KEYPRESS("MoveLeft"))
 	{
 		MoveX(deltaTime, MD_BACK);
 	}
-	if (GetAsyncKeyState('D') & 0x8000)
+	if (KEYPRESS("MoveRight"))
 	{
 		MoveX(deltaTime, MD_FRONT);
 	}
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+	if (KEYPRESS("Fire"))
 	{
 		Fire();
 	}
-	if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
+	if (KEYPRESS("Slow"))
 		SetSpeed(PLAYER_SPEED_SLOW);
 	else
 		SetSpeed(PLAYER_SPEED);
-
 }
 
 int Player::Update(float deltaTime)

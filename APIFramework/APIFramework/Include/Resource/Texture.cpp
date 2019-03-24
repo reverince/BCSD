@@ -2,7 +2,7 @@
 #include "..\Core\PathManager.h"
 
 Texture::Texture() :
-	m_hMemDC(NULL)
+	m_hMemDC(NULL), m_hasColorKey(true), m_colorKey(COLORKEY_DEFAULT)
 {
 }
 

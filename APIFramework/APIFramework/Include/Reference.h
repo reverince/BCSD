@@ -22,8 +22,8 @@ public:
 			delete this;
 	}
 
-	void SetEnable(bool enable) { m_isEnabled = enable; }
-	bool GetEnable() const { return m_isEnabled; }
+	void SetEnabled(bool enable) { m_isEnabled = enable; }
+	bool GetEnabled() const { return m_isEnabled; }
 	void Die() { m_isAlive = false; }
 	bool IsAlive() const { return m_isAlive; }
 };

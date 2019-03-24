@@ -57,45 +57,37 @@ bool Scene::Init()
 
 void Scene::Input(float deltaTime)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
-
-		(*iter)->Input(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_DELETE(*iter);
 			iter = m_listLayer.erase(iter);
-			iterEnd = m_listLayer.end();
 			--iter;
 		}
+
+		(*iter)->Input(deltaTime);
 	}
 }
 
 int Scene::Update(float deltaTime)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
-
-		(*iter)->Update(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_DELETE(*iter);
 			iter = m_listLayer.erase(iter);
-			iterEnd = m_listLayer.end();
 			--iter;
 		}
+
+		(*iter)->Update(deltaTime);
 	}
 
 	return 0;
@@ -103,23 +95,19 @@ int Scene::Update(float deltaTime)
 
 int Scene::LateUpdate(float deltaTime)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
-
-		(*iter)->LateUpdate(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_DELETE(*iter);
 			iter = m_listLayer.erase(iter);
-			iterEnd = m_listLayer.end();
 			--iter;
 		}
+
+		(*iter)->LateUpdate(deltaTime);
 	}
 
 	return 0;
@@ -127,45 +115,37 @@ int Scene::LateUpdate(float deltaTime)
 
 void Scene::Collision(float deltaTime)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
-
-		(*iter)->Collision(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_DELETE(*iter);
 			iter = m_listLayer.erase(iter);
-			iterEnd = m_listLayer.end();
 			--iter;
 		}
+
+		(*iter)->Collision(deltaTime);
 	}
 }
 
 void Scene::Render(HDC hDC, float deltaTime)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnable())
+		if (!(*iter)->GetEnabled())
 			continue;
-
-		(*iter)->Render(hDC, deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_DELETE(*iter);
 			iter = m_listLayer.erase(iter);
-			iterEnd = m_listLayer.end();
 			--iter;
 		}
+
+		(*iter)->Render(hDC, deltaTime);
 	}
 }
 
@@ -187,10 +167,7 @@ Layer * Scene::CreateLayer(const string & tag, int zOrder)
 
 Layer * Scene::FindLayer(const string & tag)
 {
-	list<Layer *>::iterator iter;
-	list<Layer *>::iterator iterEnd = m_listLayer.end();
-
-	for (iter = m_listLayer.begin(); iter != iterEnd; ++iter)
+	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
 		if ((*iter)->GetTag() == tag)
 			return *iter;

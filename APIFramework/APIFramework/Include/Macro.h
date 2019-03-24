@@ -2,9 +2,12 @@
 
 #define CLASS_NAME L"WinAPI02"
 
+// 키
 #define PATH_ROOT "RootPath"
 #define PATH_TEXTURE "TexturePath"
+#define COLORKEY_DEFAULT RGB(0, 255, 0)
 
+// 세팅
 #define WND_WIDTH 1600
 #define WND_HEIGHT 900
 #define WORLD_WIDTH 2560
@@ -17,15 +20,24 @@
 #define MINION_WIDTH 100.f
 #define MINION_HEIGHT MINION_WIDTH
 #define MINION_SPEED 300.f
-#define BULLET_WIDTH 20.f
+#define BULLET_WIDTH 50.f
 #define BULLET_HEIGHT BULLET_WIDTH
 #define BULLET_SPEED 1000.f
 
+// 파일
 #define PLAYER_TEXTURE_NORMAL L"player_normal.bmp"
 #define MINION_TEXTURE L"minion.bmp"
+#define BULLET_TEXTURE L"bullet.bmp"
 
+// 상수
 #define PI 3.141592f
 
+// 입력
+#define KEYDOWN(key) InputManager::GetInst()->KeyDown(key)
+#define KEYPRESS(key) InputManager::GetInst()->KeyPress(key)
+#define KEYUP(key) InputManager::GetInst()->KeyUp(key)
+
+// 메모리
 #define SAFE_DELETE(p) if (p) { delete p; p = nullptr; }
 #define SAFE_DELETE_ARRAY(p) if p { delete[] p; p = nullptr; }
 #define SAFE_RELEASE(p) if (p) { (p)->Release(); p = nullptr; }

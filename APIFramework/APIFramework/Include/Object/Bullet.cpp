@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "..\Resource\Texture.h"
 
 Bullet::Bullet() :
 	m_dist(0.f), m_distMax(1000.f)
@@ -25,6 +26,7 @@ bool Bullet::Init()
 {
 	SetSize(BULLET_WIDTH, BULLET_HEIGHT);
 	SetSpeed(BULLET_SPEED);
+	SetTexture("Bullet", BULLET_TEXTURE);
 
 	return true;
 }
@@ -59,6 +61,6 @@ void Bullet::Render(HDC hDC, float deltaTime)
 {
 	DynamicObject::Render(hDC, deltaTime);
 
-	POSITION pos = m_pos - m_size * m_pivot;
-	Ellipse(hDC, (int)pos.x, (int)pos.y, (int)(pos.x + m_size.x), (int)(pos.y + m_size.y));
+	//POSITION pos = m_pos - m_size * m_pivot;
+	//Ellipse(hDC, (int)pos.x, (int)pos.y, (int)(pos.x + m_size.x), (int)(pos.y + m_size.y));
 }
