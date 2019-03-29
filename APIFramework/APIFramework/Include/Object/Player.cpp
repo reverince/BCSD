@@ -25,16 +25,22 @@ void Player::Fire()
 		return;
 
 	m_fireTime = 0.f;
+	float theta = -0.1f * PI;
+	for (int i = 0; i < 3; ++i)
+	{
+		Object * pBullet = Object::CloneObject("Bullet", "PlayerBullet", m_pLayer);
 
-	Object * pBullet = Object::CloneObject("Bullet", "PlayerBullet", m_pLayer);
+		POSITION pos;
+		pos.x = m_pos.x + m_size.x * (1.f - m_pivot.x);
+		pos.y = m_pos.y + m_size.y * (0.5f - m_pivot.y);
 
-	POSITION pos;
-	pos.x = m_pos.x + m_size.x * (1.f - m_pivot.x);
-	pos.y = m_pos.y + m_size.y * (0.5f - m_pivot.y);
+		pBullet->SetPos(pos.x, pos.y);
+		((DynamicObject *)pBullet)->SetAngle(theta);
 
-	pBullet->SetPos(pos.x, pos.y);
+		theta += 0.1f * PI;
 
-	SAFE_RELEASE(pBullet);
+		SAFE_RELEASE(pBullet);
+	}
 }
 
 void Player::CollisionBullet(float deltaTime, Collider * pSrc, Collider * pDest)
@@ -97,23 +103,8 @@ int Player::Update(float deltaTime)
 	DynamicObject::Update(deltaTime);
 
 	// 이동 관련
-	if (m_pos.x >= GET_RESOLUTION.w)
-	{
-		m_pos.x = (float)GET_RESOLUTION.w;
-	}
-	else if (m_pos.x <= 0)
-	{
-		m_pos.x = 0;
-	}
-
-	if (m_pos.y >= GET_RESOLUTION.h)
-	{
-		m_pos.y = (float)GET_RESOLUTION.h;
-	}
-	else if (m_pos.y <= 0)
-	{
-		m_pos.y = 0;
-	}
+	m_pos.x = (m_pos.x <= 0) ? 0.f : (m_pos.x >= GET_RESOLUTION.w) ? (float)GET_RESOLUTION.w : m_pos.x;
+	m_pos.y = (m_pos.y <= 0) ? 0.f : (m_pos.y >= GET_RESOLUTION.h) ? (float)GET_RESOLUTION.h : m_pos.y;
 
 	// 발사 관련
 	m_fireTime += deltaTime;

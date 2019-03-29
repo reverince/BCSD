@@ -17,13 +17,8 @@ using namespace std;
 template <typename T>
 void SafeDeleteVectorList(T & p)
 {
-	typename T::iterator iter;
-	typename T::iterator iterEnd = p.end();
-
-	for (iter = p.begin(); iter != iterEnd; ++iter)
-	{
+	for (typename T::iterator iter = p.begin(); iter != p.end(); ++iter)
 		SAFE_DELETE(*iter);
-	}
 
 	p.clear();
 }
@@ -31,13 +26,8 @@ void SafeDeleteVectorList(T & p)
 template <typename T>
 void SafeReleaseVectorList(T & p)
 {
-	typename T::iterator iter;
-	typename T::iterator iterEnd = p.end();
-
-	for (iter = p.begin(); iter != iterEnd; ++iter)
-	{
+	for (typename T::iterator iter = p.begin(); iter != p.end(); ++iter)
 		SAFE_RELEASE(*iter);
-	}
 
 	p.clear();
 }
@@ -45,13 +35,8 @@ void SafeReleaseVectorList(T & p)
 template <typename T>
 void SafeDeleteMap(T & p)
 {
-	typename T::iterator iter;
-	typename T::iterator iterEnd = p.end();
-
-	for (iter = p.begin(); iter != iterEnd; ++iter)
-	{
+	for (typename T::iterator iter = p.begin(); iter != p.end(); ++iter)
 		SAFE_DELETE(iter->second);
-	}
 
 	p.clear();
 }
@@ -59,13 +44,8 @@ void SafeDeleteMap(T & p)
 template <typename T>
 void SafeReleaseMap(T & p)
 {
-	typename T::iterator iter;
-	typename T::iterator iterEnd = p.end();
-
-	for (iter = p.begin(); iter != iterEnd; ++iter)
-	{
+	for (typename T::iterator iter = p.begin(); iter != p.end(); ++iter)
 		SAFE_RELEASE(iter->second);
-	}
 
 	p.clear();
 }

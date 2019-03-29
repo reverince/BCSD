@@ -3,7 +3,7 @@
 #include "..\Collider\ColliderRect.h"
 
 Bullet::Bullet() :
-	m_dist(0.f), m_distMax(1000.f)
+	m_dist(0.f), m_distMax(10000.f)
 {
 }
 

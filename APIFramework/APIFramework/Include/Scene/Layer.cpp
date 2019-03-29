@@ -23,6 +23,7 @@ void Layer::AddObject(Object * pObj)
 {
 	pObj->SetScene(m_pScene);
 	pObj->SetLayer(this);
+
 	pObj->AddRef();
 	m_listObject.push_back(pObj);
 }

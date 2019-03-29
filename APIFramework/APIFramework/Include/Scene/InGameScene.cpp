@@ -21,6 +21,7 @@ bool InGameScene::Init()
 
 	Layer * pLayerStage = FindLayer("Stage");
 	Stage * pStage = Object::CreateObject<Stage>("Stage", pLayerStage);
+
 	Layer * pLayerDefault = FindLayer("Default");
 	Player * pPlayer = Object::CreateObject<Player>("Player", pLayerDefault);
 	Minion * pMinion = Object::CreateObject<Minion>("Minion", pLayerDefault);
