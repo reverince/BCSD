@@ -59,7 +59,7 @@ void Scene::Input(float deltaTime)
 {
 	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -77,7 +77,7 @@ int Scene::Update(float deltaTime)
 {
 	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -97,7 +97,7 @@ int Scene::LateUpdate(float deltaTime)
 {
 	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -117,7 +117,7 @@ void Scene::Collision(float deltaTime)
 {
 	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -135,7 +135,7 @@ void Scene::Render(HDC hDC, float deltaTime)
 {
 	for (list<Layer *>::iterator iter = m_listLayer.begin(); iter != m_listLayer.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())

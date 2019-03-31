@@ -1,14 +1,6 @@
 #pragma once
 #include <Windows.h>
 
-typedef struct Rectangle
-{
-	float l, t, r, b;
-
-	Rectangle() : l(0.f), t(0.f), r(0.f), b(0.f) { }
-	Rectangle(float _l, float _t, float _r, float _b) : l(_l), t(_t), r(_r), b(_b) { }
-} RECTANGLE;
-
 typedef struct Resolution
 {
 	unsigned int w, h;
@@ -109,3 +101,19 @@ typedef struct Position
 		return ret;
 	}
 } POSITION, _SIZE;
+
+typedef struct Rectangle
+{
+	float l, t, r, b;
+
+	Rectangle() : l(0.f), t(0.f), r(0.f), b(0.f) { }
+	Rectangle(float _l, float _t, float _r, float _b) : l(_l), t(_t), r(_r), b(_b) { }
+} RECTANGLE;
+
+typedef struct Circle
+{
+	POSITION p;
+	float r;
+
+	Circle() : p(0.f, 0.f), r(0.f) { }
+} CIRCLE;

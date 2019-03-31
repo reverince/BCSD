@@ -10,8 +10,6 @@ protected:
 
 	friend class Object;
 
-	COLLIDER_TYPE m_type;
-
 	ColliderRect();
 	ColliderRect(const ColliderRect & collider);
 	virtual ~ColliderRect();

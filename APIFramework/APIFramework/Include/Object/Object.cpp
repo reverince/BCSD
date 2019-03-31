@@ -130,7 +130,7 @@ int Object::Update(float deltaTime)
 {
 	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -151,7 +151,7 @@ int Object::LateUpdate(float deltaTime)
 {
 	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())
@@ -192,7 +192,7 @@ void Object::Render(HDC hDC, float deltaTime)
 	// Ãæµ¹Ã¼ ·»´õ
 	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
 			continue;
 
 		if (!(*iter)->IsAlive())

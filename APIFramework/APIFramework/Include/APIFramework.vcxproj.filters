@@ -132,6 +132,9 @@
     <ClCompile Include="Collider\CollisionManager.cpp">
       <Filter>05. Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Collider\ColliderCircle.cpp">
+      <Filter>05. Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -213,6 +216,9 @@
       <Filter>05. Collider</Filter>
     </ClInclude>
     <ClInclude Include="Collider\CollisionManager.h">
+      <Filter>05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider\ColliderCircle.h">
       <Filter>05. Collider</Filter>
     </ClInclude>
   </ItemGroup>

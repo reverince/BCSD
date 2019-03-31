@@ -26,7 +26,7 @@ public:
 	int GetZOrder() const { return m_zOrder; }
 
 	void SetEnabled(bool enable) { m_isEnabled = enable; }
-	bool GetEnabled() const { return m_isEnabled; }
+	bool IsEnabled() const { return m_isEnabled; }
 	void Die() { m_isAlive = false; }
 	bool IsAlive() const { return m_isAlive; }
 

@@ -17,6 +17,8 @@ protected:
 	virtual ~Collider() = 0;
 
 	bool CollisionRectVsRect(const RECTANGLE & src, const RECTANGLE & dest);
+	bool CollisionRectVsCircle(const RECTANGLE & src, const CIRCLE & dest);
+	bool CollisionCircleVsCircle(const CIRCLE & src, const CIRCLE & dest);
 
 public:
 

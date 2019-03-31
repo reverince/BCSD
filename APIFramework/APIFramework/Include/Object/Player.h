@@ -7,6 +7,7 @@ class Player : public DynamicObject
 
 	float m_fireTime;
 	float m_firePeriod;
+	int m_hp;
 
 	Player();
 	Player(const Player & player);
@@ -16,7 +17,7 @@ class Player : public DynamicObject
 
 public:
 
-	void CollisionBullet(float deltaTime, class Collider * pSrc, class Collider * pDest);
+	void Hit(float deltaTime, class Collider * pSrc, class Collider * pDest);
 
 	virtual Player * Clone();
 	virtual bool Init();

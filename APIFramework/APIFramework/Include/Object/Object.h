@@ -1,6 +1,7 @@
 #pragma once
 #include "..\Reference.h"
 #include "..\Scene\Layer.h"
+#include "..\Collider\Collider.h"
 
 class Object : public Reference
 {
@@ -13,7 +14,7 @@ protected:
 	class Scene * m_pScene;
 	class Layer * m_pLayer;
 	class Texture * m_pTexture;
-	list<class  Collider *> m_listCollider;
+	list<Collider *> m_listCollider;
 
 	string m_tag;
 	POSITION m_pos;
@@ -77,11 +78,25 @@ public:
 	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);
 
 	template <typename T>
+	void AddCollisionFunc(const string & tag, COLLISION_STATE state, T * pObj, void(T::*pFunc)(float, Collider *, Collider *))
+	{
+		for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+		{
+			if ((*iter)->GetTag() == tag)
+			{
+				(*iter)->AddCollisionFunc(state, pObj, pFunc);
+				break;
+			}
+		}
+	}
+
+	template <typename T>
 	T * AddCollider(const string & tag)
 	{
 		T * pCollider = new T;
 
 		pCollider->SetObj(this);
+		pCollider->SetTag(tag);
 
 		if (!pCollider->Init())
 		{
@@ -94,12 +109,8 @@ public:
 
 		return pCollider;
 	}
-
-	bool HasCollider()
-	{
-		return !m_listCollider.empty();
-	}
-	const list<class Collider *> * GetColliders() const { return &m_listCollider; }
+	bool HasCollider() { return !m_listCollider.empty(); }
+	const list<Collider *> * GetColliders() const { return &m_listCollider; }
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

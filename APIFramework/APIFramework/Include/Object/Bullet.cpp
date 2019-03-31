@@ -1,9 +1,9 @@
 #include "Bullet.h"
 #include "..\Resource\Texture.h"
-#include "..\Collider\ColliderRect.h"
+#include "..\Collider\ColliderCircle.h"
 
 Bullet::Bullet() :
-	m_dist(0.f), m_distMax(10000.f)
+	m_dist(0.f), m_distMax(5000.f)
 {
 }
 
@@ -18,6 +18,13 @@ Bullet::~Bullet()
 {
 }
 
+void Bullet::Hit(float deltaTime, Collider * pSrc, Collider * pDest)
+{
+	if (pSrc->GetObj()->GetTag() == "PlayerBullet" && pDest->GetObj()->GetTag() == "Minion" ||
+		pSrc->GetObj()->GetTag() == "MinionBullet" && pDest->GetObj()->GetTag() == "Player")
+		Die();
+}
+
 Bullet * Bullet::Clone()
 {
 	return new Bullet(*this);
@@ -29,10 +36,10 @@ bool Bullet::Init()
 	SetSpeed(BULLET_SPEED);
 	SetTexture("Bullet", BULLET_TEXTURE);
 
-	ColliderRect * pCollRect = AddCollider<ColliderRect>("Minion");
-	pCollRect->SetRect(-BULLET_WIDTH * 0.5f, -BULLET_HEIGHT * 0.5f, BULLET_WIDTH * 0.5f, BULLET_HEIGHT * 0.5f);
+	ColliderCircle * pCollCircle = AddCollider<ColliderCircle>("Bullet");
+	pCollCircle->SetCircle(POSITION(0.f, 0.f), BULLET_RADIUS);
 
-	SAFE_RELEASE(pCollRect);
+	SAFE_RELEASE(pCollCircle);
 
 	return true;
 }

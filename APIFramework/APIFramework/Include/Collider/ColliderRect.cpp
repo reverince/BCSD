@@ -1,5 +1,6 @@
 #include "ColliderRect.h"
 #include "..\Object\Object.h"
+#include "ColliderCircle.h"
 
 ColliderRect::ColliderRect()
 {
@@ -52,6 +53,9 @@ bool ColliderRect::Collision(Collider * pDest)
 	{
 	case CT_RECT:
 		return CollisionRectVsRect(m_rectWorld, ((ColliderRect*)pDest)->GetRectWorld());
+		break;
+	case  CT_CIRCLE:
+		return CollisionRectVsCircle(m_rectWorld, ((ColliderCircle*)pDest)->GetCircleWorld());
 		break;
 	}
 

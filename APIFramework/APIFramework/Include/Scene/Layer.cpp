@@ -30,41 +30,47 @@ void Layer::AddObject(Object * pObj)
 
 void Layer::Input(float deltaTime)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end();)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
+		{
+			++iter;
 			continue;
+		}
+
+		(*iter)->Input(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			--iter;
-			continue;
 		}
-
-		(*iter)->Input(deltaTime);
+		else
+			++iter;
 	}
 }
 
 int Layer::Update(float deltaTime)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end();)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
+		{
+			++iter;
 			continue;
+		}
+
+		(*iter)->Update(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			--iter;
-			continue;
 		}
-
-		(*iter)->Update(deltaTime);
+		else
+			++iter;
 	}
 
 	return 0;
@@ -72,21 +78,24 @@ int Layer::Update(float deltaTime)
 
 int Layer::LateUpdate(float deltaTime)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end();)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
+		{
+			++iter;
 			continue;
+		}
+
+		(*iter)->LateUpdate(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			--iter;
-			continue;
 		}
-
-		(*iter)->LateUpdate(deltaTime);
+		else
+			++iter;
 	}
 
 	return 0;
@@ -94,42 +103,49 @@ int Layer::LateUpdate(float deltaTime)
 
 void Layer::Collision(float deltaTime)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end();)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
+		{
+			++iter;
 			continue;
+		}
+
+		(*iter)->Collision(deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			--iter;
-			continue;
 		}
-
-		GET_SINGLE(CollisionManager)->AddObject(*iter);
-
-		(*iter)->Collision(deltaTime);
+		else
+		{
+			GET_SINGLE(CollisionManager)->AddObject(*iter);
+			++iter;
+		}
 	}
 }
 
 void Layer::Render(HDC hDC, float deltaTime)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end();)
 	{
-		if (!(*iter)->GetEnabled())
+		if (!(*iter)->IsEnabled())
+		{
+			iter++;
 			continue;
+		}
+
+		(*iter)->Render(hDC, deltaTime);
 
 		if (!(*iter)->IsAlive())
 		{
 			Object::EraseObject(*iter);
 			SAFE_RELEASE(*iter);
 			iter = m_listObject.erase(iter);
-			--iter;
-			continue;
 		}
-
-		(*iter)->Render(hDC, deltaTime);
+		else
+			++iter;
 	}
 }

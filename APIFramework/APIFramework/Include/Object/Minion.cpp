@@ -1,6 +1,7 @@
 #include "Minion.h"
 #include "..\Core\Core.h"
 #include "..\Collider\ColliderRect.h"
+#include "Bullet.h"
 
 Minion::Minion() :
 	m_dir(MD_FRONT), m_fireTime(0.f), m_firePeriod(2.f)
@@ -21,29 +22,33 @@ Minion::~Minion()
 
 void Minion::Fire()
 {
-	Object * pBullet = Object::CloneObject("Bullet", "MinionBullet", m_pLayer);
-	Object * pPlayer = Object::FindObject("Player");
-
-	float dy = m_pos.y - pPlayer->GetPos().y;
-	float dx = m_pos.x - pPlayer->GetPos().x;
-	float theta;
-
-	/*if (dx == 0.f)
-		theta = (dy > 0.f) ? 1.5f * PI : 0.5f * PI;
-	else
+	if (Object * pPlayer = Object::FindObject("Player"))
 	{
-		theta = atanf(dy / dx);
-		theta += (dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f;
-	}*/
+		Object * pBullet = Object::CloneObject("Bullet", "MinionBullet", m_pLayer);
 
-	// 각도 계산은 너굴맨이 처리했으니 안심하라구
-	theta = (dx == 0.f) ? (dy > 0.f) ? 1.5f * PI : 0.5f * PI : (atanf(dy / dx) + ((dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f));
+		pBullet->AddCollisionFunc("Bullet", CS_ENTER, (Bullet *)pBullet, &Bullet::Hit);
 
-	((DynamicObject *)pBullet)->SetAngle(theta);
-	pBullet->SetPos(m_pos);
-	((DynamicObject *)pBullet)->SetSpeed(BULLET_SPEED * 0.5f);
+		float dy = m_pos.y - pPlayer->GetPos().y;
+		float dx = m_pos.x - pPlayer->GetPos().x;
+		float theta;
 
-	SAFE_RELEASE(pBullet);
+		/*if (dx == 0.f)
+			theta = (dy > 0.f) ? 1.5f * PI : 0.5f * PI;
+		else
+		{
+			theta = atanf(dy / dx);
+			theta += (dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f;
+		}*/
+
+		// 각도 계산은 너굴맨이 처리했으니 안심하라구
+		theta = (dx == 0.f) ? (dy > 0.f) ? 1.5f * PI : 0.5f * PI : (atanf(dy / dx) + ((dx > 0.f) ? PI : (dy < 0.f && dx < 0.f) ? 2.f * PI : 0.f));
+
+		pBullet->SetPos(m_pos);
+		((DynamicObject *)pBullet)->SetAngle(theta);
+		((DynamicObject *)pBullet)->SetSpeed(BULLET_SPEED * 0.5f);
+
+		SAFE_RELEASE(pBullet);
+	}
 }
 
 Minion * Minion::Clone()
@@ -59,7 +64,7 @@ bool Minion::Init()
 	SetTexture("Minion", MINION_TEXTURE);
 
 	ColliderRect * pCollRect = AddCollider<ColliderRect>("Minion");
-	pCollRect->SetRect(-MINION_WIDTH * 0.5f, -MINION_HEIGHT * 0.5f, MINION_WIDTH * 0.5f, MINION_HEIGHT * 0.5f);
+	pCollRect->SetRect(-MINION_WIDTH * 0.4f, -MINION_HEIGHT * 0.4f, MINION_WIDTH * 0.4f, MINION_HEIGHT * 0.4f);
 
 	SAFE_RELEASE(pCollRect);
 
