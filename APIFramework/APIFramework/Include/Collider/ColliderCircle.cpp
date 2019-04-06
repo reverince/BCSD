@@ -1,6 +1,7 @@
 #include "ColliderCircle.h"
 #include "..\Object\Object.h"
 #include "ColliderRect.h"
+#include "ColliderPixel.h"
 
 ColliderCircle::ColliderCircle()
 {
