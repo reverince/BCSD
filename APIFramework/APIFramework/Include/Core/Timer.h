@@ -3,6 +3,7 @@
 
 class Timer
 {
+	HWND m_hWnd;
 	LARGE_INTEGER m_second;
 	LARGE_INTEGER m_time;
 	float m_deltaTime;
@@ -10,7 +11,6 @@ class Timer
 	float m_fps;
 	float m_fpsTime;
 	int m_frame;
-	int m_frameMax;
 
 	DECLARE_SINGLE(Timer);
 
@@ -21,6 +21,6 @@ public:
 	float GetTimeScale() const { return m_timeScale; }
 	float GetFPS() const { return m_fps; }
 
-	bool Init();
+	bool Init(HWND hWnd);
 	void Update();
 };

@@ -10,8 +10,8 @@
 // 세팅
 #define WND_WIDTH 1600
 #define WND_HEIGHT 900
-#define WORLD_WIDTH 2560
-#define WORLD_HEIGHT 1440
+#define WORLD_WIDTH 1600
+#define WORLD_HEIGHT 900
 
 #define PLAYER_WIDTH 100.f
 #define PLAYER_HEIGHT PLAYER_WIDTH
@@ -33,6 +33,7 @@
 
 // 상수
 #define PI 3.141592f
+#define GRAVITY 0.98f
 
 // 입력
 #define KEYDOWN(key) InputManager::GetInst()->KeyDown(key)

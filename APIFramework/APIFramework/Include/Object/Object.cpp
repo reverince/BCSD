@@ -9,13 +9,15 @@
 list<Object *> Object::m_listObject;
 
 Object::Object() :
-	m_pTexture(nullptr), m_pivot(0.5f, 0.5f)
+	m_pTexture(nullptr), m_pivot(0.5f, 0.5f), m_hasPhysics(false), m_gravityTime(0.f)
 {
 }
 
 Object::Object(const Object & obj)
 {
 	*this = obj;
+
+	m_gravityTime = 0.f;
 
 	if (m_pTexture)
 		m_pTexture->AddRef();
@@ -128,6 +130,12 @@ void Object::Input(float deltaTime)
 
 int Object::Update(float deltaTime)
 {
+	if (m_hasPhysics)
+	{
+		m_gravityTime += deltaTime;
+		m_pos.y += (GRAVITY * m_gravityTime * m_gravityTime);
+	}
+
 	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
 		if (!(*iter)->IsEnabled())

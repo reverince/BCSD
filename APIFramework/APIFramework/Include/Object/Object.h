@@ -20,6 +20,8 @@ protected:
 	POSITION m_pos;
 	_SIZE m_size;
 	POSITION m_pivot;
+	bool m_hasPhysics;
+	float m_gravityTime;
 
 	Object();
 	Object(const Object & obj);
@@ -48,7 +50,6 @@ public:
 
 		return pObj;
 	}
-
 	static Object * CloneObject(const string & key, const string & tag, class Layer * pLayer = nullptr);
 	static Object * FindObject(const string & tag);
 	static void EraseObject(Object * pObj);
@@ -73,6 +74,9 @@ public:
 	POSITION GetPos() const { return m_pos; }
 	_SIZE GetSize() const { return m_size; }
 	POSITION GetPivot() const { return m_pivot; }
+
+	void SetPhysics(bool hasPhysics) { m_hasPhysics = hasPhysics; }
+	bool GetPhysics() const { return m_hasPhysics; }
 
 	void SetTexture(class Texture * pTexture);
 	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);

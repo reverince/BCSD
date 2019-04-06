@@ -7,6 +7,7 @@
 Player::Player() :
 	m_fireTime(0.f), m_firePeriod(0.1f), m_hp(100)
 {
+	m_hasPhysics = true;
 }
 
 Player::Player(const Player & player) :
@@ -135,5 +136,5 @@ void Player::Render(HDC hDC, float deltaTime)
 
 	wchar_t strHP[32] = { };
 	wsprintf(strHP, L"HP: %d", m_hp);
-	TextOut(hDC, m_pos.x - (PLAYER_WIDTH * 0.3f), m_pos.y - (PLAYER_HEIGHT * 0.7f), strHP, lstrlen(strHP));
+	TextOut(hDC, (int)(m_pos.x - (PLAYER_WIDTH * 0.3f)), (int)(m_pos.y - (PLAYER_HEIGHT * 0.7f)), strHP, lstrlen(strHP));
 }

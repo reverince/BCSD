@@ -140,7 +140,7 @@ bool Core::Init(HINSTANCE hInst)
 	m_hDC = GetDC(m_hWnd);
 
 	// ½Ì±ÛÅæ ÃÊ±âÈ­
-	if (!GET_SINGLE(Timer)->Init())
+	if (!GET_SINGLE(Timer)->Init(m_hWnd))
 		return false;
 	if (!GET_SINGLE(PathManager)->Init())
 		return false;

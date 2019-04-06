@@ -20,8 +20,8 @@ Bullet::~Bullet()
 
 void Bullet::Hit(float deltaTime, Collider * pSrc, Collider * pDest)
 {
-	if (pSrc->GetObj()->GetTag() == "PlayerBullet" && pDest->GetObj()->GetTag() == "Minion" ||
-		pSrc->GetObj()->GetTag() == "MinionBullet" && pDest->GetObj()->GetTag() == "Player")
+	if (GetTag() == "PlayerBullet" && pDest->GetObj()->GetTag() == "Minion" ||
+		GetTag() == "MinionBullet" && pDest->GetObj()->GetTag() == "Player")
 		Die();
 }
 
