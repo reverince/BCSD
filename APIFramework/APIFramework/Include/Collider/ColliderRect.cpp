@@ -53,10 +53,13 @@ bool ColliderRect::Collision(Collider * pDest)
 	switch (pDest->GetType())
 	{
 	case CT_RECT:
-		return CollisionRectVsRect(m_rectWorld, ((ColliderRect*)pDest)->GetRectWorld());
+		return CollisionRectVsRect(m_rectWorld, ((ColliderRect *)pDest)->GetRectWorld());
 		break;
 	case  CT_CIRCLE:
-		return CollisionRectVsCircle(m_rectWorld, ((ColliderCircle*)pDest)->GetCircleWorld());
+		return CollisionRectVsCircle(m_rectWorld, ((ColliderCircle *)pDest)->GetCircleWorld());
+		break;
+	case CT_PIXEL:
+		return CollisionRectVsPixel(m_rectWorld, ((ColliderPixel *)pDest)->GetPixels(), ((ColliderPixel *)pDest)->GetWidth(), ((ColliderPixel *)pDest)->GetHeight());
 		break;
 	}
 

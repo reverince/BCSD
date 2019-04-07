@@ -53,6 +53,15 @@ void Player::Hit(float deltaTime, Collider * pSrc, Collider * pDest)
 	{
 		m_hp -= 10;
 	}
+	if (pDest->GetTag() == "StageColl")
+	{
+		m_gravityTime = 0.f;
+	}
+}
+
+void Player::HitStay(float deltaTime, Collider * pSrc, Collider * pDest)
+{
+	
 }
 
 Player * Player::Clone()
@@ -70,6 +79,7 @@ bool Player::Init()
 	ColliderCircle * pCollCircle = AddCollider<ColliderCircle>("Player");
 	pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
 	pCollCircle->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
+	pCollCircle->AddCollisionFunc(CS_STAY, this, &Player::HitStay);
 
 	return true;
 }

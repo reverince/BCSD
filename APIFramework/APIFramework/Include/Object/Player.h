@@ -18,6 +18,7 @@ class Player : public DynamicObject
 public:
 
 	void Hit(float deltaTime, class Collider * pSrc, class Collider * pDest);
+	void HitStay(float deltaTime, class Collider * pSrc, class Collider * pDest);
 
 	virtual Player * Clone();
 	virtual bool Init();

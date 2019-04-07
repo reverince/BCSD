@@ -117,3 +117,8 @@ typedef struct Circle
 
 	Circle() : p(0.f, 0.f), r(0.f) { }
 } CIRCLE;
+
+typedef struct Pixel
+{
+	UCHAR r, g, b;
+} PIXEL;

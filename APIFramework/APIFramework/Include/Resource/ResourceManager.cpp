@@ -19,7 +19,7 @@ bool ResourceManager::Init(HINSTANCE hInst, HDC hDC)
 	m_hDC = hDC;
 
 	// ¹é ¹öÆÛ
-	m_pBackBuffer = LoadTexture("BackBuffer", L"back_buffer.bmp");
+	m_pBackBuffer = LoadTexture("BackBuffer", BACK_BUFFER_TEXTURE);
 
 	return true;
 }

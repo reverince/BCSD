@@ -18,6 +18,7 @@ protected:
 
 	bool CollisionRectVsRect(const RECTANGLE & src, const RECTANGLE & dest);
 	bool CollisionRectVsCircle(const RECTANGLE & src, const CIRCLE & dest);
+	bool CollisionRectVsPixel(const RECTANGLE & src, const vector<PIXEL> & pixels, int width, int height);
 	bool CollisionCircleVsCircle(const CIRCLE & src, const CIRCLE & dest);
 
 public:
@@ -81,4 +82,3 @@ public:
 	virtual void Render(HDC hDC, float deltaTime);
 	virtual Collider * Clone() = 0;
 };
-

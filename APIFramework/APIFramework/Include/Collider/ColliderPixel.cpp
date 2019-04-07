@@ -4,13 +4,17 @@
 #include "ColliderCircle.h"
 #include "ColliderRect.h"
 
-ColliderPixel::ColliderPixel()
+ColliderPixel::ColliderPixel() :
+	m_width(0), m_height(0)
 {
+	m_type = CT_PIXEL;
 }
 
 ColliderPixel::ColliderPixel(const ColliderPixel & collider) :
 	Collider(collider)
 {
+	m_width = collider.m_width;
+	m_height = collider.m_height;
 }
 
 ColliderPixel::~ColliderPixel()
@@ -38,6 +42,13 @@ int ColliderPixel::LateUpdate(float deltaTime)
 
 bool ColliderPixel::Collision(Collider * pDest)
 {
+	switch (pDest->GetType())
+	{
+	case CT_RECT:
+		return CollisionRectVsPixel(((ColliderRect *)pDest)->GetRectWorld(), m_pixels, m_width, m_height);
+		break;
+	}
+
 	return false;
 }
 

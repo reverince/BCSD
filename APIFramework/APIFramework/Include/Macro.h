@@ -27,6 +27,9 @@
 #define BULLET_SPEED 1000.f
 
 // ÆÄÀÏ
+#define BACK_BUFFER_TEXTURE L"back_buffer.bmp"
+#define STAGE_TEXTURE "stage1.bmp"
+#define STAGE_TEXTURE_L L"stage1.bmp"
 #define PLAYER_TEXTURE_NORMAL L"player_normal.bmp"
 #define MINION_TEXTURE L"minion.bmp"
 #define BULLET_TEXTURE L"bullet.bmp"
