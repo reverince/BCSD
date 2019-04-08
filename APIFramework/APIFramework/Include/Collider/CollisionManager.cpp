@@ -57,6 +57,9 @@ bool CollisionManager::Collision(float deltaTime, Object * pSrc, Object * pDest)
 
 			if (isCollided)
 			{
+				// 충돌 지점 설정
+				(*iterDest)->SetHitPoint((*iterSrc)->GetHitPoint());
+
 				// 충돌
 				if (!(*iterSrc)->CheckCollision(*iterDest))
 				{

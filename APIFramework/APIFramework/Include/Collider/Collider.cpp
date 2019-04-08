@@ -67,6 +67,9 @@ bool Collider::CollisionRectVsCircle(const RECTANGLE & rect, const CIRCLE & circ
 
 bool Collider::CollisionRectVsPixel(const RECTANGLE & src, const vector<PIXEL>& pixels, int width, int height)
 {
+	m_hitPoint.y = -1;
+	m_hitPoint.x = -1;
+
 	int startX, endX, startY, endY;
 
 	startX = (int)((src.l < 0) ? 0 : src.l);
@@ -81,7 +84,11 @@ bool Collider::CollisionRectVsPixel(const RECTANGLE & src, const vector<PIXEL>& 
 			int idx = i * width + j;
 			const PIXEL & pixel = pixels[idx];
 			if (pixel.r == 0 && pixel.g == 255 && pixel.b == 0)
+			{
+				m_hitPoint.y = i;
+				m_hitPoint.x = j;
 				return true;
+			}
 		}
 	}
 

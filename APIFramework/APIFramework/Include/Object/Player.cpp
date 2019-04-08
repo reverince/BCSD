@@ -3,21 +3,26 @@
 #include "..\Core\InputManager.h"
 #include "..\Collider\ColliderRect.h"
 #include "..\Collider\ColliderCircle.h"
+#include "..\Animation\Animation.h"
 #include "Bullet.h"
 
 Player::Player() :
-	m_fireTime(0.f), m_firePeriod(0.1f), m_hp(100)
+	m_fireTime(0.f), m_firePeriod(0.1f), m_isFiring(false), m_isHit(false), m_dir(MD_FRONT),  m_hp(100)
 {
 	m_hasPhysics = true;
 	m_forceOrigin = 300.f;
 	m_isFalling = true;
 }
+
 Player::Player(const Player & player) :
 	DynamicObject(player)
 {
 	m_fireTime = player.m_fireTime;
 	m_firePeriod = player.m_firePeriod;
+	m_isFiring = false;
+	m_isHit = false;
 }
+
 Player::~Player()
 {
 }
@@ -52,12 +57,20 @@ void Player::Hit(float deltaTime, Collider * pSrc, Collider * pDest)
 {
 	if (pDest->GetObj()->GetTag() == "MinionBullet")
 	{
-		m_hp -= 10;
+		m_pAnimation->ChangeClip("Hit");
+		if (!m_isHit)
+		{
+			m_isHit = true;
+			m_hp -= 10;
+			if (m_hp <= 0)
+				Die();
+		}
 	}
 	if (pDest->GetTag() == "StageColl")
 	{
 		m_gravityTime = 0.f;
 		JumpEnd();
+		m_pos.y = pSrc->GetHitPoint().y - m_pivot.y  * m_size.y;
 	}
 }
 
@@ -67,6 +80,7 @@ void Player::HitStay(float deltaTime, Collider * pSrc, Collider * pDest)
 	{
 		m_gravityTime = 0.f;
 		JumpEnd();
+		m_pos.y = pSrc->GetHitPoint().y - m_pivot.y  * m_size.y;
 	}
 }
 
@@ -77,11 +91,35 @@ bool Player::Init()
 	SetSpeed(PLAYER_SPEED);
 	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
 
+	// 콜라이더
 	ColliderRect * pCollCircle = AddCollider<ColliderRect>("Player");
-	pCollCircle->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.5f, PLAYER_WIDTH * 0.5f, PLAYER_HEIGHT * 0.5f);
+	pCollCircle->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.2f,
+		PLAYER_WIDTH * 0.5f, PLAYER_HEIGHT * 0.5f);
 	//pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
 	pCollCircle->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
 	pCollCircle->AddCollisionFunc(CS_STAY, this, &Player::HitStay);
+
+	// 애니메이션
+	Animation * pAnim = CreateAnimation("PlayerAnim");
+	AddAnimationClip("Idle", AT_ATLAS, AO_LOOP, 0.7f, 0.f, 2, 1, 0, 0, 2, 1,
+		"PlayerIdleRight", PLAYER_ANIM_IDLE_RIGHT);
+	AddAnimationClip("Fire", AT_ATLAS, AO_LOOP, 0.3f, 0.f, 2, 1, 0, 0, 2, 1,
+		"PlayerFireRight", PLAYER_ANIM_FIRE_RIGHT);
+	AddAnimationClip("Hit", AT_ATLAS, AO_ONCE_RETURN, 0.5f, 0.f, 2, 1, 0, 0, 2, 1,
+		"PlayerHitRight", PLAYER_ANIM_HIT_RIGHT);
+
+	// 이하 프레임 애니메이션 구현
+	/*vector<wstring> fileNames;
+	for (int i = 0; i < 8; ++i)
+	{
+		wchar_t fileName[MAX_PATH] = { };
+		wsprintf(fileName, L"player_attack_%d.bmp", i);
+		fileNames.push_back(fileName);
+	}
+	AddAnimationClip("AttackLeft", AT_FRAME, AO_ONCE_RETURN, 0.5f, 0.f, 2, 1, 0, 0, 2, 1,
+		"PlayerAttackLeft", fileNames);*/
+
+	SAFE_RELEASE(pAnim);
 
 	return true;
 }
@@ -93,13 +131,26 @@ void Player::Input(float deltaTime)
 	if (KEYPRESS("MoveUp"))
 		Jump();
 		//MoveY(deltaTime, MD_BACK);
-	//if (KEYPRESS("MoveDown")) MoveY(deltaTime, MD_FRONT);
+	if (KEYPRESS("MoveDown")) MoveY(deltaTime, MD_FRONT);
 	if (KEYPRESS("MoveLeft"))
+	{
 		MoveX(deltaTime, MD_BACK);
+		m_dir = MD_BACK;
+	}
 	if (KEYPRESS("MoveRight"))
+	{
 		MoveX(deltaTime, MD_FRONT);
+		m_dir = MD_FRONT;
+	}
+	if (KEYDOWN("Fire"))
+	{
+		m_isFiring = true;
+		m_pAnimation->ChangeClip("Fire");
+	}
 	if (KEYPRESS("Fire"))
 		Fire();
+	if (KEYUP("Fire"))
+		m_isFiring = false;
 	if (KEYPRESS("Slow"))
 		SetSpeed(PLAYER_SPEED_SLOW);
 	else
@@ -116,6 +167,11 @@ int Player::Update(float deltaTime)
 
 	// 발사 관련
 	m_fireTime += deltaTime;
+
+	if (m_isHit && m_pAnimation->IsClipOver())
+		m_isHit = false;
+	if (!m_isFiring && !m_isHit)
+		m_pAnimation->ReturnClip();
 
 	return 0;
 }

@@ -31,6 +31,9 @@
 #define STAGE_TEXTURE "stage1.bmp"
 #define STAGE_TEXTURE_L L"stage1.bmp"
 #define PLAYER_TEXTURE_NORMAL L"player_normal.bmp"
+#define PLAYER_ANIM_IDLE_RIGHT L"player_idle_right.bmp"
+#define PLAYER_ANIM_FIRE_RIGHT L"player_fire_right.bmp"
+#define PLAYER_ANIM_HIT_RIGHT L"player_hit_right.bmp"
 #define MINION_TEXTURE L"minion.bmp"
 #define BULLET_TEXTURE L"bullet.bmp"
 

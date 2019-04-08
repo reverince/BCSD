@@ -4,6 +4,7 @@ DynamicObject::DynamicObject() :
 	m_angle(0.f), m_speed(100.f), m_isMoving(false), m_isFalling(false), m_force(0.f), m_forceOrigin(0.f)
 {
 }
+
 DynamicObject::DynamicObject(const DynamicObject & obj) :
 	Object(obj)
 {
@@ -14,6 +15,7 @@ DynamicObject::DynamicObject(const DynamicObject & obj) :
 	m_force = 0.f;
 	m_forceOrigin = obj.m_forceOrigin;
 }
+
 DynamicObject::~DynamicObject()
 {
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "..\Reference.h"
 #include "..\Scene\Layer.h"
+#include "..\Resource\Texture.h"
 #include "..\Collider\Collider.h"
 
 class Object : public Reference
@@ -82,6 +83,8 @@ public:
 	void SetTexture(class Texture * pTexture);
 	void SetTexture(const string & key, const wchar_t * pFileName = nullptr, const string & pathKey = PATH_TEXTURE);
 
+	void SetColorKey(UCHAR r, UCHAR g, UCHAR b) { m_pTexture->SetColorKey(r, g, b); }
+
 	template <typename T>
 	void AddCollisionFunc(const string & tag, COLLISION_STATE state, T * pObj, void(T::*pFunc)(float, Collider *, Collider *))
 	{
@@ -118,6 +121,14 @@ public:
 	const list<Collider *> * GetColliders() const { return &m_listCollider; }
 
 	class Animation * CreateAnimation(const string & tag);
+	bool AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option,
+		float timeMax, float optionTimeMax,
+		int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY,
+		const string & keyTexture, const wchar_t * pFileName, const string & keyPath = PATH_TEXTURE);
+	bool AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option,
+		float timeMax, float optionTimeMax,
+		int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY,
+		const string & keyTexture, const vector<wstring> & fileNames, const string & keyPath = PATH_TEXTURE);
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

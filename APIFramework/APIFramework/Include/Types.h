@@ -131,9 +131,11 @@ typedef struct AnimationClip
 	std::vector<class Texture *> textures;
 	float time;
 	float timeMax;
+	float timeFrame;
 	float optionTime;
 	float optionTimeMax;
 	int frameX, frameY;
 	int frameMaxX, frameMaxY;
 	int startX, startY, lengthX, lengthY;
+	_SIZE sizeFrame;
 } ANIMATIONCLIP;

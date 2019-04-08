@@ -47,7 +47,6 @@ void Timer::Update()
 #ifdef _DEBUG
 		char strFPS[64] = { };
 		sprintf_s(strFPS, "FPS : %.f\n", m_fps);
-		_cprintf(strFPS);
 		SetWindowTextA(m_hWnd, strFPS);
 		OutputDebugStringA(strFPS);
 #endif

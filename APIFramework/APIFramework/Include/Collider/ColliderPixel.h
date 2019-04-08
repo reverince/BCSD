@@ -69,7 +69,7 @@ public:
 
 		//fclose(pFile);
 
-		//return true;
+		return true;
 	}
 	const vector<PIXEL> & GetPixels() const { return m_pixels; }
 	int GetWidth() const { return m_width; }

@@ -130,6 +130,7 @@ Animation * Object::CreateAnimation(const string & tag)
 
 	m_pAnimation = new Animation;
 	m_pAnimation->SetTag(tag);
+	m_pAnimation->SetObj(this);
 	if (!m_pAnimation->Init())
 	{
 		SAFE_RELEASE(m_pAnimation);
@@ -139,6 +140,33 @@ Animation * Object::CreateAnimation(const string & tag)
 	m_pAnimation->AddRef();
 
 	return m_pAnimation;
+}
+
+bool Object::AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option,
+	float timeMax, float optionTimeMax,
+	int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY,
+	const string & keyTexture, const wchar_t * pFileName, const string & keyPath)
+{
+	if (!m_pAnimation)
+		return false;
+
+	m_pAnimation->AddClip(name, type, option,
+		timeMax, optionTimeMax,
+		frameMaxX, frameMaxY, startX, startY, lengthX, lengthY,
+		keyTexture, pFileName, keyPath);
+	return true;
+}
+
+bool Object::AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option, float timeMax, float optionTimeMax, int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY, const string & keyTexture, const vector<wstring>& fileNames, const string & keyPath)
+{
+	if (!m_pAnimation)
+		return false;
+
+	m_pAnimation->AddClip(name, type, option,
+		timeMax, optionTimeMax,
+		frameMaxX, frameMaxY, startX, startY, lengthX, lengthY,
+		keyTexture, fileNames, keyPath);
+	return true;
 }
 
 bool Object::Init()
@@ -157,6 +185,8 @@ int Object::Update(float deltaTime)
 		if (!(*iter)->IsEnabled())
 			continue;
 
+		(*iter)->Update(deltaTime);
+
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_RELEASE(*iter);
@@ -164,9 +194,10 @@ int Object::Update(float deltaTime)
 			--iter;
 			continue;
 		}
-
-		(*iter)->Update(deltaTime);
 	}
+
+	if (m_pAnimation)
+		m_pAnimation->Update(deltaTime);
 
 	return 0;
 }
@@ -178,6 +209,8 @@ int Object::LateUpdate(float deltaTime)
 		if (!(*iter)->IsEnabled())
 			continue;
 
+		(*iter)->LateUpdate(deltaTime);
+
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_RELEASE(*iter);
@@ -185,8 +218,6 @@ int Object::LateUpdate(float deltaTime)
 			--iter;
 			continue;
 		}
-
-		(*iter)->LateUpdate(deltaTime);
 	}
 
 	return 0;
@@ -203,14 +234,22 @@ void Object::Render(HDC hDC, float deltaTime)
 		POSITION pos = m_pos - m_size * m_pivot;
 		int pX = (int)pos.x, pY = (int)pos.y, sX = (int)m_size.x, sY = (int)m_size.y;
 
+		POSITION posImage;
+
+		if (m_pAnimation)
+		{
+			ANIMATIONCLIP * pClip = m_pAnimation->GetClipCurrent();
+			if (pClip->type == AT_ATLAS)
+			{
+				posImage.x = pClip->frameX * pClip->sizeFrame.x;
+				posImage.y = pClip->frameY * pClip->sizeFrame.y;
+			}
+		}
+
 		if (m_pTexture->HasColorKey())
-		{
-			TransparentBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), 0, 0, sX, sY, m_pTexture->GetColorKey());
-		}
+			TransparentBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), (int)posImage.x, (int)posImage.y, sX, sY, m_pTexture->GetColorKey());
 		else
-		{
-			BitBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), 0, 0, SRCCOPY);
-		}
+			BitBlt(hDC, pX, pY, sX, sY, m_pTexture->GetDC(), (int)posImage.x, (int)posImage.y, SRCCOPY);
 	}
 
 	// Ãæµ¹Ã¼ ·»´õ
@@ -219,12 +258,12 @@ void Object::Render(HDC hDC, float deltaTime)
 		if (!(*iter)->IsEnabled())
 			continue;
 
+		(*iter)->Render(hDC, deltaTime);
+
 		if (!(*iter)->IsAlive())
 		{
 			SAFE_RELEASE(*iter);
 			iter = m_listCollider.erase(iter);
 		}
-
-		(*iter)->Render(hDC, deltaTime);
 	}
 }

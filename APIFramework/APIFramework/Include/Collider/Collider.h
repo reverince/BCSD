@@ -12,6 +12,8 @@ protected:
 	list<Collider *> m_listCollision;
 	list<function<void(float, Collider *, Collider *)>> m_listFunc[CS_END];  // 함수 리스트의 배열
 
+	POINT m_hitPoint;
+
 	Collider();
 	Collider(const Collider & collider);
 	virtual ~Collider() = 0;
@@ -26,6 +28,9 @@ public:
 	void SetObj(class Object * pObj) { m_pObj = pObj; }
 	COLLIDER_TYPE GetType() const { return m_type; }
 	class Object * GetObj() const { return m_pObj; }
+
+	void SetHitPoint(const POINT & hitPoint) { m_hitPoint = hitPoint; }
+	POINT GetHitPoint() const { return m_hitPoint; }
 
 	void AddCollision(Collider * pCollider) { m_listCollision.push_back(pCollider); }
 	bool CheckCollision(Collider * pCollider)

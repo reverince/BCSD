@@ -22,6 +22,9 @@ public:
 	COLORREF GetColorKey() const { return m_colorKey; }
 	bool HasColorKey() const { return m_hasColorKey; }
 
+	long GetWidth() const { return m_bitmapInfo.bmWidth; }
+	long GetHeight() const { return m_bitmapInfo.bmHeight; }
+
 	HDC GetDC() const { return m_hMemDC; }
 
 	bool LoadTexture(HINSTANCE hInst, HDC hDC, const string & key, const wchar_t * pFileName, const string & pathKey = PATH_TEXTURE);

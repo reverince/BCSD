@@ -7,6 +7,9 @@ class Player : public DynamicObject
 
 	float m_fireTime;
 	float m_firePeriod;
+	bool m_isFiring;
+	bool m_isHit;
+	int m_dir;
 	int m_hp;
 
 	Player();
