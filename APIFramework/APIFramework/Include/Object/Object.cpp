@@ -5,11 +5,12 @@
 #include "..\Scene\Scene.h"
 #include "..\Scene\Layer.h"
 #include "..\Collider\Collider.h"
+#include "..\Animation\Animation.h"
 
 list<Object *> Object::m_listObject;
 
 Object::Object() :
-	m_pTexture(nullptr), m_pivot(0.5f, 0.5f), m_hasPhysics(false), m_gravityTime(0.f)
+	m_pTexture(nullptr), m_pAnimation(nullptr), m_pivot(0.5f, 0.5f), m_hasPhysics(false), m_gravityTime(0.f)
 {
 }
 
@@ -21,6 +22,9 @@ Object::Object(const Object & obj)
 
 	if (m_pTexture)
 		m_pTexture->AddRef();
+
+	if (m_pAnimation)
+		m_pAnimation = obj.m_pAnimation->Clone();
 
 	m_listCollider.clear();
 
@@ -36,6 +40,7 @@ Object::Object(const Object & obj)
 Object::~Object()
 {
 	SAFE_RELEASE(m_pTexture);
+	SAFE_RELEASE(m_pAnimation);
 	SafeReleaseVectorList(m_listCollider);
 }
 
@@ -117,6 +122,23 @@ void Object::SetTexture(const string & key, const wchar_t * pFileName, const str
 {
 	SAFE_RELEASE(m_pTexture);
 	m_pTexture = GET_SINGLE(ResourceManager)->LoadTexture(key, pFileName, pathKey);
+}
+
+Animation * Object::CreateAnimation(const string & tag)
+{
+	SAFE_RELEASE(m_pAnimation);
+
+	m_pAnimation = new Animation;
+	m_pAnimation->SetTag(tag);
+	if (!m_pAnimation->Init())
+	{
+		SAFE_RELEASE(m_pAnimation);
+		return nullptr;
+	}
+
+	m_pAnimation->AddRef();
+
+	return m_pAnimation;
 }
 
 bool Object::Init()

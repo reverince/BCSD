@@ -1,9 +1,6 @@
 #pragma once
 #pragma comment(lib, "msimg32")
-#include "Flag.h"
-#include "Macro.h"
-#include "Types.h"
-#include "resource.h"
+
 #include <Windows.h>
 #include <conio.h>
 #include <crtdbg.h>  // 메모리 누수 체크
@@ -13,6 +10,10 @@
 #include <typeinfo>
 #include <unordered_map>
 #include <vector>
+#include "Macro.h"
+#include "Flag.h"
+#include "Types.h"
+#include "resource.h"
 using namespace std;
 
 template <typename T>

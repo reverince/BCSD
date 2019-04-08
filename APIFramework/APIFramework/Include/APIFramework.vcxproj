@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation\Animation.cpp" />
     <ClCompile Include="Collider\Collider.cpp" />
     <ClCompile Include="Collider\ColliderCircle.cpp" />
     <ClCompile Include="Collider\ColliderPixel.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Scene\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\Animation.h" />
     <ClInclude Include="Collider\Collider.h" />
     <ClInclude Include="Collider\ColliderCircle.h" />
     <ClInclude Include="Collider\ColliderPixel.h" />

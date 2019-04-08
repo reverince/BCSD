@@ -15,6 +15,7 @@ protected:
 	class Layer * m_pLayer;
 	class Texture * m_pTexture;
 	list<Collider *> m_listCollider;
+	class Animation * m_pAnimation;
 
 	string m_tag;
 	POSITION m_pos;
@@ -115,6 +116,8 @@ public:
 	}
 	bool HasCollider() { return !m_listCollider.empty(); }
 	const list<Collider *> * GetColliders() const { return &m_listCollider; }
+
+	class Animation * CreateAnimation(const string & tag);
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

@@ -1,5 +1,6 @@
 #pragma once
-#include <Windows.h>
+#include "Flag.h"
+#include <vector>
 
 typedef struct Resolution
 {
@@ -122,3 +123,17 @@ typedef struct Pixel
 {
 	UCHAR r, g, b;
 } PIXEL;
+
+typedef struct AnimationClip
+{
+	ANIMATION_TYPE type;
+	ANIMATION_OPTION option;
+	std::vector<class Texture *> textures;
+	float time;
+	float timeMax;
+	float optionTime;
+	float optionTimeMax;
+	int frameX, frameY;
+	int frameMaxX, frameMaxY;
+	int startX, startY, lengthX, lengthY;
+} ANIMATIONCLIP;
