@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "..\Core\Core.h"
 #include "..\Core\InputManager.h"
+#include "..\Collider\ColliderRect.h"
 #include "..\Collider\ColliderCircle.h"
 #include "Bullet.h"
 
@@ -8,15 +9,15 @@ Player::Player() :
 	m_fireTime(0.f), m_firePeriod(0.1f), m_hp(100)
 {
 	m_hasPhysics = true;
+	m_forceOrigin = 300.f;
+	m_isFalling = true;
 }
-
 Player::Player(const Player & player) :
 	DynamicObject(player)
 {
 	m_fireTime = player.m_fireTime;
 	m_firePeriod = player.m_firePeriod;
 }
-
 Player::~Player()
 {
 }
@@ -56,17 +57,17 @@ void Player::Hit(float deltaTime, Collider * pSrc, Collider * pDest)
 	if (pDest->GetTag() == "StageColl")
 	{
 		m_gravityTime = 0.f;
+		JumpEnd();
 	}
 }
 
 void Player::HitStay(float deltaTime, Collider * pSrc, Collider * pDest)
 {
-	
-}
-
-Player * Player::Clone()
-{
-	return new Player(*this);
+	if (pDest->GetTag() == "StageColl")
+	{
+		m_gravityTime = 0.f;
+		JumpEnd();
+	}
 }
 
 bool Player::Init()
@@ -76,8 +77,9 @@ bool Player::Init()
 	SetSpeed(PLAYER_SPEED);
 	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
 
-	ColliderCircle * pCollCircle = AddCollider<ColliderCircle>("Player");
-	pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
+	ColliderRect * pCollCircle = AddCollider<ColliderRect>("Player");
+	pCollCircle->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.5f, PLAYER_WIDTH * 0.5f, PLAYER_HEIGHT * 0.5f);
+	//pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
 	pCollCircle->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
 	pCollCircle->AddCollisionFunc(CS_STAY, this, &Player::HitStay);
 
@@ -89,25 +91,15 @@ void Player::Input(float deltaTime)
 	DynamicObject::Input(deltaTime);
 
 	if (KEYPRESS("MoveUp"))
-	{
-		MoveY(deltaTime, MD_BACK);
-	}
-	if (KEYPRESS("MoveDown"))
-	{
-		MoveY(deltaTime, MD_FRONT);
-	}
+		Jump();
+		//MoveY(deltaTime, MD_BACK);
+	//if (KEYPRESS("MoveDown")) MoveY(deltaTime, MD_FRONT);
 	if (KEYPRESS("MoveLeft"))
-	{
 		MoveX(deltaTime, MD_BACK);
-	}
 	if (KEYPRESS("MoveRight"))
-	{
 		MoveX(deltaTime, MD_FRONT);
-	}
 	if (KEYPRESS("Fire"))
-	{
 		Fire();
-	}
 	if (KEYPRESS("Slow"))
 		SetSpeed(PLAYER_SPEED_SLOW);
 	else
@@ -147,4 +139,9 @@ void Player::Render(HDC hDC, float deltaTime)
 	wchar_t strHP[32] = { };
 	wsprintf(strHP, L"HP: %d", m_hp);
 	TextOut(hDC, (int)(m_pos.x - (PLAYER_WIDTH * 0.3f)), (int)(m_pos.y - (PLAYER_HEIGHT * 0.7f)), strHP, lstrlen(strHP));
+}
+
+Player * Player::Clone()
+{
+	return new Player(*this);
 }

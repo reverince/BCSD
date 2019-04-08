@@ -60,16 +60,16 @@ public:
 		delete[] pTemp;
 		fclose(pFile);
 
-		// 쓰기
-		fopen_s(&pFile, "test.bmp", "wb");
+		//// 쓰기
+		//fopen_s(&pFile, "test.bmp", "wb");
 
-		fwrite(&fh, sizeof(fh), 1, pFile);
-		fwrite(&ih, sizeof(ih), 1, pFile);
-		fwrite(&m_pixels[0], sizeof(PIXEL), m_pixels.size(), pFile);
+		//fwrite(&fh, sizeof(fh), 1, pFile);
+		//fwrite(&ih, sizeof(ih), 1, pFile);
+		//fwrite(&m_pixels[0], sizeof(PIXEL), m_pixels.size(), pFile);
 
-		fclose(pFile);
+		//fclose(pFile);
 
-		return true;
+		//return true;
 	}
 	const vector<PIXEL> & GetPixels() const { return m_pixels; }
 	int GetWidth() const { return m_width; }

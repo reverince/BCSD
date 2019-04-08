@@ -7,6 +7,10 @@ protected:
 
 	float m_angle;
 	float m_speed;
+	bool m_isMoving;
+	bool m_isFalling;
+	float m_force;
+	float m_forceOrigin;
 
 	DynamicObject();
 	DynamicObject(const DynamicObject  & obj);
@@ -20,6 +24,8 @@ protected:
 	void MoveY(float deltaTime, MOVE_DIR dir);
 	void MoveAngle();
 	void MoveAngle(float deltaTime);
+	void Jump();
+	void JumpEnd();
 
 	virtual Object * Clone() = 0;
 	virtual bool Init() = 0;
@@ -33,6 +39,8 @@ public:
 
 	void SetAngle(float angle) { m_angle = angle; }
 	void SetSpeed(float speed) { m_speed = speed; }
+	void SetForce(float force) { m_force = force; }
 	float GetAngle() const { return m_angle; }
 	float GetSpeed() const { return m_speed; }
+	float GetForce() const { return m_force; }
 };

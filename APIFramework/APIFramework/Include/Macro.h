@@ -36,7 +36,7 @@
 
 // 상수
 #define PI 3.141592f
-#define GRAVITY 0.98f
+#define GRAVITY 10.0f
 
 // 입력
 #define KEYDOWN(key) InputManager::GetInst()->KeyDown(key)
