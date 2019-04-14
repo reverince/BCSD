@@ -9,6 +9,7 @@ Scene::Scene()
 	Layer * pLayer;
 	pLayer = CreateLayer("Stage", 0);
 	pLayer = CreateLayer("Default", 1);
+	pLayer = CreateLayer("HUD", INT_MAX - 1);
 	pLayer = CreateLayer("UI", INT_MAX);
 }
 

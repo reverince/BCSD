@@ -64,6 +64,9 @@
     <Filter Include="06. Animation">
       <UniqueIdentifier>{d80e2904-3298-4f9e-8386-09830ff3f7b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Object\01. DynamicObject\04. UI">
+      <UniqueIdentifier>{4a1bc759-8a6a-400b-83d7-5d833005166a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -143,6 +146,21 @@
     </ClCompile>
     <ClCompile Include="Animation\Animation.cpp">
       <Filter>06. Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UI.cpp">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIPanel.cpp">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\StartScene.cpp">
+      <Filter>02. Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIButton.cpp">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\UIMouse.cpp">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +253,21 @@
     </ClInclude>
     <ClInclude Include="Animation\Animation.h">
       <Filter>06. Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UI.h">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIPanel.h">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\StartScene.h">
+      <Filter>02. Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIButton.h">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\UIMouse.h">
+      <Filter>03. Object\01. DynamicObject\04. UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

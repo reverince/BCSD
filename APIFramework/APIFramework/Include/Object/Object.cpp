@@ -7,14 +7,14 @@
 #include "..\Collider\Collider.h"
 #include "..\Animation\Animation.h"
 
-list<Object *> Object::m_listObject;
+list<Object*> Object::m_listObject;
 
 Object::Object() :
 	m_pTexture(nullptr), m_pAnimation(nullptr), m_pivot(0.5f, 0.5f), m_hasPhysics(false), m_gravityTime(0.f)
 {
 }
 
-Object::Object(const Object & obj)
+Object::Object(const Object& obj)
 {
 	*this = obj;
 
@@ -28,9 +28,9 @@ Object::Object(const Object & obj)
 
 	m_listCollider.clear();
 
-	for (list<Collider *>::const_iterator iter = obj.m_listCollider.begin(); iter != obj.m_listCollider.end(); ++iter)
+	for (list<Collider*>::const_iterator iter = obj.m_listCollider.begin(); iter != obj.m_listCollider.end(); ++iter)
 	{
-		Collider * pCollider = (*iter)->Clone();
+		Collider* pCollider = (*iter)->Clone();
 		pCollider->SetObj(this);
 
 		m_listCollider.push_back(pCollider);
@@ -44,14 +44,14 @@ Object::~Object()
 	SafeReleaseVectorList(m_listCollider);
 }
 
-Object * Object::CloneObject(const string & key, const string & tag, class Layer * pLayer)
+Object* Object::CloneObject(const string& key, const string& tag, class Layer* pLayer)
 {
-	Object * pPrototype = Scene::FindPrototype(key);
+	Object* pPrototype = Scene::FindPrototype(key);
 
 	if (!pPrototype)
 		return nullptr;
 
-	Object * pObj = pPrototype->Clone();
+	Object* pObj = pPrototype->Clone();
 
 	pObj->SetTag(tag);
 
@@ -64,9 +64,9 @@ Object * Object::CloneObject(const string & key, const string & tag, class Layer
 	return pObj;
 }
 
-Object * Object::FindObject(const string & tag)
+Object* Object::FindObject(const string& tag)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object*>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if ((*iter)->GetTag() == tag)
 		{
@@ -78,9 +78,9 @@ Object * Object::FindObject(const string & tag)
 	return nullptr;
 }
 
-void Object::EraseObject(Object * pObj)
+void Object::EraseObject(Object* pObj)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object*>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if (*iter == pObj)
 		{
@@ -91,9 +91,9 @@ void Object::EraseObject(Object * pObj)
 	}
 }
 
-void Object::EraseObject(const string & tag)
+void Object::EraseObject(const string& tag)
 {
-	for (list<Object *>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
+	for (list<Object*>::iterator iter = m_listObject.begin(); iter != m_listObject.end(); ++iter)
 	{
 		if ((*iter)->GetTag() == tag)
 		{
@@ -109,7 +109,7 @@ void Object::ClearObjects()
 	SafeReleaseVectorList(m_listObject);
 }
 
-void Object::SetTexture(Texture * pTexture)
+void Object::SetTexture(Texture* pTexture)
 {
 	SAFE_RELEASE(m_pTexture);
 	m_pTexture = pTexture;
@@ -118,13 +118,28 @@ void Object::SetTexture(Texture * pTexture)
 		pTexture->AddRef();
 }
 
-void Object::SetTexture(const string & key, const wchar_t * pFileName, const string & pathKey)
+void Object::SetTexture(const string& key, const wchar_t* pFileName, const string& pathKey)
 {
 	SAFE_RELEASE(m_pTexture);
 	m_pTexture = GET_SINGLE(ResourceManager)->LoadTexture(key, pFileName, pathKey);
 }
 
-Animation * Object::CreateAnimation(const string & tag)
+Collider* Object::GetCollider(const string& tag)
+{
+	list<Collider*>::iterator iter;
+	for (iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	{
+		if ((*iter)->GetTag() == tag)
+		{
+			(*iter)->AddRef();
+			return *iter;
+		}
+	}
+
+	return nullptr;
+}
+
+Animation* Object::CreateAnimation(const string& tag)
 {
 	SAFE_RELEASE(m_pAnimation);
 
@@ -142,10 +157,10 @@ Animation * Object::CreateAnimation(const string & tag)
 	return m_pAnimation;
 }
 
-bool Object::AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option,
+bool Object::AddAnimationClip(const string& name, ANIMATION_TYPE type, ANIMATION_OPTION option,
 	float timeMax, float optionTimeMax,
 	int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY,
-	const string & keyTexture, const wchar_t * pFileName, const string & keyPath)
+	const string& keyTexture, const wchar_t* pFileName, const string& keyPath)
 {
 	if (!m_pAnimation)
 		return false;
@@ -157,7 +172,7 @@ bool Object::AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATIO
 	return true;
 }
 
-bool Object::AddAnimationClip(const string & name, ANIMATION_TYPE type, ANIMATION_OPTION option, float timeMax, float optionTimeMax, int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY, const string & keyTexture, const vector<wstring>& fileNames, const string & keyPath)
+bool Object::AddAnimationClip(const string& name, ANIMATION_TYPE type, ANIMATION_OPTION option, float timeMax, float optionTimeMax, int frameMaxX, int frameMaxY, int startX, int startY, int lengthX, int lengthY, const string& keyTexture, const vector<wstring>& fileNames, const string& keyPath)
 {
 	if (!m_pAnimation)
 		return false;
@@ -180,7 +195,7 @@ void Object::Input(float deltaTime)
 
 int Object::Update(float deltaTime)
 {
-	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	for (list<Collider*>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
 		if (!(*iter)->IsEnabled())
 			continue;
@@ -204,7 +219,7 @@ int Object::Update(float deltaTime)
 
 int Object::LateUpdate(float deltaTime)
 {
-	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	for (list<Collider*>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
 		if (!(*iter)->IsEnabled())
 			continue;
@@ -238,7 +253,7 @@ void Object::Render(HDC hDC, float deltaTime)
 
 		if (m_pAnimation)
 		{
-			ANIMATIONCLIP * pClip = m_pAnimation->GetClipCurrent();
+			ANIMATIONCLIP* pClip = m_pAnimation->GetClipCurrent();
 			if (pClip->type == AT_ATLAS)
 			{
 				posImage.x = pClip->frameX * pClip->sizeFrame.x;
@@ -253,7 +268,7 @@ void Object::Render(HDC hDC, float deltaTime)
 	}
 
 	// Ãæµ¹Ã¼ ·»´õ
-	for (list<Collider *>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
+	for (list<Collider*>::iterator iter = m_listCollider.begin(); iter != m_listCollider.end(); ++iter)
 	{
 		if (!(*iter)->IsEnabled())
 			continue;

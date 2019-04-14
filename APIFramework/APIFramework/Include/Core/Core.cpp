@@ -6,6 +6,7 @@
 #include "..\Resource\ResourceManager.h"
 #include "..\Resource\Texture.h"
 #include "..\Scene\SceneManager.h"
+#include "..\Object\UIMouse.h"
 #include "..\Collider\CollisionManager.h"
 
 DEFINE_SINGLE(Core);
@@ -117,9 +118,12 @@ void Core::Render(float deltaTime)
 {
 	Texture * pBackBuffer = GET_SINGLE(ResourceManager)->GetBackBuffer();
 
-	Rectangle(pBackBuffer->GetDC(), 0, 0, (int)m_rs.w, (int)m_rs.h);
+	//Rectangle(pBackBuffer->GetDC(), 0, 0, (int)m_rs.w, (int)m_rs.h);
 	GET_SINGLE(SceneManager)->Render(pBackBuffer->GetDC(), deltaTime);
 	BitBlt(m_hDC, 0, 0, (int)m_rs.w, (int)m_rs.h, pBackBuffer->GetDC(), 0, 0, SRCCOPY);
+
+	UIMouse* pMouse = GET_SINGLE(InputManager)->GetMouse();
+	pMouse->Render(pBackBuffer->GetDC(), deltaTime);
 
 	SAFE_RELEASE(pBackBuffer);
 }

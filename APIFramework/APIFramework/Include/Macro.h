@@ -12,6 +12,10 @@
 #define WND_HEIGHT 900
 #define WORLD_WIDTH 1600
 #define WORLD_HEIGHT 900
+#define CURSOR_WIDTH 50
+#define CURSOR_HEIGHT CURSOR_WIDTH
+#define BUTTON_WIDTH 200
+#define BUTTON_HEIGHT 100
 
 #define PLAYER_WIDTH 100.f
 #define PLAYER_HEIGHT PLAYER_WIDTH
@@ -28,8 +32,12 @@
 
 // ÆÄÀÏ
 #define BACK_BUFFER_TEXTURE L"back_buffer.bmp"
+#define CURSOR_TEXTURE L"cursor.bmp"
 #define STAGE_TEXTURE "stage1.bmp"
 #define STAGE_TEXTURE_L L"stage1.bmp"
+#define START_BACK_TEXTURE L"start_back.bmp"
+#define START_BUTTON_TEXTURE L"button_start.bmp"
+#define QUIT_BUTTON_TEXTURE L"button_quit.bmp"
 #define PLAYER_TEXTURE_NORMAL L"player_normal.bmp"
 #define PLAYER_ANIM_IDLE_RIGHT L"player_idle_right.bmp"
 #define PLAYER_ANIM_FIRE_RIGHT L"player_fire_right.bmp"
@@ -74,4 +82,5 @@ private:
 #define GET_SINGLE(Type) Type::GetInst()
 #define DESTROY_SINGLE(Type) Type::DestroyInst()
 
+#define GET_WINDOWHANDLE Core::GetInst()->GetWindowHandle()
 #define GET_RESOLUTION Core::GetInst()->GetResolution()

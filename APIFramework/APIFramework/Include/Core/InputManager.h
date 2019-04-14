@@ -20,7 +20,13 @@ class InputManager
 	unordered_map<string, KEYINFO *> m_mapKey;
 	KEYINFO * m_pCreateKey;
 
+	POINT m_cursorPos;
+	POINT m_cursorMove;
+	class UIMouse* m_pMouse;
+
 public:
+
+	class UIMouse* GetMouse() const { return m_pMouse; }
 
 	template <typename T>
 	bool AddKey(const T & data)

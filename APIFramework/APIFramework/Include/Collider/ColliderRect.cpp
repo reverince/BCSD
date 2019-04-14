@@ -38,8 +38,8 @@ int ColliderRect::Update(float deltaTime)
 int ColliderRect::LateUpdate(float deltaTime)
 {
 	Collider::LateUpdate(deltaTime);
-
-	POSITION pos = m_pObj->GetPos();
+	//POSITION pos = m_pos - m_size * m_pivot;
+	POSITION pos = m_pObj->GetPos() - m_pObj->GetSize() * m_pObj->GetPivot();
 	m_rectWorld.l = pos.x + m_rect.l;
 	m_rectWorld.t = pos.y + m_rect.t;
 	m_rectWorld.r = pos.x + m_rect.r;
@@ -69,6 +69,14 @@ bool ColliderRect::Collision(Collider * pDest)
 void ColliderRect::Render(HDC hDC, float deltaTime)
 {
 	Collider::Render(hDC, deltaTime);
+
+#ifdef _DEBUG
+	MoveToEx(hDC, (int)m_rectWorld.l, (int)m_rectWorld.t, NULL);
+	LineTo(hDC, (int)m_rectWorld.r, (int)m_rectWorld.t);
+	LineTo(hDC, (int)m_rectWorld.r, (int)m_rectWorld.b);
+	LineTo(hDC, (int)m_rectWorld.l, (int)m_rectWorld.b);
+	LineTo(hDC, (int)m_rectWorld.l, (int)m_rectWorld.t);
+#endif
 }
 
 ColliderRect * ColliderRect::Clone()

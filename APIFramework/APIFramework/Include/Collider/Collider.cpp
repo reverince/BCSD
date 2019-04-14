@@ -102,11 +102,6 @@ bool Collider::CollisionCircleVsCircle(const CIRCLE & src, const CIRCLE & dest)
 	return dist <= src.r + dest.r;
 }
 
-bool Collider::Init()
-{
-	return false;
-}
-
 void Collider::Input(float deltaTime)
 {
 }
@@ -123,14 +118,9 @@ int Collider::LateUpdate(float deltaTime)
 
 bool Collider::Collision(Collider * pDest)
 {
-	return false;
+	return true;
 }
 
 void Collider::Render(HDC hDC, float deltaTime)
 {
-}
-
-Collider * Collider::Clone()
-{
-	return nullptr;
 }

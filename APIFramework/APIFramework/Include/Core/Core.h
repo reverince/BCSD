@@ -26,6 +26,7 @@ public:
 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+	HWND GetWindowHandle() const { return m_hWnd; }
 	RESOLUTION GetResolution() const { return m_rs; }
 
 	bool Init(HINSTANCE hInst);

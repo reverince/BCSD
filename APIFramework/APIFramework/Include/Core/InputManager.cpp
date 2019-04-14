@@ -1,15 +1,19 @@
 #include "InputManager.h"
+#include "..\Scene\Layer.h"
+#include "..\Object\UIMouse.h"
+#include "..\Animation\Animation.h"
 
 DEFINE_SINGLE(InputManager);
 
 InputManager::InputManager() :
-	m_pCreateKey(nullptr)
+	m_pCreateKey(nullptr), m_pMouse(nullptr)
 {
 }
 
 InputManager::~InputManager()
 {
 	SafeDeleteMap(m_mapKey);
+	SAFE_RELEASE(m_pMouse);
 }
 
 KEYINFO * InputManager::FindKey(const string & key) const
@@ -62,6 +66,17 @@ bool InputManager::Init(HWND hWnd)
 	AddKey('D', "MoveRight");
 	AddKey(VK_SPACE, "Fire");
 	AddKey(VK_SHIFT, "Slow");
+	AddKey(VK_LBUTTON, "LeftClick");
+	
+	GetCursorPos(&m_cursorPos);
+	m_pMouse = Object::CreateObject<UIMouse>("Cursor");
+	m_pMouse->SetSize(CURSOR_WIDTH, CURSOR_HEIGHT);
+	m_pMouse->SetTexture("Cursor", CURSOR_TEXTURE);
+
+	// 애니메이션
+	//Animation* pAnim = m_pMouse->CreateAnimation("CursorAnim");
+	//
+	//SAFE_RELEASE(pAnim);
 
 	return true;
 }
@@ -104,4 +119,7 @@ void InputManager::Update(float deltaTime)
 				iter->second->isUp = false;
 		}
 	}
+
+	m_pMouse->Update(deltaTime);
+	m_pMouse->LateUpdate(deltaTime);
 }

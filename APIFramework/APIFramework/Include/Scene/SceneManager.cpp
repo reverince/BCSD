@@ -1,4 +1,5 @@
 #include "SceneManager.h"
+#include "StartScene.h"
 #include "InGameScene.h"
 
 DEFINE_SINGLE(SceneManager);
@@ -15,7 +16,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::Init()
 {
-	if (!CreateScene<InGameScene>(SC_CURRENT))
+	if (!CreateScene<StartScene>(SC_CURRENT))
 		return false;
 
 	return true;

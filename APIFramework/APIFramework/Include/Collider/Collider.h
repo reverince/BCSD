@@ -79,7 +79,7 @@ public:
 		}
 	}
 
-	virtual bool Init();
+	virtual bool Init() = 0;
 	virtual void Input(float deltaTime);
 	virtual int Update(float deltaTime);
 	virtual int LateUpdate(float deltaTime);

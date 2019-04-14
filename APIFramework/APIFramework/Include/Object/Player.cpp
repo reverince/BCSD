@@ -92,12 +92,12 @@ bool Player::Init()
 	SetTexture("Player", PLAYER_TEXTURE_NORMAL);
 
 	// 콜라이더
-	ColliderRect * pCollCircle = AddCollider<ColliderRect>("Player");
-	pCollCircle->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.2f,
+	ColliderRect * pCollRect = AddCollider<ColliderRect>("Player");
+	pCollRect->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.2f,
 		PLAYER_WIDTH * 0.5f, PLAYER_HEIGHT * 0.5f);
 	//pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
-	pCollCircle->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
-	pCollCircle->AddCollisionFunc(CS_STAY, this, &Player::HitStay);
+	pCollRect->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
+	pCollRect->AddCollisionFunc(CS_STAY, this, &Player::HitStay);
 
 	// 애니메이션
 	Animation * pAnim = CreateAnimation("PlayerAnim");
