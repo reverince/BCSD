@@ -1,11 +1,26 @@
 #include "UIButton.h"
 #include "..\Collider\ColliderRect.h"
 
-UIButton::UIButton()
+UIButton::UIButton() :
+	m_isCallbackEnabled(false)
 {
 }
 
+UIButton::UIButton(const UIButton& ui) :
+	UI(ui)
+{
+	m_isCallbackEnabled = false;
+}
+
 UIButton::~UIButton()
+{
+}
+
+void UIButton::MouseOn(float deltaTime, Collider* pSrc, Collider* pDest)
+{
+}
+
+void UIButton::MouseOff(float deltaTime, Collider* pSrc, Collider* pDest)
 {
 }
 

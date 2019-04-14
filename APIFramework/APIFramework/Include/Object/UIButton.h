@@ -7,10 +7,29 @@ class UIButton : public UI
 	friend class Scene;
 
 	UIButton();
-	UIButton(const UIButton& ui) : UI(ui) { }
+	UIButton(const UIButton& ui);
 	~UIButton();
 
+	function<void(float time)> m_callback;
+	bool m_isCallbackEnabled;
+
 public:
+
+	template <typename T>
+	void SetCallback(T* pObj, void (T::* pFunc)(float))
+	{
+		m_callback = bind(pFunc, pObj, placeholders::_1);
+		m_isCallbackEnabled = true;
+	}
+
+	void SetCallback(void(*pFunc)(float))
+	{
+		m_callback = bind(pFunc, placeholders::_1);
+		m_isCallbackEnabled = true;
+	}
+
+	void MouseOn(float deltaTime, class Collider* pSrc, class Collider* pDest);
+	void MouseOff(float deltaTime, class Collider* pSrc, class Collider* pDest);
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

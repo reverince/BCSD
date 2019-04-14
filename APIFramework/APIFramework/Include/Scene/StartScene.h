@@ -10,5 +10,8 @@ class StartScene : public Scene
 
 public:
 
+	void StartButtonCallback(float time);
+	void QuitButtonCallback(float time);
+
 	virtual bool Init();
 };

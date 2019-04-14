@@ -93,8 +93,8 @@ bool Player::Init()
 
 	// 콜라이더
 	ColliderRect * pCollRect = AddCollider<ColliderRect>("Player");
-	pCollRect->SetRect(-PLAYER_WIDTH * 0.5f, -PLAYER_HEIGHT * 0.2f,
-		PLAYER_WIDTH * 0.5f, PLAYER_HEIGHT * 0.5f);
+	pCollRect->SetRect(-PLAYER_WIDTH * 0.3f, -PLAYER_HEIGHT * 0.2f,
+		PLAYER_WIDTH * 0.3f, PLAYER_HEIGHT * 0.5f);
 	//pCollCircle->SetCircle(POSITION(0.f, 0.f), PLAYER_RADIUS);
 	pCollRect->AddCollisionFunc(CS_ENTER, this, &Player::Hit);
 	pCollRect->AddCollisionFunc(CS_STAY, this, &Player::HitStay);

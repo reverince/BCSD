@@ -2,6 +2,7 @@
 #include "..\Object\Object.h"
 #include "ColliderRect.h"
 #include "ColliderPixel.h"
+#include "ColliderPoint.h"
 
 ColliderCircle::ColliderCircle()
 {
@@ -55,6 +56,9 @@ bool ColliderCircle::Collision(Collider * pDest)
 		break;
 	case CT_RECT:
 		return CollisionRectVsCircle(((ColliderRect*)pDest)->GetRectWorld(), m_circleWorld);
+		break;
+	case CT_POINT:
+		return CollisionCircleVsPoint(m_circleWorld, ((ColliderPoint*)pDest)->GetPos());
 		break;
 	}
 

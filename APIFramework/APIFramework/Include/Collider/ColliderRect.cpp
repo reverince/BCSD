@@ -2,6 +2,7 @@
 #include "..\Object\Object.h"
 #include "ColliderCircle.h"
 #include "ColliderPixel.h"
+#include "ColliderPoint.h"
 
 ColliderRect::ColliderRect()
 {
@@ -38,8 +39,9 @@ int ColliderRect::Update(float deltaTime)
 int ColliderRect::LateUpdate(float deltaTime)
 {
 	Collider::LateUpdate(deltaTime);
-	//POSITION pos = m_pos - m_size * m_pivot;
-	POSITION pos = m_pObj->GetPos() - m_pObj->GetSize() * m_pObj->GetPivot();
+
+	POSITION pos = m_pObj->GetPos();
+	//POSITION pos = m_pObj->GetPos() - m_pObj->GetSize() * m_pObj->GetPivot();
 	m_rectWorld.l = pos.x + m_rect.l;
 	m_rectWorld.t = pos.y + m_rect.t;
 	m_rectWorld.r = pos.x + m_rect.r;
@@ -60,6 +62,9 @@ bool ColliderRect::Collision(Collider * pDest)
 		break;
 	case CT_PIXEL:
 		return CollisionRectVsPixel(m_rectWorld, ((ColliderPixel *)pDest)->GetPixels(), ((ColliderPixel *)pDest)->GetWidth(), ((ColliderPixel *)pDest)->GetHeight());
+		break;
+	case CT_POINT:
+		return CollisionRectVsPoint(m_rectWorld, ((ColliderPoint*)pDest)->GetPos());
 		break;
 	}
 

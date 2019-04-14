@@ -5,7 +5,7 @@
 DEFINE_SINGLE(SceneManager);
 
 SceneManager::SceneManager() :
-	m_pScene(nullptr)
+	m_pScene(nullptr), m_pSceneNext(nullptr)
 {
 }
 

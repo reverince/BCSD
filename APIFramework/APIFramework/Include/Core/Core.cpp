@@ -17,7 +17,7 @@ Core::Core()
 {
 	// 메모리 누수 체크
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(289);
+	//_CrtSetBreakAlloc(426);
 }
 
 Core::~Core()
@@ -120,10 +120,11 @@ void Core::Render(float deltaTime)
 
 	//Rectangle(pBackBuffer->GetDC(), 0, 0, (int)m_rs.w, (int)m_rs.h);
 	GET_SINGLE(SceneManager)->Render(pBackBuffer->GetDC(), deltaTime);
-	BitBlt(m_hDC, 0, 0, (int)m_rs.w, (int)m_rs.h, pBackBuffer->GetDC(), 0, 0, SRCCOPY);
 
 	UIMouse* pMouse = GET_SINGLE(InputManager)->GetMouse();
 	pMouse->Render(pBackBuffer->GetDC(), deltaTime);
+
+	BitBlt(m_hDC, 0, 0, (int)m_rs.w, (int)m_rs.h, pBackBuffer->GetDC(), 0, 0, SRCCOPY);
 
 	SAFE_RELEASE(pBackBuffer);
 }

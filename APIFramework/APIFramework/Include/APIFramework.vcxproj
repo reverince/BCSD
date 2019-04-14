@@ -23,6 +23,7 @@
     <ClCompile Include="Collider\Collider.cpp" />
     <ClCompile Include="Collider\ColliderCircle.cpp" />
     <ClCompile Include="Collider\ColliderPixel.cpp" />
+    <ClCompile Include="Collider\ColliderPoint.cpp" />
     <ClCompile Include="Collider\ColliderRect.cpp" />
     <ClCompile Include="Collider\CollisionManager.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="Collider\Collider.h" />
     <ClInclude Include="Collider\ColliderCircle.h" />
     <ClInclude Include="Collider\ColliderPixel.h" />
+    <ClInclude Include="Collider\ColliderPoint.h" />
     <ClInclude Include="Collider\ColliderRect.h" />
     <ClInclude Include="Collider\CollisionManager.h" />
     <ClInclude Include="Core\Camera.h" />

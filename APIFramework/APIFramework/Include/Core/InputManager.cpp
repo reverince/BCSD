@@ -1,6 +1,7 @@
 #include "InputManager.h"
 #include "..\Scene\Layer.h"
 #include "..\Object\UIMouse.h"
+#include "..\Collider\CollisionManager.h"
 #include "..\Animation\Animation.h"
 
 DEFINE_SINGLE(InputManager);
@@ -12,8 +13,9 @@ InputManager::InputManager() :
 
 InputManager::~InputManager()
 {
-	SafeDeleteMap(m_mapKey);
+	Object::EraseObject(m_pMouse);
 	SAFE_RELEASE(m_pMouse);
+	SafeDeleteMap(m_mapKey);
 }
 
 KEYINFO * InputManager::FindKey(const string & key) const
@@ -122,4 +124,6 @@ void InputManager::Update(float deltaTime)
 
 	m_pMouse->Update(deltaTime);
 	m_pMouse->LateUpdate(deltaTime);
+
+	GET_SINGLE(CollisionManager)->AddObject(m_pMouse);
 }

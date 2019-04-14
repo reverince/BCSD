@@ -29,6 +29,8 @@ public:
 	HWND GetWindowHandle() const { return m_hWnd; }
 	RESOLUTION GetResolution() const { return m_rs; }
 
+	void DestroyGame() { DestroyWindow(m_hWnd); }
+
 	bool Init(HINSTANCE hInst);
 	int Run();
 };

@@ -15,6 +15,15 @@ StartScene::~StartScene()
 {
 }
 
+void StartScene::StartButtonCallback(float time)
+{
+}
+
+void StartScene::QuitButtonCallback(float time)
+{
+	GET_SINGLE(Core)->DestroyGame();
+}
+
 bool StartScene::Init()
 {
 	if (!Scene::Init())
@@ -28,16 +37,18 @@ bool StartScene::Init()
 
 	SAFE_RELEASE(pBackPanel);
 
-	POSITION pos, size;
+	POSITION size;
 
 	UIButton* pStartBtn = Object::CreateObject<UIButton>("StartButton", pLayerUI);
 	pStartBtn->SetPos(WND_WIDTH / 2 - BUTTON_WIDTH, WND_HEIGHT / 2 + BUTTON_HEIGHT);
 	pStartBtn->SetSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 	pStartBtn->SetTexture("StartButton", START_BUTTON_TEXTURE);
 	ColliderRect* pStartColl = (ColliderRect*)pStartBtn->GetCollider("ButtonBody");
-	pos = pStartBtn->GetPos();
 	size = pStartBtn->GetSize();
-	pStartColl->SetRect(pos.x, pos.y, pos.x + size.x, pos.y + size.y);
+	pStartColl->SetRect(-0.5f * size.x, -0.5f * size.y, 0.5f * size.x, 0.5f * size.y);
+	pStartColl->AddCollisionFunc(CS_ENTER, pStartBtn, &UIButton::MouseOn);
+	pStartColl->AddCollisionFunc(CS_LEAVE, pStartBtn, &UIButton::MouseOff);
+	pStartBtn->SetCallback(this, &StartScene::StartButtonCallback);
 
 	SAFE_RELEASE(pStartColl);
 	SAFE_RELEASE(pStartBtn);
@@ -47,12 +58,14 @@ bool StartScene::Init()
 	pQuitBtn->SetSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 	pQuitBtn->SetTexture("QuitButton", QUIT_BUTTON_TEXTURE);
 	ColliderRect* pQuitColl = (ColliderRect*)pQuitBtn->GetCollider("ButtonBody");
-	pos = pQuitBtn->GetPos();
 	size = pQuitBtn->GetSize();
-	pQuitColl->SetRect(pos.x, pos.y, pos.x + size.x, pos.y + size.y);
+	pQuitColl->SetRect(-0.5f * size.x, -0.5f * size.y, 0.5f * size.x, 0.5f * size.y);
+	pQuitColl->AddCollisionFunc(CS_ENTER, pQuitBtn, &UIButton::MouseOn);
+	pQuitColl->AddCollisionFunc(CS_LEAVE, pQuitBtn, &UIButton::MouseOff);
+	pQuitBtn->SetCallback(this, &StartScene::QuitButtonCallback);
 
 	SAFE_RELEASE(pQuitColl);
-	SAFE_RELEASE(pStartBtn);
+	SAFE_RELEASE(pQuitBtn);
 
 	return true;
 }

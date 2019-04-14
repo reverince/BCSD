@@ -10,10 +10,12 @@ class UIMouse : public UI
 	POINT m_move;
 
 	UIMouse();
-	UIMouse(const UIMouse& ui) : UI(ui) { }
+	UIMouse(const UIMouse& ui);
 	~UIMouse();
 
 public:
+
+	void Hit(float deltaTime, class Collider* pSrc, class Collider* pDest);
 
 	virtual bool Init();
 	virtual void Input(float deltaTime);

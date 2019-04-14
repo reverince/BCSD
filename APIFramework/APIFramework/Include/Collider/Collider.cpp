@@ -95,11 +95,45 @@ bool Collider::CollisionRectVsPixel(const RECTANGLE & src, const vector<PIXEL>& 
 	return false;
 }
 
+bool Collider::CollisionRectVsPoint(const RECTANGLE& src, const POSITION& dest)
+{
+	if (dest.x < src.l || src.r < dest.x || dest.y < src.t || src.b < dest.y)
+		return false;
+
+	return true;
+}
+
 bool Collider::CollisionCircleVsCircle(const CIRCLE & src, const CIRCLE & dest)
 {
 	float dist = sqrtf((src.p.x - dest.p.x) * (src.p.x - dest.p.x) + (src.p.y - dest.p.y) * (src.p.y - dest.p.y));
 
 	return dist <= src.r + dest.r;
+}
+
+bool Collider::CollisionCircleVsPixel(const CIRCLE& src, const vector<PIXEL>& pixels, int width, int height)
+{
+	return false;
+}
+
+bool Collider::CollisionCircleVsPoint(const CIRCLE& src, const POSITION& dest)
+{
+	float dist = sqrtf((src.p.x - dest.x) * (src.p.x - dest.x) + (src.p.y - dest.y) * (src.p.y - dest.y));
+
+	return dist <= src.r;
+}
+
+bool Collider::CollisionPixelVsPoint(const vector<PIXEL>& pixels, int width, int height, const POSITION& dest)
+{
+	int idx = (int)dest.y * width + (int)dest.x;
+	const PIXEL& pixel = pixels[idx];
+	if (pixel.r == 0 && pixel.g == 255 && pixel.b == 0)
+	{
+		m_hitPoint.x = (int)dest.x;
+		m_hitPoint.y = (int)dest.y;
+		return true;
+	}
+
+	return false;
 }
 
 void Collider::Input(float deltaTime)

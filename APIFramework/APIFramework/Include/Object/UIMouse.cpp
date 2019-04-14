@@ -1,11 +1,21 @@
 #include "UIMouse.h"
 #include "..\Core\Core.h"
+#include "..\Collider\ColliderPoint.h"
 
 UIMouse::UIMouse()
 {
 }
 
+UIMouse::UIMouse(const UIMouse& ui) :
+	UI(ui)
+{
+}
+
 UIMouse::~UIMouse()
+{
+}
+
+void UIMouse::Hit(float deltaTime, Collider* pSrc, Collider* pDest)
 {
 }
 
@@ -20,6 +30,10 @@ bool UIMouse::Init()
 	m_pos = pos;
 
 	//ShowCursor(FALSE);
+
+	ColliderPoint* pColl = AddCollider<ColliderPoint>("Cursor");
+
+	SAFE_RELEASE(pColl);
 
 	return true;
 }
