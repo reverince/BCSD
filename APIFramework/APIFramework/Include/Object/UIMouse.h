@@ -6,7 +6,6 @@ class UIMouse : public UI
 	friend class Object;
 	friend class Scene;
 
-	POINT m_pos;
 	POINT m_move;
 
 	UIMouse();
