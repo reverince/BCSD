@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace csharp_example
@@ -7,7 +8,7 @@ namespace csharp_example
     class Program
     {
         [Flags]
-        enum Border {  None = 0, Left = 1, Top = 2, Right = 4, Bottom = 8 }
+        enum Border { None = 0, Left = 1, Top = 2, Right = 4, Bottom = 8 }
 
         #region Functions
 
@@ -102,6 +103,25 @@ namespace csharp_example
             DelegateString2Int ds2i = new DelegateString2Int(String2Int);
             Console.WriteLine($"Delegate string to int: {ds2i("2357")}");
 
+            var people = new[]
+            {  // 읽기 전용 익명 타입
+                new { Name="Lee", Age=33, Phone="000-111-1111" },
+                new { Name="Kim", Age=25, Phone="000-222-2222" },
+                new { Name="Park", Age=37, Phone="000-333-3333" }
+            };
+            // 람다식과 LINQ
+            var query = people.Where(p => p.Age >= 30).Select(p => new { p.Name, p.Age });
+            foreach (var p in query)
+                Console.WriteLine(p);
+
+            // Extension.cs에 정의된 확장 메소드
+            Console.WriteLine($"\"Hello\".Has('e'): {"Hello".Has('e')}");
+
+            // dynamic 기능 테스트
+            Dynamic dynamic = new Dynamic();
+
+            // 이하 클래스 관련
+
             var account = new BankAccount("앨리스", 1000);
             Console.WriteLine($"어서오세요, {account.Owner} 씨! 당신의 계좌 #{account.Number}의 잔액은 ${account.Balance}입니다.");
 
@@ -123,7 +143,6 @@ namespace csharp_example
                 Console.WriteLine(e.ToString());
             }
 
-            // 
         }
     }
 }
