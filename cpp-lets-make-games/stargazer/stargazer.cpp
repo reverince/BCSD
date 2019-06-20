@@ -6,13 +6,6 @@ void stargaze(int type) {
 	if (type <= 0 || type > 4) return;
 	int n;
 	cout << "n을 입력하세요: ";
-	while (true) {
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(1024, '\n');
-			continue;
-		}
-	}
 	cin >> n;
 
 	switch (type) {
