@@ -143,6 +143,7 @@ namespace csharp_example
                 Console.WriteLine(e.ToString());
             }
 
+            Console.ReadLine();
         }
     }
 }

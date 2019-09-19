@@ -21,8 +21,7 @@ namespace csharp_example
             person.SetAge = (Action<int>)((age) =>
             {
                 person.Age = age;
-                if (person.AgeChanged != null)
-                    person.AgeChanged(person, EventArgs.Empty);
+                person.AgeChanged?.Invoke(person, EventArgs.Empty);
             });
             person.AgeChanged = null;
             person.AgeChanged += new EventHandler(OnAgeChanged);
